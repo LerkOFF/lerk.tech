@@ -59,18 +59,20 @@ ssh metrika-rebenka 'nginx -t && systemctl reload nginx'
 
 ## Сертификат
 
-Только после того, как A-записи смотрят на `157.22.231.158`, иначе Let's Encrypt постучится на парковку REG.RU.
+Выпущен 27.09.2026, действует до 26.12.2026, имена `lerk.tech` и `www.lerk.tech`.
+Пара Let's Encrypt: `/etc/letsencrypt/live/lerk.tech/`. Копия для Xray: `/usr/local/etc/xray/certs/lerk.tech.fullchain.pem` и `lerk.tech.privkey.pem`, владелец `nobody`, ключ 640.
+Это третья пара в `certificates` у `vless-tcp`. В `hy2-in` её нет. Метрика остаётся первой.
+Хук `/etc/letsencrypt/renewal-hooks/deploy/xray-certs.sh` копирует пару, если каталог live есть, и перезапускает Xray.
+
+Пока `ns1.reg.ru` отдаёт парковку, обычный браузер на `https://lerk.tech` до сервера не доходит. Проверка на сам сервер: `--resolve lerk.tech:443:157.22.231.158`.
+
+Повторный выпуск:
 
 ```bash
 ssh metrika-rebenka 'certbot certonly --webroot -w /var/www/acme -d lerk.tech -d www.lerk.tech'
 ```
 
-Подключить к Xray один раз: скопировать пару в `/usr/local/etc/xray/certs/lerk.tech.*` (`install -o nobody -g nogroup`, ключ 640),
-дописать её третьей в `certificates` у inbound `vless-tcp` (метрика остаётся первой, в `hy2-in` не добавлять),
-проверить `xray run -test -config /usr/local/etc/xray/config.json`, затем `systemctl restart xray`.
-Перед правкой сохранить копию `config.json` в `/root/`, не рядом с хуками.
-
-Продление: хук `xray-certs.sh` копирует пару lerk.tech, если есть `/etc/letsencrypt/live/lerk.tech`, и перезапускает Xray.
+Перед ручной правкой `config.json` копию класть в `/root/`. После правки `xray run -test -config /usr/local/etc/xray/config.json`, затем `systemctl restart xray`.
 
 ## Проверка
 
