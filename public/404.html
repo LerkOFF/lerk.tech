@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Страница не найдена: lerk.tech</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20260927">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    .lost { min-height: 100dvh; display: grid; place-items: center; padding: 32px var(--gutter); }
+    .lost__card { max-width: 560px; text-align: left; }
+    .lost__face { width: 132px; height: 132px; border: 2px solid var(--line); border-radius: 26px; background: var(--avatar-bg); box-shadow: 6px 6px 0 var(--shadow-c); rotate: -3deg; }
+    .lost h1 { margin-top: 36px; font: 400 clamp(2.2rem, 1.4rem + 3vw, 3.4rem)/1.05 var(--font-display); }
+    .lost p { margin-top: 16px; font-size: 1.125rem; color: var(--text-2); }
+    .lost .btn { margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <main class="lost">
+    <div class="lost__card">
+      <img class="lost__face" src="/assets/img/avatar-sm.webp" alt="" width="132" height="132">
+      <h1>Такой страницы нет</h1>
+      <p>Возможно, ссылка устарела. Всё главное лежит на одной странице.</p>
+      <a class="btn btn--primary" href="/">На главную</a>
+    </div>
+  </main>
+</body>
+</html>

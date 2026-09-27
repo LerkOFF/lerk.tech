@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<!-- Шаблон картинки для превью ссылок (1200x630). Собирается: node tools/og.mjs -->
+<link rel="stylesheet" href="../public/assets/css/style.css">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body::after { opacity: .06; }
+  .og { box-sizing: border-box; width: 1200px; height: 630px; padding: 64px 72px; display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: center; }
+  .og__site { font: 400 30px/1 var(--font-display); display: flex; align-items: center; gap: 14px; }
+  .og__site img { width: 52px; height: 52px; border: 2px solid var(--line); border-radius: 50%; }
+  .og h1 { margin-top: 44px; font: 400 76px/1.03 var(--font-display); letter-spacing: -.012em; }
+  .og p { margin-top: 28px; font-size: 28px; line-height: 1.35; color: var(--text-2); font-weight: 600; }
+  .og__pic { position: relative; width: 400px; height: 400px; }
+  .og__pic .stack__avatar { left: 0; top: 0; width: 100%; rotate: -3deg; box-shadow: 10px 10px 0 var(--shadow-c); border-width: 3px; }
+</style></head>
+<body>
+  <div class="og">
+    <div>
+      <div class="og__site"><img src="../public/assets/img/avatar-sm.webp" alt=""><span>lerk.tech</span></div>
+      <h1>Сайты, боты и&nbsp;ИИ под&nbsp;ключ</h1>
+      <p>Дмитрий Гайдаш. Живые работы, отчёт каждый вечер, самозанятый.</p>
+    </div>
+    <div class="og__pic"><div class="stack__avatar"><img src="../public/assets/img/avatar.webp" alt=""></div></div>
+  </div>
+</body></html>

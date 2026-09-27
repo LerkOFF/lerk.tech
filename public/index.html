@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Дмитрий Гайдаш: сайты, боты и ИИ-сервисы под ключ</title>
+  <meta name="description" content="Разработчик lerk. Делаю сайты, ботов для Telegram, ВК и MAX, ИИ-генерацию и автоматизацию. Работы: метрика-ребенка.рф, гербсемьи.рф, lodki.site, parkhotelvp.ru. Самозанятый.">
+  <link rel="canonical" href="https://lerk.tech/">
+  <meta name="theme-color" content="#d9c3a0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#18130f" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://lerk.tech/">
+  <meta property="og:site_name" content="lerk.tech">
+  <meta property="og:title" content="Дмитрий Гайдаш: сайты, боты и ИИ-сервисы под ключ">
+  <meta property="og:description" content="Сайты, боты и ИИ-функции для бизнеса. Живые работы, отчёт каждый вечер, самозанятый.">
+  <meta property="og:image" content="https://lerk.tech/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <link rel="preload" href="assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260927">
+  <script>
+    // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Дмитрий Гайдаш",
+    "alternateName": "lerk",
+    "url": "https://lerk.tech/",
+    "image": "https://lerk.tech/assets/img/avatar.webp",
+    "jobTitle": "Разработчик сайтов, ботов и ИИ-сервисов",
+    "email": "mailto:lerk@joulerk.ru",
+    "sameAs": ["https://t.me/joulerkOFF", "https://vk.com/ca7ana", "https://github.com/LerkOFF"],
+    "knowsAbout": ["PHP", "Laravel", "Python", "Telegram-боты", "ИИ-генерация изображений", "ЮKassa"]
+  }
+  </script>
+</head>
+<body>
+<!-- icons:start -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-telegram" viewBox="0 0 256 256" fill="currentColor"><path d="M231.49,23.16a13,13,0,0,0-13.23-2.26L15.6,100.21a18.22,18.22,0,0,0,3.12,34.86L68,144.74V200a20,20,0,0,0,34.4,13.88l22.67-23.51L162.35,223a20,20,0,0,0,32.7-10.54L235.67,35.91A13,13,0,0,0,231.49,23.16ZM139.41,77.52,77.22,122.09l-34.43-6.75ZM92,190.06V161.35l15,13.15Zm81.16,10.52L99.28,135.81,205.59,59.63Z"/></symbol><symbol id="i-mail" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H32A12,12,0,0,0,20,56V192a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A12,12,0,0,0,224,44ZM193.15,68,128,127.72,62.85,68ZM44,188V83.28l75.89,69.57a12,12,0,0,0,16.22,0L212,83.28V188Z"/></symbol><symbol id="i-github" viewBox="0 0 256 256" fill="currentColor"><path d="M212.62,75.17A63.7,63.7,0,0,0,206.39,26,12,12,0,0,0,196,20a63.71,63.71,0,0,0-50,24H126A63.71,63.71,0,0,0,76,20a12,12,0,0,0-10.39,6,63.7,63.7,0,0,0-6.23,49.17A61.5,61.5,0,0,0,52,104v8a60.1,60.1,0,0,0,45.76,58.28A43.66,43.66,0,0,0,92,192v4H76a20,20,0,0,1-20-20,44.05,44.05,0,0,0-44-44,12,12,0,0,0,0,24,20,20,0,0,1,20,20,44.05,44.05,0,0,0,44,44H92v12a12,12,0,0,0,24,0V192a20,20,0,0,1,40,0v40a12,12,0,0,0,24,0V192a43.66,43.66,0,0,0-5.76-21.72A60.1,60.1,0,0,0,220,112v-8A61.5,61.5,0,0,0,212.62,75.17ZM196,112a36,36,0,0,1-36,36H112a36,36,0,0,1-36-36v-8a37.87,37.87,0,0,1,6.13-20.12,11.65,11.65,0,0,0,1.58-11.49,39.9,39.9,0,0,1-.4-27.72,39.87,39.87,0,0,1,26.41,17.8A12,12,0,0,0,119.82,68h32.35a12,12,0,0,0,10.11-5.53,39.84,39.84,0,0,1,26.41-17.8,39.9,39.9,0,0,1-.4,27.72,12,12,0,0,0,1.61,11.53A37.85,37.85,0,0,1,196,104Z"/></symbol><symbol id="i-arrow" viewBox="0 0 256 256" fill="currentColor"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol><symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,36V20a12,12,0,0,1,24,0V36a12,12,0,0,1-24,0Zm80,92a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM48,128a12,12,0,0,0-12-12H20a12,12,0,0,0,0,24H36A12,12,0,0,0,48,128Zm80,80a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V220A12,12,0,0,0,128,208Zm108-92H220a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-moon" viewBox="0 0 256 256" fill="currentColor"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol><symbol id="i-menu" viewBox="0 0 256 256" fill="currentColor"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-close" viewBox="0 0 256 256" fill="currentColor"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></symbol><symbol id="i-copy" viewBox="0 0 256 256" fill="currentColor"><path d="M216,28H88A12,12,0,0,0,76,40V76H40A12,12,0,0,0,28,88V216a12,12,0,0,0,12,12H168a12,12,0,0,0,12-12V180h36a12,12,0,0,0,12-12V40A12,12,0,0,0,216,28ZM156,204H52V100H156Zm48-48H180V88a12,12,0,0,0-12-12H100V52H204Z"/></symbol><symbol id="i-check" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></symbol><symbol id="i-browser" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,24V84H44V60ZM44,196V108H212v88Z"/></symbol><symbol id="i-robot" viewBox="0 0 256 256" fill="currentColor"><path d="M72,104a16,16,0,1,1,16,16A16,16,0,0,1,72,104Zm96,16a16,16,0,1,0-16-16A16,16,0,0,0,168,120Zm68-40V192a36,36,0,0,1-36,36H56a36,36,0,0,1-36-36V80A36,36,0,0,1,56,44h60V16a12,12,0,0,1,24,0V44h60A36,36,0,0,1,236,80Zm-24,0a12,12,0,0,0-12-12H56A12,12,0,0,0,44,80V192a12,12,0,0,0,12,12H200a12,12,0,0,0,12-12Zm-12,82a30,30,0,0,1-30,30H86a30,30,0,0,1,0-60h84A30,30,0,0,1,200,162Zm-80-6v12h16V156ZM86,168H96V156H86a6,6,0,0,0,0,12Zm90-6a6,6,0,0,0-6-6H160v12h10A6,6,0,0,0,176,162Z"/></symbol><symbol id="i-sparkle" viewBox="0 0 256 256" fill="currentColor"><path d="M199,125.31l-49.88-18.39L130.69,57a19.92,19.92,0,0,0-37.38,0L74.92,106.92,25,125.31a19.92,19.92,0,0,0,0,37.38l49.88,18.39L93.31,231a19.92,19.92,0,0,0,37.38,0l18.39-49.88L199,162.69a19.92,19.92,0,0,0,0-37.38Zm-63.38,35.16a12,12,0,0,0-7.11,7.11L112,212.28l-16.47-44.7a12,12,0,0,0-7.11-7.11L43.72,144l44.7-16.47a12,12,0,0,0,7.11-7.11L112,75.72l16.47,44.7a12,12,0,0,0,7.11,7.11L180.28,144ZM140,40a12,12,0,0,1,12-12h12V16a12,12,0,0,1,24,0V28h12a12,12,0,0,1,0,24H188V64a12,12,0,0,1-24,0V52H152A12,12,0,0,1,140,40ZM252,88a12,12,0,0,1-12,12h-4v4a12,12,0,0,1-24,0v-4h-4a12,12,0,0,1,0-24h4V72a12,12,0,0,1,24,0v4h4A12,12,0,0,1,252,88Z"/></symbol><symbol id="i-card" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H32A20,20,0,0,0,12,64V192a20,20,0,0,0,20,20H224a20,20,0,0,0,20-20V64A20,20,0,0,0,224,44Zm-4,24V88H36V68ZM36,188V112H220v76Zm172-24a12,12,0,0,1-12,12H164a12,12,0,0,1,0-24h32A12,12,0,0,1,208,164Zm-68,0a12,12,0,0,1-12,12H116a12,12,0,0,1,0-24h12A12,12,0,0,1,140,164Z"/></symbol><symbol id="i-server" viewBox="0 0 256 256" fill="currentColor"><path d="M208,36H48A20,20,0,0,0,28,56V200a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V56A20,20,0,0,0,208,36Zm-4,24v56H52V60ZM52,196V140H204v56ZM160,88a16,16,0,1,1,16,16A16,16,0,0,1,160,88Zm32,80a16,16,0,1,1-16-16A16,16,0,0,1,192,168Z"/></symbol><symbol id="i-wrench" viewBox="0 0 256 256" fill="currentColor"><path d="M230.47,67.5a12,12,0,0,0-19.26-4.32L172.43,99l-12.68-2.72L157,83.57l35.79-38.78a12,12,0,0,0-4.32-19.26A76.07,76.07,0,0,0,88.41,121.64L30.92,174.18a4.68,4.68,0,0,0-.39.38,36,36,0,0,0,50.91,50.91l.38-.39,52.54-57.49A76.05,76.05,0,0,0,230.47,67.5ZM160,148a51.5,51.5,0,0,1-23.35-5.52,12,12,0,0,0-14.26,2.62L64.31,208.66a12,12,0,0,1-17-17l63.55-58.07a12,12,0,0,0,2.62-14.26A51.5,51.5,0,0,1,108,96a52.06,52.06,0,0,1,52-52h.89L135.17,71.87a12,12,0,0,0-2.91,10.65l5.66,26.35a12,12,0,0,0,9.21,9.21l26.35,5.66a12,12,0,0,0,10.65-2.91L212,95.12c0,.3,0,.59,0,.89A52.06,52.06,0,0,1,160,148Z"/></symbol><symbol id="i-image" viewBox="0 0 256 256" fill="currentColor"><path d="M208,28H48A20,20,0,0,0,28,48V208a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V48A20,20,0,0,0,208,28Zm-4,24v63.72L186.14,97.86a20,20,0,0,0-28.28,0L52,203.72V52ZM85.66,204,172,117.66l32,32V204ZM76,96a20,20,0,1,1,20,20A20,20,0,0,1,76,96Z"/></symbol><symbol id="i-article" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,160H44V60H212ZM68,92A12,12,0,0,1,80,80h96a12,12,0,0,1,0,24H80A12,12,0,0,1,68,92Zm0,36a12,12,0,0,1,12-12h96a12,12,0,0,1,0,24H80A12,12,0,0,1,68,128Zm0,36a12,12,0,0,1,12-12h96a12,12,0,0,1,0,24H80A12,12,0,0,1,68,164Z"/></symbol><symbol id="i-chat" viewBox="0 0 256 256" fill="currentColor"><path d="M88,128a16,16,0,1,1,16,16A16,16,0,0,1,88,128Zm64,16a16,16,0,1,0-16-16A16,16,0,0,0,152,144Zm84-80V192a20,20,0,0,1-20,20H84.47L53,239.17l-.12.11A19.91,19.91,0,0,1,40.05,244a20.14,20.14,0,0,1-8.49-1.9A19.82,19.82,0,0,1,20,224V64A20,20,0,0,1,40,44H216A20,20,0,0,1,236,64Zm-24,4H44V215.23l28.16-24.32A11.93,11.93,0,0,1,80,188H212Z"/></symbol><symbol id="i-chart" viewBox="0 0 256 256" fill="currentColor"><path d="M236,208a12,12,0,0,1-12,12H32a12,12,0,0,1-12-12V48a12,12,0,0,1,24,0v99l43.51-43.52a12,12,0,0,1,17,0L128,127l43-43H160a12,12,0,0,1,0-24h40a12,12,0,0,1,12,12v40a12,12,0,0,1-24,0V101l-51.51,51.52a12,12,0,0,1-17,0L96,129,44,181v15H224A12,12,0,0,1,236,208Z"/></symbol><symbol id="i-swap" viewBox="0 0 256 256" fill="currentColor"><path d="M216.49,184.49l-32,32a12,12,0,0,1-17-17L179,188H48a12,12,0,0,1,0-24H179l-11.52-11.51a12,12,0,0,1,17-17l32,32A12,12,0,0,1,216.49,184.49Zm-145-64a12,12,0,0,0,17-17L77,92H208a12,12,0,0,0,0-24H77L88.49,56.49a12,12,0,0,0-17-17l-32,32a12,12,0,0,0,0,17Z"/></symbol><symbol id="i-store" viewBox="0 0 256 256" fill="currentColor"><path d="M236,96a12,12,0,0,0-.44-3.3L221.2,42.51A20.08,20.08,0,0,0,202,28H54A20.08,20.08,0,0,0,34.8,42.51L20.46,92.7A12,12,0,0,0,20,96h0v16a43.94,43.94,0,0,0,16,33.92V216a12,12,0,0,0,12,12H208a12,12,0,0,0,12-12V145.92A43.94,43.94,0,0,0,236,112V96ZM57.05,52H199l9.14,32H47.91Zm91,56v4a20,20,0,0,1-40,0v-4ZM53,128.71A20,20,0,0,1,44,112v-4H84v4a20,20,0,0,1-20,20,19.76,19.76,0,0,1-9.07-2.2A11.54,11.54,0,0,0,53,128.71ZM196,204H60V155.81c1.32.12,2.65.19,4,.19a43.86,43.86,0,0,0,32-13.85,43.89,43.89,0,0,0,64,0A43.86,43.86,0,0,0,192,156c1.35,0,2.68-.07,4-.19Zm16-92a20,20,0,0,1-9,16.71,11.66,11.66,0,0,0-1.88,1.09A20,20,0,0,1,172,112v-4h40Z"/></symbol><symbol id="i-notebook" viewBox="0 0 256 256" fill="currentColor"><path d="M108,108a12,12,0,0,1,12-12h56a12,12,0,0,1,0,24H120A12,12,0,0,1,108,108Zm68,28H120a12,12,0,0,0,0,24h56a12,12,0,0,0,0-24Zm52-88V208a20,20,0,0,1-20,20H48a20,20,0,0,1-20-20V48A20,20,0,0,1,48,28H208A20,20,0,0,1,228,48ZM52,204H68V52H52ZM204,52H92V204H204Z"/></symbol><symbol id="i-vk" viewBox="0 0 24 24" fill="currentColor"><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z"/></symbol></svg>
+<!-- icons:end -->
+
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<header class="top" data-top>
+  <div class="wrap top__row">
+    <a class="brand" href="#top" aria-label="lerk, в начало страницы">
+      <img class="brand__face" src="assets/img/avatar-sm.webp" alt="" width="40" height="40">
+      <span class="brand__name">lerk</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#work">Работы</a>
+      <a href="#ai">ИИ</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Как работаю</a>
+      <a href="#about">Обо мне</a>
+    </nav>
+
+    <div class="top__actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Тёмная тема" title="Сменить тему">
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+      <a class="btn btn--primary btn--sm top__tg" href="https://t.me/joulerkOFF" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+        <span>Написать в Telegram</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Первый экран -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="hero__hello">Привет, я Дмитрий Гайдаш. В сети меня знают как lerk.</p>
+        <h1 class="hero__title" id="hero-title">Сайты, боты и&nbsp;ИИ под&nbsp;ключ</h1>
+        <p class="hero__lead">От формы заявки до оплаты, рассылок и ИИ-генерации. Пишу код вместе с ИИ-агентами, каждую выкладку проверяю сам.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="https://t.me/joulerkOFF" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+            <span>Написать в Telegram</span>
+          </a>
+          <a class="btn btn--ghost" href="#work">Смотреть работы</a>
+        </div>
+      </div>
+
+      <div class="hero__art">
+        <div class="stack">
+          <img class="stack__shot stack__shot--back" src="assets/img/site-lodki-sm.webp" alt="" width="640" height="400">
+          <img class="stack__shot stack__shot--front" src="assets/img/site-metrika-sm.webp" alt="" width="640" height="400">
+          <div class="stack__avatar">
+            <img src="assets/img/avatar.webp" alt="Аватар Дмитрия: нарисованный парень с бирюзовыми кудрями на крафтовом фоне" width="880" height="880" fetchpriority="high">
+          </div>
+          <p class="bubble">Пишите напрямую, без менеджеров</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Работы -->
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <header class="section__head">
+        <h2 class="section__title" id="work-title">Работы</h2>
+        <p class="section__lead">Живые сайты и сервисы: свои и сделанные для заказчиков. Всё открыто, можно зайти и проверить.</p>
+      </header>
+
+      <div class="bento">
+        <article class="case case--metrika reveal">
+          <div class="case__media">
+            <img class="case__shot" src="assets/img/site-metrika.webp" alt="Главная метрика-ребенка.рф: форма с данными ребёнка и акварельный постер с ёжиком" width="1200" height="750" loading="lazy">
+            <div class="case__fan" aria-hidden="true">
+              <img src="assets/img/tpl-2.webp" alt="" width="420" height="560" loading="lazy">
+              <img src="assets/img/tpl-3.webp" alt="" width="420" height="560" loading="lazy">
+              <img src="assets/img/tpl-4.webp" alt="" width="420" height="560" loading="lazy">
+            </div>
+          </div>
+          <div class="case__body">
+            <p class="role role--own">Свой проект</p>
+            <h3 class="case__title">Метрика ребёнка</h3>
+            <p class="case__text">Постеры-метрики для новорождённых. 82 акварельных шаблона, PNG с логотипом бесплатно, ИИ-версия по фото ребёнка платно. Оплата через ЮKassa, файл приходит в Telegram, ВК, MAX или на почту.</p>
+            <ul class="tags" aria-label="Технологии">
+              <li>PHP</li><li>ИИ-генерация</li><li>ЮKassa</li><li>боты</li><li>SEO</li>
+            </ul>
+            <a class="case__link" href="https://метрика-ребенка.рф/" rel="noopener">метрика-ребенка.рф<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="case case--gerbs reveal">
+          <div class="case__media case__media--gerbs">
+            <img src="assets/img/gerb-1.webp" alt="ИИ-герб семьи Салдушкиных: два медведя, горы, море и солнце" width="560" height="560" loading="lazy">
+            <img src="assets/img/gerb-2.webp" alt="ИИ-герб семьи Рудак: львы, книги и символы профессий" width="560" height="560" loading="lazy">
+            <img src="assets/img/gerb-3.webp" alt="ИИ-герб фамилии Салдушкин: медведь на скале у моря" width="560" height="560" loading="lazy">
+          </div>
+          <div class="case__body">
+            <p class="role">Для заказчика</p>
+            <h3 class="case__title">Гербы семьи</h3>
+            <p class="case__text">Генератор семейных гербов на ИИ: фамилия, рассказ о семье и фото превращаются в герб. Превью с водяным знаком, файл 4000&nbsp;px после оплаты, английская версия на <a href="https://crestmaker.site/" rel="noopener">crestmaker.site</a>.</p>
+            <ul class="tags" aria-label="Технологии">
+              <li>PHP</li><li>очередь генераций</li><li>ЮKassa</li><li>ВК, Telegram, MAX</li>
+            </ul>
+            <a class="case__link" href="https://гербсемьи.рф/" rel="noopener">гербсемьи.рф<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="case case--lodki reveal">
+          <div class="case__media">
+            <img class="case__shot" src="assets/img/site-lodki.webp" alt="Главная lodki.site: каталог лодок России на фоне ночной гавани" width="1200" height="750" loading="lazy">
+          </div>
+          <div class="case__body">
+            <p class="role">Для заказчика</p>
+            <h3 class="case__title">Каталог лодок России</h3>
+            <p class="case__text">872 лодки и 97 предприятий в базе. Кабинет дилеров, сравнение, конфигуратор комплектаций, звонки в CRM, ИИ-помощник и статьи с ИИ-обложками.</p>
+            <ul class="tags" aria-label="Технологии">
+              <li>Laravel</li><li>MySQL</li><li>ИИ</li><li>телефония</li>
+            </ul>
+            <a class="case__link" href="https://lodki.site/" rel="noopener">lodki.site<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          </div>
+        </article>
+        <article class="case case--donnu reveal">
+          <div class="case__media case__media--phone">
+            <img class="phone" src="assets/img/phone-donnu.webp" alt="донну.рф на телефоне: расписание группы ИВТ-4 на сегодня" width="520" height="1125" loading="lazy">
+          </div>
+          <div class="case__body">
+            <p class="role role--own">Свой проект</p>
+            <h3 class="case__title">Расписание ДОННУ</h3>
+            <p class="case__text">Расписание и домашние задания для групп университета. Сетка по дням и парам, вход через Telegram-бота, админка, светлая и тёмная тема.</p>
+            <a class="case__link" href="https://донну.рф/" rel="noopener">донну.рф<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          </div>
+        </article>
+
+        <article class="case case--park reveal">
+          <div class="case__media">
+            <img class="case__shot" src="assets/img/site-parkhotel.webp" alt="Главная parkhotelvp.ru: «Отдых в городе. Тишина парка.» и фото гостиницы" width="1200" height="750" loading="lazy">
+          </div>
+          <div class="case__body">
+            <p class="role">Для заказчика</p>
+            <h3 class="case__title">Парк-Отель Вятские Поляны</h3>
+            <p class="case__text">Новый сайт гостиницы вместо двух старых: номера, бассейн, баня, банкеты, заявки в админку. От ТЗ до запуска 4 дня.</p>
+            <ul class="tags" aria-label="Технологии">
+              <li>PHP</li><li>SQLite</li><li>админка</li>
+            </ul>
+            <a class="case__link" href="https://parkhotelvp.ru/" rel="noopener">parkhotelvp.ru<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="subhead" id="more">Ещё проекты</h3>
+      <ul class="projects">
+        <li class="project reveal">
+          <img class="project__thumb" src="assets/img/site-tabson-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://tabson.ru/" rel="noopener">tabson.ru</a></h4>
+            <p>Сайт веб-агентства: портфолио кейсов по годам, блог, админка проектов, мобильная вёрстка.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="assets/img/site-slapi-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://sl-api.ru/" rel="noopener">sl-api.ru</a></h4>
+            <p>Сервис для ломбардов: CRM и RFM-анализ клиентов в одном окне вместо трёх программ.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="assets/img/site-sanlux-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://aqcentr.ru/" rel="noopener">САНЛЮКС, aqcentr.ru</a></h4>
+            <p>Магазин производителя сантехники: посадочные «Производство» и «Опт», звонки с сайта через Plusofon, статьи по расписанию.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb project__thumb--phone" src="assets/img/phone-app.webp" alt="" width="520" height="1125" loading="lazy">
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://apps.apple.com/ru/app/id6762267781" rel="noopener">Карта желаний «Будьте богаты»</a></h4>
+            <p>Приложение для iOS и Android на Expo: выпуск версий в App Store и Google Play, аналитика AppMetrica, ИИ-коуч на своём бэкенде.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="assets/img/site-ss14-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://сс14.рф/" rel="noopener">сс14.рф</a> и <a href="https://github.com/LerkOFF/LerkBot_Horizon" rel="noopener">LERK Bot</a></h4>
+            <p>Портал по игре Space Station 14 и Discord-бот сервера Star Horizon: статус сервера, синхронизация спонсоров.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <span class="project__thumb project__thumb--icon" aria-hidden="true"><svg class="icon"><use href="#i-chart"></use></svg></span>
+          <div class="project__body">
+            <h4 class="project__title">ССП, кабинет аналитики</h4>
+            <p>Яндекс.Метрика, Вебмастер и Директ по всем сайтам агентства в одной сетке, отчёты в Telegram.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <span class="project__thumb project__thumb--icon" aria-hidden="true"><svg class="icon"><use href="#i-swap"></use></svg></span>
+          <div class="project__body">
+            <h4 class="project__title"><a href="https://github.com/LerkOFF/max2tg_Sav" rel="noopener">Мост Telegram и MAX</a></h4>
+            <p>Двустороннее зеркало рабочих чатов между Telegram и MAX. Вход в MAX по SMS и паролю через бота.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="support reveal">
+        <h3 class="support__title">Поддерживаю и дорабатываю</h3>
+        <ul class="support__list">
+          <li><a href="https://energoproms.ru/" rel="noopener">energoproms.ru</a> <span>механический завод, HostCMS</span></li>
+          <li><a href="https://rocketeda.ru/" rel="noopener">rocketeda.ru</a> <span>доставка пиццы и роллов</span></li>
+          <li><a href="https://zaryanka.coffee/" rel="noopener">zaryanka.coffee</a> <span>кофейня с доставкой</span></li>
+          <li><a href="https://gold777.ru/" rel="noopener">gold777.ru</a> <span>скупка и ломбард</span></li>
+          <li><a href="https://kosmos.pw/" rel="noopener">kosmos.pw</a> <span>кинотеатр, поднял после взлома</span></li>
+          <li><a href="https://anonimku.ru/" rel="noopener">anonimku.ru</a> <span>анонимки для пабликов ВК</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИИ -->
+  <section class="section section--ai" id="ai" aria-labelledby="ai-title">
+    <div class="wrap">
+      <header class="section__head">
+        <h2 class="section__title" id="ai-title">ИИ, который уже работает</h2>
+        <p class="section__lead">Не демо, а функции на живых сайтах: с очередью, повторами при сбоях и логами.</p>
+      </header>
+
+      <div class="ai" data-tabs>
+        <div class="ai__tabs" role="tablist" aria-label="Примеры ИИ в проектах">
+          <button class="ai__tab" type="button" role="tab" id="tab-img" aria-controls="panel-img" aria-selected="true">
+            <svg class="icon" aria-hidden="true"><use href="#i-image"></use></svg><span>Картинки по описанию и фото</span>
+          </button>
+          <button class="ai__tab" type="button" role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false" tabindex="-1">
+            <svg class="icon" aria-hidden="true"><use href="#i-article"></use></svg><span>Статьи с обложками по расписанию</span>
+          </button>
+          <button class="ai__tab" type="button" role="tab" id="tab-chat" aria-controls="panel-chat" aria-selected="false" tabindex="-1">
+            <svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg><span>Помощник в чате на сайте</span>
+          </button>
+          <button class="ai__tab" type="button" role="tab" id="tab-agents" aria-controls="panel-agents" aria-selected="false" tabindex="-1">
+            <svg class="icon" aria-hidden="true"><use href="#i-robot"></use></svg><span>Агенты для рутины</span>
+          </button>
+        </div>
+
+        <div class="ai__panels">
+          <div class="ai__panel" role="tabpanel" id="panel-img" aria-labelledby="tab-img" tabindex="0">
+            <div class="ai__text">
+              <h3>Гербы, постеры и обложки</h3>
+              <p>Человек пишет фамилию и пару фраз о семье, прикладывает фото и получает герб. Метрика ребёнка по фото малыша рисует ИИ-постер, а lodki.site рисует лодки у причала в честном масштабе.</p>
+              <ul class="checks">
+                <li>Очередь заказов: сбой API не теряет заявку, генерация повторяется.</li>
+                <li>Превью с водяным знаком, файл 4000&nbsp;px после оплаты.</li>
+                <li>Отказ фильтра безопасности объясняется человеку по-русски.</li>
+                <li>Время генерации пишется в базу, чтобы считать скорость и расходы.</li>
+              </ul>
+              <p class="ai__where">Работает на <a href="https://гербсемьи.рф/" rel="noopener">гербсемьи.рф</a>, <a href="https://метрика-ребенка.рф/" rel="noopener">метрика-ребенка.рф</a> и <a href="https://lodki.site/" rel="noopener">lodki.site</a>.</p>
+            </div>
+            <div class="ai__visual ai__visual--gerbs">
+              <img src="assets/img/gerb-2.webp" alt="ИИ-герб семьи Рудак с превью-знаком сайта" width="560" height="560" loading="lazy">
+              <img src="assets/img/tpl-1.webp" alt="Шаблон метрики ребёнка с ёжиком в шарфе и тестовыми данными" width="420" height="560" loading="lazy">
+              <img src="assets/img/gerb-1.webp" alt="ИИ-герб семьи Салдушкиных с медведями" width="560" height="560" loading="lazy">
+            </div>
+          </div>
+
+          <div class="ai__panel" role="tabpanel" id="panel-text" aria-labelledby="tab-text" tabindex="0">
+            <div class="ai__text">
+              <h3>Статьи, которые пишутся сами</h3>
+              <p>Каждые 4 часа lodki.site берёт поисковый запрос из Wordstat, пишет по нему статью, рисует обложку и публикует в блог. Люди на обложках соразмерны лодкам: длина корпуса уходит в промпт.</p>
+              <ul class="checks">
+                <li>Очередь задач с паузой, когда API упирается в лимит.</li>
+                <li>У производителя сантехники слоты 10, 14 и 18 часов и анонс каждой статьи в Telegram.</li>
+                <li>Включается и выключается одной галкой в админке.</li>
+              </ul>
+              <p class="ai__where">Примеры: <a href="https://lodki.site/blog" rel="noopener">lodki.site/blog</a> и <a href="https://aqcentr.ru/articles" rel="noopener">aqcentr.ru/articles</a>.</p>
+            </div>
+            <div class="ai__visual ai__visual--covers">
+              <img src="assets/img/cover-1.webp" alt="ИИ-обложка статьи «Килеватые лодки длиной 6 метров»" width="560" height="560" loading="lazy">
+              <img src="assets/img/cover-2.webp" alt="ИИ-обложка статьи «Компактные моторные лодки»" width="560" height="560" loading="lazy">
+              <img src="assets/img/cover-3.webp" alt="ИИ-обложка статьи «Путешествие на яхте»" width="560" height="560" loading="lazy">
+            </div>
+          </div>
+
+          <div class="ai__panel" role="tabpanel" id="panel-chat" aria-labelledby="tab-chat" tabindex="0">
+            <div class="ai__text">
+              <h3>Консультант, который берёт телефон</h3>
+              <p>ИИ-помощник на lodki.site подбирает лодку по задаче, бюджету и размеру, показывает подходящие модели карточками и просит телефон. Номер из переписки сразу становится заявкой.</p>
+              <ul class="checks">
+                <li>Заявки с пометкой «из чата» попадают в общую CRM.</li>
+                <li>Все диалоги видны в админке.</li>
+                <li>Открытие чата и сообщения уходят в цели Яндекс.Метрики.</li>
+                <li>ИИ-коуч в мобильном приложении ходит в модель через свой бэкенд, ключ API в приложении не лежит.</li>
+              </ul>
+              <p class="ai__where">Работает на <a href="https://lodki.site/" rel="noopener">lodki.site</a>, кнопка «AI-помощник» справа внизу.</p>
+            </div>
+            <div class="ai__visual ai__visual--phone">
+              <img class="phone" src="assets/img/phone-assistant.webp" alt="Окно ИИ-помощника lodki.site на телефоне: «Подберу лодку по задаче, бюджету и размеру»" width="520" height="1125" loading="lazy">
+            </div>
+          </div>
+
+          <div class="ai__panel" role="tabpanel" id="panel-agents" aria-labelledby="tab-agents" tabindex="0">
+            <div class="ai__text">
+              <h3>Боты, которые работают за меня</h3>
+              <p>Мои ИИ-агенты днём каждый час разбирают почту и присылают сводку, следят за сообщениями на Авито и записывают итоги задач в базу знаний. Такую же рутину можно снять и с вашей команды.</p>
+              <p class="ai__where">Подходит для заявок, отчётов, мониторинга цен и упоминаний.</p>
+            </div>
+            <ul class="agents">
+              <li class="agent">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+                <div><h4>Почта</h4><p>Сводка раз в час: счета, оплаты, сроки. Рассылки и спам не отвлекают.</p></div>
+              </li>
+              <li class="agent">
+                <svg class="icon" aria-hidden="true"><use href="#i-store"></use></svg>
+                <div><h4>Авито</h4><p>Новые сообщения покупателей в одной сводке. От имени владельца бот не отвечает.</p></div>
+              </li>
+              <li class="agent">
+                <svg class="icon" aria-hidden="true"><use href="#i-notebook"></use></svg>
+                <div><h4>База знаний</h4><p>После каждой задачи итог ложится в заметки проекта, ничего не теряется.</p></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Услуги -->
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <header class="section__head">
+        <h2 class="section__title" id="services-title">Чем могу помочь</h2>
+      </header>
+      <ul class="services">
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-browser"></use></svg>
+          <h3>Сайты и лендинги</h3>
+          <p>Лендинг, каталог, личный кабинет, админка. Быстрые, адаптивные, с SEO и целями Яндекс.Метрики.</p>
+          <p class="service__where">Уже работает: parkhotelvp.ru, lodki.site, tabson.ru</p>
+        </li>
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-robot"></use></svg>
+          <h3>Боты</h3>
+          <p>Telegram, ВК, MAX и Discord. Приём заявок и оплат, уведомления, рассылки, мосты между мессенджерами.</p>
+          <p class="service__where">Уже работает: выдача гербов и метрик, LERK Bot, мост Telegram и MAX</p>
+        </li>
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+          <h3>ИИ-функции</h3>
+          <p>Генерация картинок и текстов, помощник в чате, автопостинг. С очередью, повторами и понятными ошибками.</p>
+          <p class="service__where">Уже работает: гербсемьи.рф, метрика-ребенка.рф, lodki.site</p>
+        </li>
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-card"></use></svg>
+          <h3>Оплаты и интеграции</h3>
+          <p>ЮKassa, телефония, CRM, выгрузки, Яндекс.Метрика, Вебмастер и Директ. Отчёты сами приходят в Telegram.</p>
+          <p class="service__where">Уже работает: ЮKassa в метрике и гербах, звонки Plusofon, ССП</p>
+        </li>
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-server"></use></svg>
+          <h3>Серверы и почта</h3>
+          <p>VPS, nginx, SSL, Docker, бэкапы. Почта с SPF, DKIM и DMARC, чтобы письма не уходили в спам.</p>
+          <p class="service__where">Уже работает: свои серверы для метрики, гербов и ботов</p>
+        </li>
+        <li class="service reveal">
+          <svg class="icon service__icon" aria-hidden="true"><use href="#i-wrench"></use></svg>
+          <h3>Поддержка и спасение</h3>
+          <p>Беру готовые сайты на Laravel, WordPress, HostCMS, OpenCart и самописном PHP. Лечу взломанные и поднимаю упавшие.</p>
+          <p class="service__where">Уже работает: energoproms.ru, rocketeda.ru, kosmos.pw</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Как работаю -->
+  <section class="section section--process" id="process" aria-labelledby="process-title">
+    <div class="wrap process">
+      <div class="process__main">
+        <header class="section__head">
+          <h2 class="section__title" id="process-title">Как работаю</h2>
+        </header>
+        <ol class="steps">
+          <li class="step reveal"><h3>Пишете в Telegram</h3><p>Пара фраз о задаче и ссылка на сайт, если он уже есть.</p></li>
+          <li class="step reveal"><h3>Оцениваю</h3><p>Задаю вопросы, называю срок и цену. Большую задачу делим на этапы.</p></li>
+          <li class="step reveal"><h3>Делаю и отчитываюсь</h3><p>Утром короткий план, вечером отчёт: что сделано, сколько часов, ссылки и скриншоты.</p></li>
+          <li class="step reveal"><h3>Запускаю</h3><p>Выкладываю через git, проверяю руками на живом сайте и пишу документацию, чтобы проект не зависел от меня.</p></li>
+          <li class="step reveal"><h3>Оплата</h3><p>Работаю как самозанятый, на каждую оплату выдаю чек. Можно по этапам или почасово.</p></li>
+        </ol>
+      </div>
+
+      <aside class="process__side reveal" aria-label="Пример отчёта и заметка про ИИ">
+        <figure class="report">
+          <div class="report__bubble">
+            <p class="report__tag">#отчет 5 ч</p>
+            <ul>
+              <li>форма заказа шлёт заявку в Telegram</li>
+              <li>подключил ЮKassa, тестовый платёж прошёл</li>
+              <li>скрин и ссылка на тестовую страницу ниже</li>
+            </ul>
+          </div>
+          <figcaption>Так выглядит вечерний отчёт</figcaption>
+        </figure>
+        <p class="note">
+          <svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
+          <span>Код пишу вместе с Claude Code, Cursor и Codex. ИИ берёт рутину, а постановку задачи, проверку и выкладку делаю сам. Так быстрее, а отвечаю за результат всё равно я.</span>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Обо мне -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div class="about__text">
+        <h2 class="section__title" id="about-title">Обо мне</h2>
+        <p>Меня зовут Дмитрий Гайдаш, в сети lerk. Делаю сайты, ботов и ИИ-функции и сам довожу их до запуска: от первой строки кода до сервера, домена и почты.</p>
+        <p>Учусь на 2 курсе ДОННУ по направлению «Информатика и вычислительная техника». Для своей группы сделал расписание донну.рф, теперь там и другие группы университета.</p>
+        <p>Кроме заказов веду свои проекты: метрика-ребенка.рф, портал сс14.рф и Discord-бота для сервера Star Horizon.</p>
+
+        <h3 class="about__sub">Открытый код</h3>
+        <ul class="repos">
+          <li><a href="https://github.com/LerkOFF/LerkBot_Horizon" rel="noopener">LerkBot_Horizon</a><span>Discord-бот, Python</span></li>
+          <li><a href="https://github.com/LerkOFF/max2tg_Sav" rel="noopener">max2tg_Sav</a><span>мост Telegram и MAX, Python</span></li>
+          <li><a href="https://github.com/LerkOFF/parkhotel" rel="noopener">parkhotel</a><span>сайт гостиницы, PHP</span></li>
+          <li><a href="https://github.com/LerkOFF/VoiceAnswererApp" rel="noopener">VoiceAnswererApp</a><span>Android, Kotlin</span></li>
+          <li><a href="https://github.com/LerkOFF/CryptoBotTG" rel="noopener">CryptoBotTG</a><span>Telegram-бот, Python</span></li>
+          <li><a href="https://github.com/LerkOFF" rel="noopener">Все репозитории на GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="about__facts reveal">
+        <dl class="facts">
+          <div><dt>Статус</dt><dd>Самозанятый, чек на каждую оплату</dd></div>
+          <div><dt>Часовой пояс</dt><dd>Москва, UTC+3, работаю удалённо</dd></div>
+          <div><dt>Связь</dt><dd><a href="https://t.me/joulerkOFF" rel="noopener">@joulerkOFF</a> в Telegram</dd></div>
+        </dl>
+
+        <h3 class="about__sub">Стек</h3>
+        <ul class="chips">
+          <li>PHP</li><li>Laravel</li><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>React Native и Expo</li>
+          <li>MySQL</li><li>SQLite</li><li>Docker</li><li>nginx</li><li>Linux</li><li>Git</li>
+          <li>Telegram Bot API</li><li>VK API</li><li>ЮKassa</li><li>Яндекс.Метрика</li>
+        </ul>
+
+        <h3 class="about__sub">ИИ в работе</h3>
+        <ul class="chips chips--accent">
+          <li>Claude Code</li><li>Cursor</li><li>Codex</li><li>GPT</li><li>Gemini</li><li>GigaChat</li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Контакты -->
+  <section class="section section--contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap contact">
+      <div class="contact__intro">
+        <h2 class="section__title" id="contact-title">Расскажите о задаче</h2>
+        <p class="section__lead">Отвечаю сам. Соберите задачу здесь, и текст подставится в Telegram или письмо.</p>
+
+        <ul class="channels">
+          <li>
+            <a class="channel" href="https://t.me/joulerkOFF" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+              <span class="channel__name">Telegram</span><span class="channel__value">@joulerkOFF</span>
+            </a>
+          </li>
+          <li class="channel-row">
+            <a class="channel" href="mailto:lerk@joulerk.ru">
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+              <span class="channel__name">Почта</span><span class="channel__value">lerk@joulerk.ru</span>
+            </a>
+            <button class="icon-btn copy" type="button" data-copy="lerk@joulerk.ru" aria-label="Скопировать адрес почты">
+              <svg class="icon icon--copy" aria-hidden="true"><use href="#i-copy"></use></svg>
+              <svg class="icon icon--done" aria-hidden="true"><use href="#i-check"></use></svg>
+            </button>
+          </li>
+          <li>
+            <a class="channel" href="https://vk.com/ca7ana" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-vk"></use></svg>
+              <span class="channel__name">ВКонтакте</span><span class="channel__value">vk.com/ca7ana</span>
+            </a>
+          </li>
+          <li>
+            <a class="channel" href="https://github.com/LerkOFF" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+              <span class="channel__name">GitHub</span><span class="channel__value">github.com/LerkOFF</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <form class="brief reveal" data-brief novalidate aria-labelledby="brief-title">
+        <h3 class="brief__title" id="brief-title">Соберите задачу</h3>
+
+        <fieldset class="field">
+          <legend>Что нужно</legend>
+          <div class="pick">
+            <label><input type="checkbox" name="kind" value="Сайт"><span>Сайт</span></label>
+            <label><input type="checkbox" name="kind" value="Бот"><span>Бот</span></label>
+            <label><input type="checkbox" name="kind" value="ИИ-функция"><span>ИИ-функция</span></label>
+            <label><input type="checkbox" name="kind" value="Приложение"><span>Приложение</span></label>
+            <label><input type="checkbox" name="kind" value="Оплата или интеграция"><span>Оплата или интеграция</span></label>
+            <label><input type="checkbox" name="kind" value="Сервер и почта"><span>Сервер и почта</span></label>
+            <label><input type="checkbox" name="kind" value="Починить или доработать"><span>Починить или доработать</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Срок</legend>
+          <div class="pick">
+            <label><input type="radio" name="when" value="Срочно"><span>Срочно</span></label>
+            <label><input type="radio" name="when" value="В течение месяца"><span>В течение месяца</span></label>
+            <label><input type="radio" name="when" value="Не горит"><span>Не горит</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="brief-text">Пара слов о задаче</label>
+          <textarea id="brief-text" name="text" rows="4" maxlength="2000" aria-describedby="brief-help brief-error"></textarea>
+          <p class="field__help" id="brief-help">Например: нужен лендинг для кофейни, заявки в Telegram и оплата картой.</p>
+          <p class="field__error" id="brief-error" hidden>Опишите задачу хотя бы парой слов.</p>
+        </div>
+
+        <div class="brief__actions">
+          <button class="btn btn--primary" type="submit" name="to" value="tg">
+            <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+            <span>Написать в Telegram</span>
+          </button>
+          <button class="btn btn--ghost" type="submit" name="to" value="mail">
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+            <span>Отправить на почту</span>
+          </button>
+        </div>
+        <p class="brief__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <p>Гайдаш Дмитрий Павлович, самозанятый, ИНН 614328597388. <a href="https://npd.nalog.ru/check-status/" rel="noopener">Проверить статус на сайте ФНС</a></p>
+    <p>© 2026 lerk.tech</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js?v=20260927" defer></script>
+</body>
+</html>
