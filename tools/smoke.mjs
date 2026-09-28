@@ -85,7 +85,7 @@ for (const scheme of ['light', 'dark']) {
   await p.goto(url, { waitUntil: 'networkidle' });
   if (scheme === 'light') {
     const rows = await p.$$eval('.rekv__list dt', els => els.map(e => e.textContent.trim()));
-    ok('реквизиты без региона и СНИЛС', rows.join('|') === 'ФИО|ИНН|Статус|Виды деятельности|Электронная почта', rows.join(', '));
+    ok('реквизиты без региона и СНИЛС', rows.join('|') === 'Имя|ИНН|Статус|Виды деятельности|Электронная почта', rows.join(', '));
   }
   const stamp = p.locator('.rekv__stamp svg');
   await stamp.scrollIntoViewIfNeeded();
