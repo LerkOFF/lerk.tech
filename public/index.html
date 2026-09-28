@@ -28,7 +28,7 @@
 
   <link rel="preload" href="assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20260927">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260927c">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -498,7 +498,7 @@
       <div class="about__facts reveal">
         <dl class="facts">
           <div><dt>Статус</dt><dd>Самозанятый, чек на каждую оплату</dd></div>
-          <div><dt>Часовой пояс</dt><dd>Москва, UTC+3, работаю удалённо</dd></div>
+          <div><dt>Часовой пояс</dt><dd>Москва, UTC+3, работаю удалённо с клиентами по всему миру</dd></div>
           <div><dt>Связь</dt><dd><a href="https://t.me/joulerkOFF" rel="noopener">@joulerkOFF</a> в Telegram</dd></div>
         </dl>
 
@@ -570,6 +570,7 @@
             <label><input type="checkbox" name="kind" value="Оплата или интеграция"><span>Оплата или интеграция</span></label>
             <label><input type="checkbox" name="kind" value="Сервер и почта"><span>Сервер и почта</span></label>
             <label><input type="checkbox" name="kind" value="Починить или доработать"><span>Починить или доработать</span></label>
+            <label><input type="checkbox" name="kind" value="Другое"><span>Другое</span></label>
           </div>
         </fieldset>
 
@@ -603,11 +604,71 @@
       </form>
     </div>
   </section>
+
+  <!-- Реквизиты -->
+  <section class="section section--rekv" id="rekvizity" aria-labelledby="rekv-title">
+    <div class="wrap">
+      <header class="section__head">
+        <h2 class="section__title" id="rekv-title">Реквизиты</h2>
+        <p class="section__lead">Пригодятся для оплаты и документов.</p>
+      </header>
+
+      <div class="rekv reveal">
+        <dl class="rekv__list">
+          <div><dt>ФИО</dt><dd>Гайдаш Дмитрий Павлович</dd></div>
+          <div><dt>ИНН</dt><dd>614328597388</dd></div>
+          <div><dt>Статус</dt><dd>Самозанятый, плательщик налога на профессиональный доход. <a href="https://npd.nalog.ru/check-status/" rel="noopener">Проверить на сайте ФНС</a></dd></div>
+          <div>
+            <dt>Виды деятельности</dt>
+            <dd>
+              <ul class="rekv__kinds">
+                <li>IT-сфера: программист</li>
+                <li>IT-сфера: вебмастер</li>
+                <li>IT-сфера: администрирование</li>
+              </ul>
+            </dd>
+          </div>
+          <div><dt>Электронная почта</dt><dd><a href="mailto:lerk@joulerk.ru">lerk@joulerk.ru</a></dd></div>
+        </dl>
+
+        <a class="rekv__stamp" href="mailto:lerk@joulerk.ru" aria-label="Печать самозанятого с QR-кодом, написать на lerk@joulerk.ru">
+          <!-- stamp:start -->
+          <svg class="stamp" viewBox="0 0 240 240" role="img" aria-labelledby="stamp-title">
+            <title id="stamp-title">Печать самозанятого: Гайдаш Дмитрий Павлович, ИНН 614328597388, плательщик НПД. QR-код открывает письмо на lerk@joulerk.ru</title>
+            <defs>
+              <path id="stamp-top" d="M30 120A90 90 0 0 1 210 120"/>
+              <path id="stamp-bottom" d="M19 120A101 101 0 0 0 221 120"/>
+              <path id="stamp-ring" d="M49 120A71 71 0 1 1 191 120A71 71 0 1 1 49 120"/>
+              <filter id="stamp-ink" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="11" result="noise"/>
+                <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -4 3.25" result="speckle"/>
+                <feComposite in="SourceGraphic" in2="speckle" operator="in"/>
+              </filter>
+            </defs>
+            <g class="stamp__ink" filter="url(#stamp-ink)">
+              <circle cx="120" cy="120" r="114" fill="none" stroke-width="4"/>
+              <circle cx="120" cy="120" r="107" fill="none" stroke-width="1.4"/>
+              <circle cx="120" cy="120" r="84" fill="none" stroke-width="1.4"/>
+              <circle cx="120" cy="120" r="64" fill="none" stroke-width="1.4"/>
+              <circle cx="25" cy="120" r="2.6"/>
+              <circle cx="215" cy="120" r="2.6"/>
+              <text class="stamp__big"><textPath href="#stamp-top" startOffset="50%" text-anchor="middle">Гайдаш Дмитрий Павлович</textPath></text>
+              <text class="stamp__big"><textPath href="#stamp-bottom" startOffset="50%" text-anchor="middle">ИНН 614328597388</textPath></text>
+              <text class="stamp__small"><textPath href="#stamp-ring" textLength="436.11" lengthAdjust="spacing">РОССИЙСКАЯ ФЕДЕРАЦИЯ • ПЛАТЕЛЬЩИК НПД • САМОЗАНЯТЫЙ • </textPath></text>
+            </g>
+            <rect class="stamp__qr-bg" x="77" y="77" width="86" height="86" rx="3"/>
+            <path class="stamp__qr" d="M80 80h22.4v3.2h-22.4zM112 80h3.2v3.2h-3.2zM118.4 80h3.2v3.2h-3.2zM124.8 80h3.2v3.2h-3.2zM131.2 80h3.2v3.2h-3.2zM137.6 80h22.4v3.2h-22.4zM80 83.2h3.2v3.2h-3.2zM99.2 83.2h3.2v3.2h-3.2zM108.8 83.2h3.2v3.2h-3.2zM118.4 83.2h6.4v3.2h-6.4zM128 83.2h6.4v3.2h-6.4zM137.6 83.2h3.2v3.2h-3.2zM156.8 83.2h3.2v3.2h-3.2zM80 86.4h3.2v3.2h-3.2zM86.4 86.4h9.6v3.2h-9.6zM99.2 86.4h3.2v3.2h-3.2zM105.6 86.4h3.2v3.2h-3.2zM112 86.4h3.2v3.2h-3.2zM128 86.4h6.4v3.2h-6.4zM137.6 86.4h3.2v3.2h-3.2zM144 86.4h9.6v3.2h-9.6zM156.8 86.4h3.2v3.2h-3.2zM80 89.6h3.2v3.2h-3.2zM86.4 89.6h9.6v3.2h-9.6zM99.2 89.6h3.2v3.2h-3.2zM105.6 89.6h6.4v3.2h-6.4zM118.4 89.6h12.8v3.2h-12.8zM137.6 89.6h3.2v3.2h-3.2zM144 89.6h9.6v3.2h-9.6zM156.8 89.6h3.2v3.2h-3.2zM80 92.8h3.2v3.2h-3.2zM86.4 92.8h9.6v3.2h-9.6zM99.2 92.8h3.2v3.2h-3.2zM105.6 92.8h3.2v3.2h-3.2zM112 92.8h6.4v3.2h-6.4zM121.6 92.8h3.2v3.2h-3.2zM131.2 92.8h3.2v3.2h-3.2zM137.6 92.8h3.2v3.2h-3.2zM144 92.8h9.6v3.2h-9.6zM156.8 92.8h3.2v3.2h-3.2zM80 96h3.2v3.2h-3.2zM99.2 96h3.2v3.2h-3.2zM105.6 96h12.8v3.2h-12.8zM121.6 96h3.2v3.2h-3.2zM128 96h3.2v3.2h-3.2zM137.6 96h3.2v3.2h-3.2zM156.8 96h3.2v3.2h-3.2zM80 99.2h22.4v3.2h-22.4zM105.6 99.2h3.2v3.2h-3.2zM112 99.2h3.2v3.2h-3.2zM118.4 99.2h3.2v3.2h-3.2zM124.8 99.2h3.2v3.2h-3.2zM131.2 99.2h3.2v3.2h-3.2zM137.6 99.2h22.4v3.2h-22.4zM105.6 102.4h3.2v3.2h-3.2zM112 102.4h3.2v3.2h-3.2zM118.4 102.4h3.2v3.2h-3.2zM124.8 102.4h9.6v3.2h-9.6zM80 105.6h3.2v3.2h-3.2zM86.4 105.6h16v3.2h-16zM112 105.6h6.4v3.2h-6.4zM121.6 105.6h3.2v3.2h-3.2zM137.6 105.6h16v3.2h-16zM80 108.8h9.6v3.2h-9.6zM92.8 108.8h6.4v3.2h-6.4zM108.8 108.8h3.2v3.2h-3.2zM115.2 108.8h9.6v3.2h-9.6zM131.2 108.8h6.4v3.2h-6.4zM140.8 108.8h3.2v3.2h-3.2zM147.2 108.8h6.4v3.2h-6.4zM80 112h9.6v3.2h-9.6zM99.2 112h3.2v3.2h-3.2zM115.2 112h3.2v3.2h-3.2zM121.6 112h12.8v3.2h-12.8zM137.6 112h6.4v3.2h-6.4zM153.6 112h6.4v3.2h-6.4zM80 115.2h6.4v3.2h-6.4zM89.6 115.2h3.2v3.2h-3.2zM102.4 115.2h6.4v3.2h-6.4zM115.2 115.2h6.4v3.2h-6.4zM128 115.2h6.4v3.2h-6.4zM140.8 115.2h3.2v3.2h-3.2zM153.6 115.2h6.4v3.2h-6.4zM89.6 118.4h16v3.2h-16zM108.8 118.4h9.6v3.2h-9.6zM121.6 118.4h19.2v3.2h-19.2zM144 118.4h9.6v3.2h-9.6zM156.8 118.4h3.2v3.2h-3.2zM80 121.6h9.6v3.2h-9.6zM92.8 121.6h6.4v3.2h-6.4zM105.6 121.6h6.4v3.2h-6.4zM118.4 121.6h3.2v3.2h-3.2zM124.8 121.6h3.2v3.2h-3.2zM131.2 121.6h3.2v3.2h-3.2zM140.8 121.6h3.2v3.2h-3.2zM150.4 121.6h3.2v3.2h-3.2zM80 124.8h3.2v3.2h-3.2zM86.4 124.8h9.6v3.2h-9.6zM99.2 124.8h6.4v3.2h-6.4zM112 124.8h3.2v3.2h-3.2zM121.6 124.8h3.2v3.2h-3.2zM128 124.8h6.4v3.2h-6.4zM147.2 124.8h3.2v3.2h-3.2zM153.6 124.8h6.4v3.2h-6.4zM80 128h3.2v3.2h-3.2zM86.4 128h6.4v3.2h-6.4zM108.8 128h6.4v3.2h-6.4zM118.4 128h3.2v3.2h-3.2zM131.2 128h6.4v3.2h-6.4zM140.8 128h6.4v3.2h-6.4zM153.6 128h6.4v3.2h-6.4zM80 131.2h3.2v3.2h-3.2zM86.4 131.2h6.4v3.2h-6.4zM99.2 131.2h3.2v3.2h-3.2zM105.6 131.2h3.2v3.2h-3.2zM112 131.2h3.2v3.2h-3.2zM118.4 131.2h9.6v3.2h-9.6zM131.2 131.2h16v3.2h-16zM150.4 131.2h6.4v3.2h-6.4zM105.6 134.4h3.2v3.2h-3.2zM112 134.4h3.2v3.2h-3.2zM124.8 134.4h9.6v3.2h-9.6zM144 134.4h3.2v3.2h-3.2zM80 137.6h22.4v3.2h-22.4zM115.2 137.6h6.4v3.2h-6.4zM124.8 137.6h3.2v3.2h-3.2zM131.2 137.6h3.2v3.2h-3.2zM137.6 137.6h3.2v3.2h-3.2zM144 137.6h6.4v3.2h-6.4zM153.6 137.6h6.4v3.2h-6.4zM80 140.8h3.2v3.2h-3.2zM99.2 140.8h3.2v3.2h-3.2zM105.6 140.8h3.2v3.2h-3.2zM115.2 140.8h3.2v3.2h-3.2zM124.8 140.8h3.2v3.2h-3.2zM131.2 140.8h3.2v3.2h-3.2zM144 140.8h3.2v3.2h-3.2zM80 144h3.2v3.2h-3.2zM86.4 144h9.6v3.2h-9.6zM99.2 144h3.2v3.2h-3.2zM105.6 144h12.8v3.2h-12.8zM128 144h32v3.2h-32zM80 147.2h3.2v3.2h-3.2zM86.4 147.2h9.6v3.2h-9.6zM99.2 147.2h3.2v3.2h-3.2zM105.6 147.2h3.2v3.2h-3.2zM112 147.2h3.2v3.2h-3.2zM118.4 147.2h6.4v3.2h-6.4zM128 147.2h12.8v3.2h-12.8zM144 147.2h3.2v3.2h-3.2zM150.4 147.2h9.6v3.2h-9.6zM80 150.4h3.2v3.2h-3.2zM86.4 150.4h9.6v3.2h-9.6zM99.2 150.4h3.2v3.2h-3.2zM105.6 150.4h9.6v3.2h-9.6zM121.6 150.4h12.8v3.2h-12.8zM137.6 150.4h6.4v3.2h-6.4zM150.4 150.4h3.2v3.2h-3.2zM156.8 150.4h3.2v3.2h-3.2zM80 153.6h3.2v3.2h-3.2zM99.2 153.6h3.2v3.2h-3.2zM118.4 153.6h6.4v3.2h-6.4zM128 153.6h6.4v3.2h-6.4zM137.6 153.6h3.2v3.2h-3.2zM144 153.6h6.4v3.2h-6.4zM156.8 153.6h3.2v3.2h-3.2zM80 156.8h22.4v3.2h-22.4zM105.6 156.8h3.2v3.2h-3.2zM112 156.8h3.2v3.2h-3.2zM118.4 156.8h3.2v3.2h-3.2zM124.8 156.8h3.2v3.2h-3.2zM137.6 156.8h3.2v3.2h-3.2zM144 156.8h3.2v3.2h-3.2zM150.4 156.8h9.6v3.2h-9.6z" shape-rendering="crispEdges"/>
+          </svg>
+          <!-- stamp:end -->
+        </a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="foot">
   <div class="wrap foot__row">
-    <p>Гайдаш Дмитрий Павлович, самозанятый, ИНН 614328597388. <a href="https://npd.nalog.ru/check-status/" rel="noopener">Проверить статус на сайте ФНС</a></p>
+    <p>Гайдаш Дмитрий Павлович, самозанятый, ИНН 614328597388. <a href="#rekvizity">Реквизиты</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

@@ -1,63 +1,57 @@
 # lerk.tech
 
-Лендинг Дмитрия Гайдаша (lerk): продажа услуг разработчика. Сайты, боты, ИИ-функции, интеграции, серверы.
-Одна статичная страница без сборки и без бэкенда. Форма «Соберите задачу» не отправляет данные на сервер:
-она собирает текст и открывает Telegram (`t.me/joulerkOFF?text=...`) или почтовую программу.
+Исходники [lerk.tech](https://lerk.tech) — личного сайта Дмитрия Гайдаша. Лендинг рассказывает о разработке сайтов, ботов, ИИ-функций и интеграций, показывает работы и даёт возможность связаться напрямую.
 
-Документация: [docs/README.md](docs/README.md). Канон фактов о человеке и проектах: Obsidian, карточка `lerk.tech` в `Lerk/продукты`.
-Локальная копия проекта: `/Users/lerk/work/lerk.tech`.
+Сайт статический: для просмотра и выкладки не нужны сборка, база данных или серверное приложение. Форма «Соберите задачу» составляет сообщение и открывает Telegram или почтовую программу. Данные формы не отправляются на сервер сайта и не сохраняются.
 
-## Структура
+## Состав проекта
 
-| Путь | Что |
-| --- | --- |
-| `public/` | корень сайта, это и выкладывается на сервер |
-| `public/index.html` | вся страница |
-| `public/assets/css/style.css` | стили, токены светлой и тёмной темы в начале файла |
-| `public/assets/js/main.js` | тема, меню, вкладки ИИ, появление блоков, копирование почты, сборка задачи |
-| `public/assets/img/` | картинки, собирает `tools/build_images.py` |
-| `public/assets/fonts/` | Dela Gothic One и Onest, только кириллица и латиница |
-| `public/og.jpg` | превью ссылки 1200x630, собирает `tools/og.mjs` |
-| `tools/` | скрипты скриншотов, картинок, иконок и проверок |
-| `deploy/` | vhost nginx для сервера |
-| `docs/` | документация страницы и выкладки |
+- `public/` — готовый сайт и корень веб-сервера: HTML, CSS, JavaScript, изображения, шрифты, иконки, robots.txt и sitemap.xml.
+- `tools/` — скрипты подготовки изображений, иконок, превью, печати и проверки страницы. Зависимости инструментов описаны в `tools/package.json`.
+- `deploy/` — образец конфигурации nginx для текущего VPS.
+- `docs/` — [страница](docs/site.md) и [выкладка](docs/deploy.md); [индекс документации](docs/README.md).
 
-## Запустить локально
+## Запуск локально
 
 ```bash
 python3 -m http.server 8765 --bind 127.0.0.1 --directory public
 ```
 
-Открыть http://127.0.0.1:8765. В Claude Code то же самое запускается из `.claude/launch.json` (имя `lerk-tech`).
+Откройте <http://127.0.0.1:8765/>. Для изменения текста, стилей и поведения достаточно редактировать файлы в `public/`. После правки CSS или JavaScript обновите параметр `?v=` у подключений в `public/index.html` и `public/404.html`, чтобы браузеры получили новые файлы.
 
-## Инструменты
+## Инструменты и проверка
 
-Один раз поставить зависимости (playwright-core берёт установленный Google Chrome, иконки Phosphor):
+Для скриптов из `tools/` нужны Node.js, Python 3 и установленный Google Chrome. Установите зависимости один раз:
 
 ```bash
-cd tools && npm install
+npm ci --prefix tools
 ```
 
-| Команда | Зачем |
+| Команда | Назначение |
 | --- | --- |
-| `node tools/shoot.mjs` | заново снять скриншоты живых сайтов в `tools/raw` (cookie-баннеры прячутся, согласие не даётся) |
-| `node tools/shoot-extra.mjs` | экран ИИ-помощника lodki.site, блог с ИИ-обложками, примеры гербов, статьи aqcentr.ru |
-| `python3 tools/build_images.py` | собрать картинки сайта из `tools/raw` и аватара в Obsidian |
-| `python3 tools/build_icons.py` | собрать спрайт иконок и вставить его в `index.html` |
-| `node tools/og.mjs` | пересобрать `public/og.jpg` из `tools/og.html` |
-| `node tools/smoke.mjs` | проверить интерактив: тема, вкладки, меню, копирование, форма, режим без JS |
-| `node tools/review.mjs <url> <файл> <ширина> <высота> <light или dark>` | скриншот всей страницы для просмотра |
-| `node tools/parts.mjs <папка> <ширина> <light или dark> <селектор>...` | скриншоты отдельных блоков |
+| `node tools/smoke.mjs local` | Проверить локальную страницу без отдельного HTTP-сервера |
+| `node tools/smoke.mjs https://lerk.tech/` | Проверить опубликованный сайт |
+| `node tools/shoot.mjs` и `node tools/shoot-extra.mjs` | Снять скриншоты проектов в `tools/raw/` |
+| `python3 tools/build_images.py` | Подготовить изображения из исходных скриншотов |
+| `python3 tools/build_icons.py` | Обновить SVG-спрайт иконок |
+| `node tools/build_stamp.mjs` | Обновить печать с QR-кодом в HTML |
+| `node tools/og.mjs` | Пересобрать Open Graph изображение |
+| `node tools/review.mjs <url> <файл> <ширина> <высота> <light или dark>` | Снять скриншот страницы |
+| `node tools/parts.mjs <папка> <ширина> <light или dark> <селектор>...` | Снять отдельные блоки |
 
-Проверки гоняются на запущенном локальном сервере.
+`tools/raw/` и `tools/node_modules/` не входят в Git. Готовые изображения уже лежат в `public/`; для обычной правки страницы пересобирать их не нужно. Некоторые скрипты подготовки изображений используют локальный аватар из Obsidian и потому зависят от авторского окружения.
 
-## Выложить на lerk.tech
+## Обновление сайта
 
-Сайт живёт на VPS метрики-ребенка (SSH `metrika-rebenka`), docroot `/var/www/lerk.tech/public`, vhost `site-lerk.tech`.
-Обновить файлы:
+Исходники хранятся в `main` этого репозитория. На VPS `metrika-rebenka` рабочая копия находится в `/var/www/lerk.tech/repo`, а nginx отдаёт `/var/www/lerk.tech/repo/public`. После проверки локальных изменений:
 
 ```bash
-rsync -rltz --delete public/ metrika-rebenka:/var/www/lerk.tech/public/
+git push origin main
+ssh metrika-rebenka 'git -C /var/www/lerk.tech/repo pull --ff-only origin main'
 ```
 
-Схема с Xray на 443, DNS на REG.RU, сертификат и проверки: [docs/deploy.md](docs/deploy.md).
+Затем проверьте `https://lerk.tech/` и интерактив командой `node tools/smoke.mjs https://lerk.tech/`. Изменение конфигурации nginx требует отдельной проверки `nginx -t` и перезагрузки nginx. Подробности, особенности HTTPS через Xray и откат — в [инструкции по выкладке](docs/deploy.md).
+
+## Связь
+
+По задаче можно написать [в Telegram](https://t.me/joulerkOFF) или на [lerk@joulerk.ru](mailto:lerk@joulerk.ru).

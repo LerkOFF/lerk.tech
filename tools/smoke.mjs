@@ -1,13 +1,23 @@
-// Смоук-тест интерактива страницы. Запуск: node tools/smoke.mjs [url]
+// Смоук-тест интерактива страницы. Запуск: node tools/smoke.mjs [url | local]
+// local: public/ без сервера (tools/local-route.mjs), иначе адрес сайта.
 import { chromium } from 'playwright-core';
-const url = process.argv[2] || 'http://127.0.0.1:8765/';
-const b = await chromium.launch({ channel: 'chrome' });
+import { createRequire } from 'node:module';
+import { serveLocal, LOCAL_URL } from './local-route.mjs';
+const local = process.argv[2] === 'local';
+const url = local ? LOCAL_URL : (process.argv[2] || 'http://127.0.0.1:8765/');
+const jsqrPath = createRequire(import.meta.url).resolve('jsqr/dist/jsQR.js');
+// RESOLVE_IP=157.22.231.158 заставляет Chrome идти на этот IP, минуя DNS (полезно, пока кэш отдаёт старую запись)
+const resolveIp = process.env.RESOLVE_IP;
+const host = new URL(url).hostname;
+const args = resolveIp ? [`--host-resolver-rules=MAP ${host} ${resolveIp},MAP www.${host} ${resolveIp}`] : [];
+const b = await chromium.launch({ channel: 'chrome', args });
 const results = [];
 const ok = (name, cond, extra = '') => results.push(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 
 // Десктоп
 {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] });
+  if (local) await serveLocal(ctx);
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', e => errs.push(e.message));
@@ -53,14 +63,50 @@ const ok = (name, cond, extra = '') => results.push(`${cond ? 'PASS' : 'FAIL'}  
   const text = decodeURIComponent((opened.split('?text=')[1] || ''));
   ok('Telegram открывается с текстом', opened.startsWith('https://t.me/joulerkOFF?text='), JSON.stringify(text));
   ok('в тексте виды работ и срок', text.includes('Нужно: Сайт, ИИ-функция.') && text.includes('Срок: в течение месяца.') && text.includes('Задача: Лендинг для кофейни с оплатой'));
+
+  // вариант «Другое» для задач не из списка
+  await p.evaluate(() => { window.__opened = []; });
+  await p.uncheck('input[name="kind"][value="Сайт"]');
+  await p.uncheck('input[name="kind"][value="ИИ-функция"]');
+  await p.check('input[name="kind"][value="Другое"]');
+  await p.click('button[value="tg"]');
+  const other = decodeURIComponent(((await p.evaluate(() => window.__opened[0] || '')).split('?text=')[1] || ''));
+  ok('вариант «Другое» попадает в текст', other.includes('Нужно: Другое.'), JSON.stringify(other.split('\n')[1] || ''));
   ok('статус под формой', (await p.textContent('.brief__status')).startsWith('Открываю Telegram'));
   ok('ошибок JS нет', errs.length === 0, errs.join('; '));
+  await ctx.close();
+}
+
+// Реквизиты и печать: QR на печати читается и ведёт на почту в обеих темах
+for (const scheme of ['light', 'dark']) {
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme, reducedMotion: 'reduce' });
+  if (local) await serveLocal(ctx);
+  const p = await ctx.newPage();
+  await p.goto(url, { waitUntil: 'networkidle' });
+  if (scheme === 'light') {
+    const rows = await p.$$eval('.rekv__list dt', els => els.map(e => e.textContent.trim()));
+    ok('реквизиты без региона и СНИЛС', rows.join('|') === 'ФИО|ИНН|Статус|Виды деятельности|Электронная почта', rows.join(', '));
+  }
+  const stamp = p.locator('.rekv__stamp svg');
+  await stamp.scrollIntoViewIfNeeded();
+  await p.evaluate(() => document.fonts.ready);
+  const png = (await stamp.screenshot()).toString('base64');
+  await p.addScriptTag({ path: jsqrPath });
+  const qr = await p.evaluate(async (b64) => {
+    const img = new Image(); img.src = 'data:image/png;base64,' + b64; await img.decode();
+    const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
+    const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+    const r = window.jsQR(g.getImageData(0, 0, c.width, c.height).data, c.width, c.height, { inversionAttempts: 'attemptBoth' });
+    return r ? r.data : null;
+  }, png);
+  ok(`QR печати читается (${scheme === 'light' ? 'светлая' : 'тёмная'} тема)`, qr === 'mailto:lerk@joulerk.ru', String(qr));
   await ctx.close();
 }
 
 // Телефон
 {
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  if (local) await serveLocal(ctx);
   const p = await ctx.newPage();
   await p.goto(url, { waitUntil: 'networkidle' });
   ok('меню скрыто на телефоне', !(await p.isVisible('#nav')));
@@ -81,6 +127,7 @@ const ok = (name, cond, extra = '') => results.push(`${cond ? 'PASS' : 'FAIL'}  
 // Без JS
 {
   const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
+  if (local) await serveLocal(ctx);
   const p = await ctx.newPage();
   await p.goto(url, { waitUntil: 'networkidle' });
   ok('без JS видны все блоки', await p.evaluate(() => getComputedStyle(document.querySelector('.case')).opacity === '1'));

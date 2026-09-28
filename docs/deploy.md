@@ -1,13 +1,15 @@
 # Выкладка lerk.tech
 
-Сайт статичный: на сервер едет только папка `public/`. PHP, база и cron не нужны.
+Сайт статичный: nginx отдаёт папку `public/` из серверной Git-копии. PHP, база и cron не нужны.
 Живёт на VPS метрики-ребенка рядом с метрикой и донну.рф. Общие у них только Xray и nginx.
 
 | | |
 | --- | --- |
 | локально | `/Users/lerk/work/lerk.tech` |
+| GitHub | `git@github.com:LerkOFF/lerk.tech.git`, ветка `main` |
+| серверная копия | `/var/www/lerk.tech/repo` |
 | SSH | `metrika-rebenka` (`157.22.231.158`, AdminVPS), root |
-| docroot | `/var/www/lerk.tech/public`, владелец `root:root`, каталоги 755, файлы 644 |
+| docroot | `/var/www/lerk.tech/repo/public`, владелец `root:root`, каталоги 755, файлы 644 |
 | nginx vhost | `/etc/nginx/sites-available/site-lerk.tech`, симлинк в `sites-enabled` с тем же именем. Шаблон в проекте: `deploy/nginx-site-lerk.tech.conf` |
 | ACME webroot | `/var/www/acme` (общий с донну.рф) |
 | Xray | `/usr/local/etc/xray/config.json`, публичный TCP и UDP 443 |
@@ -39,16 +41,30 @@ inbound `hy2-in`, клиентов Happ, UDP 443, порт 4443. Плагин ng
 | `www` | A | `157.22.231.158` |
 
 По умолчанию REG.RU ставит обе записи на свою парковку `95.163.244.138`: их заменить, а не добавлять рядом.
-AAAA не нужна: у сервера нет IPv6. Проверка: `dig +short @8.8.8.8 lerk.tech A` отдаёт `157.22.231.158`.
+AAAA не нужна: у сервера нет IPv6.
 
-## Выкладка файлов
+Записи стоят с 27.09.2026: `ns1.reg.ru`, `ns2.reg.ru` и публичные DNS (Google, Cloudflare, Яндекс, Quad9) отдают `157.22.231.158`.
+TTL у REG.RU 86400, поэтому кэш, успевший взять парковку, держит её до суток.
+Если на Mac три разных DNS отдают парковку с одинаковым остатком TTL, запросы перехватывает роутер или VPN: проверять с сервера.
 
 ```bash
-rsync -rltz --delete public/ metrika-rebenka:/var/www/lerk.tech/public/
-ssh metrika-rebenka 'chown -R root:root /var/www/lerk.tech && find /var/www/lerk.tech -type d -exec chmod 755 {} + && find /var/www/lerk.tech -type f -exec chmod 644 {} +'
+ssh metrika-rebenka 'dig +short @8.8.8.8 lerk.tech A'
 ```
 
+## Обновление из Git
+
+Локально проверить изменения и отправить `main` в GitHub. На сервере обновлять только быстрым перемещением вперёд:
+
+```bash
+git push origin main
+ssh metrika-rebenka 'git -C /var/www/lerk.tech/repo pull --ff-only origin main'
+```
+
+Папка `/var/www/lerk.tech/public` сохранена как резервная копия первоначальной выкладки. nginx использует `/var/www/lerk.tech/repo/public`. Не редактировать отслеживаемые файлы на сервере: следующая выкладка должна приходить из Git. Скрипты `tools/` и документация доступны в серверной копии, но не обслуживаются nginx.
+
 После правки CSS или JS поменять `?v=` у `style.css` и `main.js` в `public/index.html` (и у `style.css` в `404.html`).
+
+Откат к предыдущему коммиту: сохранить SHA нужного коммита, сделать `git revert` локально, запушить и выполнить ту же команду `pull --ff-only`. Если нужно срочно вернуться к исходной файловой выкладке, вернуть `root /var/www/lerk.tech/public;` в vhost, проверить `nginx -t` и перезагрузить nginx.
 
 ## Правка vhost
 
@@ -64,7 +80,7 @@ ssh metrika-rebenka 'nginx -t && systemctl reload nginx'
 Это третья пара в `certificates` у `vless-tcp`. В `hy2-in` её нет. Метрика остаётся первой.
 Хук `/etc/letsencrypt/renewal-hooks/deploy/xray-certs.sh` копирует пару, если каталог live есть, и перезапускает Xray.
 
-Пока `ns1.reg.ru` отдаёт парковку, обычный браузер на `https://lerk.tech` до сервера не доходит. Проверка на сам сервер: `--resolve lerk.tech:443:157.22.231.158`.
+Проверка на сам сервер в обход DNS: `curl --resolve lerk.tech:443:157.22.231.158 https://lerk.tech/`.
 
 Повторный выпуск:
 
@@ -85,6 +101,7 @@ curl -sS -o /dev/null -w "%{http_code} %{redirect_url}\n" https://www.lerk.tech/
 curl -sS -o /dev/null -w "%{http_code}\n" --http2 --resolve xn----7sbbdrcbtsfnu5aey.xn--p1ai:443:157.22.231.158 https://xn----7sbbdrcbtsfnu5aey.xn--p1ai/
 curl -sS -o /dev/null -w "%{http_code}\n" --http2 --resolve xn--d1asac1a.xn--p1ai:443:157.22.231.158 https://xn--d1asac1a.xn--p1ai/
 node tools/smoke.mjs https://lerk.tech/
+RESOLVE_IP=157.22.231.158 node tools/smoke.mjs https://lerk.tech/   # то же в обход DNS-кэша
 ```
 
 Ждём: lerk.tech 200 по HTTP/2 и HTTP/1.1, http и www дают 301 на `https://lerk.tech/`, метрика и донну.рф 200.

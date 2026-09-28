@@ -51,6 +51,9 @@
   --error: #8e2a1c;
   --avatar-bg: #7f5d3d;
   --grain: .07;
+  --stamp-ink: #2b45a6;   /* синие чернила печати */
+  --qr-ink: #2b45a6;
+  --qr-bg: transparent;
 
   --r-panel: 22px;
   --r-inner: 14px;
@@ -85,6 +88,9 @@
     --error: #f0a08d;
     --avatar-bg: #7f5d3d;
     --grain: .05;
+    --stamp-ink: #9db2ff;
+    --qr-ink: #1f1a15;
+    --qr-bg: #efe3cc;
     color-scheme: dark;
   }
 }
@@ -107,6 +113,9 @@
   --error: #f0a08d;
   --avatar-bg: #7f5d3d;
   --grain: .05;
+  --stamp-ink: #9db2ff;
+  --qr-ink: #1f1a15;
+  --qr-bg: #efe3cc;
   color-scheme: dark;
 }
 
@@ -614,7 +623,8 @@ button { font: inherit; }
 .field legend, .field > label { display: block; padding: 0; margin-bottom: 10px; font-weight: 800; }
 .pick { display: flex; flex-wrap: wrap; gap: 8px; }
 .pick label { position: relative; cursor: pointer; }
-.pick input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+/* z-index: у отмеченного чипа подпись сдвинута трансформом, клик всё равно должен попадать в сам чекбокс */
+.pick input { position: absolute; inset: 0; z-index: 1; opacity: 0; margin: 0; cursor: pointer; }
 .pick span {
   display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px;
   border: 2px solid var(--line); border-radius: var(--r-pill);
@@ -641,6 +651,38 @@ button { font: inherit; }
 .brief__actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px 14px; }
 .brief__status { margin-top: 16px; min-height: 1.6em; font-weight: 600; color: var(--link); }
 .brief__status:empty { display: none; }
+
+/* ---------- Реквизиты ---------- */
+.section--rekv { padding-top: clamp(8px, 2vw, 24px); }
+.rekv {
+  display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; align-items: end;
+  padding: 10px clamp(20px, 3vw, 36px) 10px;
+  background: var(--surface);
+  border: 2px solid var(--line); border-radius: var(--r-panel);
+  box-shadow: 6px 6px 0 var(--shadow-c);
+}
+.rekv__list { margin: 0; }
+.rekv__list > div {
+  display: grid; grid-template-columns: minmax(150px, .5fr) minmax(0, 1fr); gap: 8px 24px;
+  padding: 18px 0;
+}
+.rekv__list > div + div { border-top: 2px solid color-mix(in srgb, var(--line) 18%, transparent); }
+.rekv__list dt { color: var(--text-2); font-weight: 600; }
+.rekv__list dd { margin: 0; font-weight: 700; }
+.rekv__list dd a { font-weight: 600; }
+.rekv__kinds { display: grid; gap: 4px; }
+
+/* Печать как настоящий оттиск: наклон, чернила ложатся на бумагу */
+.rekv__stamp { display: block; justify-self: center; margin-bottom: 8px; border-radius: 50%; }
+.stamp { display: block; width: 240px; height: auto; rotate: -8deg; opacity: .92; mix-blend-mode: multiply; }
+.stamp__ink { fill: var(--stamp-ink); stroke: var(--stamp-ink); }
+.stamp__ink text { stroke: none; font-family: var(--font-body); font-weight: 800; }
+.stamp__big { font-size: 14.5px; letter-spacing: .02em; }
+.stamp__small { font-size: 8.6px; }
+.stamp__qr { fill: var(--qr-ink); }
+.stamp__qr-bg { fill: var(--qr-bg); }
+:root[data-theme="dark"] .stamp { mix-blend-mode: normal; opacity: .96; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stamp { mix-blend-mode: normal; opacity: .96; } }
 
 /* ---------- Подвал ---------- */
 .foot { border-top: 2px solid var(--line); padding-block: 28px 44px; font-size: .9375rem; color: var(--text-2); }
@@ -686,6 +728,8 @@ button { font: inherit; }
   .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__art { max-width: 460px; width: 100%; margin-inline: auto; }
   .process, .about, .contact { grid-template-columns: minmax(0, 1fr); }
+  .rekv { grid-template-columns: minmax(0, 1fr) 230px; }
+  .stamp { width: 220px; }
   .process__side { position: static; max-width: 560px; }
   .ai__panel { grid-template-columns: minmax(0, 1fr); }
   .ai__visual { min-height: 0; aspect-ratio: 5 / 4; max-width: 520px; width: 100%; margin-inline: auto; }
@@ -725,4 +769,7 @@ button { font: inherit; }
   .channel { grid-template-columns: 24px minmax(0, 1fr); row-gap: 0; }
   .channel__value { grid-column: 2; }
   .brief__actions .btn { flex: 1 1 100%; }
+  .rekv { grid-template-columns: minmax(0, 1fr); padding-bottom: 24px; }
+  .rekv__list > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .stamp { width: 210px; }
 }
