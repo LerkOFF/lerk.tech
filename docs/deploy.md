@@ -21,7 +21,8 @@
 
 Браузер приходит на 443 в Xray. Xray снимает TLS своим сертификатом (выбирает по имени сайта) и по ALPN отдаёт
 расшифрованный HTTP на localhost: `h2` на `127.0.0.1:8081`, остальное на `127.0.0.1:8082`, оба с PROXY v2.
-Дальше nginx выбирает vhost по `Host`. На порту 80 nginx отдаёт только ACME и 301 на `https://lerk.tech`.
+Дальше nginx выбирает vhost по `Host`. На порту 80 nginx отдаёт только ACME, файлы `yandex_*.html` Вебмастера (его робот не верит редиректу) и 301 на `https://lerk.tech`.
+Путь `/pokupki/` обслуживает отдельный checkout `/var/www/pokupki` (`LerkOFF/pokupki_site`): vhost подключает его `deploy/nginx-pokupki.conf` через `include`.
 `www.lerk.tech` отвечает 301 на apex.
 
 Файл vhost назван `site-lerk.tech`, чтобы грузиться после `metrika`. У портов 80, 8081 и 8082 нет `default_server`,
@@ -67,6 +68,8 @@ ssh metrika-rebenka 'git -C /var/www/lerk.tech/repo pull --ff-only origin main'
 Откат к предыдущему коммиту: сохранить SHA нужного коммита, сделать `git revert` локально, запушить и выполнить ту же команду `pull --ff-only`. Если нужно срочно вернуться к исходной файловой выкладке, вернуть `root /var/www/lerk.tech/public;` в vhost, проверить `nginx -t` и перезагрузить nginx.
 
 ## Правка vhost
+
+Шаблон совпадает с сервером, включая `include` Покупок. Без этой строки `/pokupki/` перестанет открываться. Перед заливкой сравнить с живым файлом и сохранить копию: последняя `site-lerk.tech.pre-webmaster` (05.10.2026).
 
 ```bash
 scp deploy/nginx-site-lerk.tech.conf metrika-rebenka:/etc/nginx/sites-available/site-lerk.tech

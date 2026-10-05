@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# Покупки: закрытый список на /pokupki/, не для поиска
+Disallow: /pokupki
 
 Sitemap: https://lerk.tech/sitemap.xml
