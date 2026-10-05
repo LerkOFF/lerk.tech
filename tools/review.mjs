@@ -7,6 +7,8 @@ const ctx = await b.newContext({
   viewport: { width: +w, height: +h }, deviceScaleFactor: 1, colorScheme: scheme, reducedMotion: 'reduce',
   isMobile: mobile, hasTouch: mobile, locale: 'ru-RU',
 });
+// Яндекс.Метрику глушим, как в smoke.mjs: просмотры для проверки не должны попадать в статистику
+await ctx.route(/^https:\/\/mc\.(yandex|webvisor)\./, r => r.abort());
 const p = await ctx.newPage();
 const errors = [];
 p.on('console', m => { if (m.type() === 'error' || m.type() === 'warning') errors.push(m.type() + ': ' + m.text()); });

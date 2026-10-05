@@ -133,6 +133,69 @@ for (const scheme of ['light', 'dark']) {
   await ctx.close();
 }
 
+// Поиск: sitemap, страницы услуг, микроразметка, внутренние ссылки
+{
+  const CANON = 'https://lerk.tech/';
+  const ctx = await newCtx({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage();
+  const errs = [];
+  p.on('pageerror', e => errs.push(e.message));
+  await p.goto(url, { waitUntil: 'networkidle' });
+  const fetchText = (u) => p.evaluate(async (u) => { const r = await fetch(u); return { status: r.status, text: await r.text() }; }, u);
+  const sitemap = (await fetchText(new URL('sitemap.xml', url).href)).text;
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  const pages = locs.map(l => new URL(l.replace(CANON, ''), url).href);
+  ok('в sitemap главная и 6 услуг', locs.length === 7 && locs[0] === CANON, String(locs.length));
+  const robots = (await fetchText(new URL('robots.txt', url).href)).text;
+  ok('robots.txt указывает на sitemap', robots.includes('Sitemap: https://lerk.tech/sitemap.xml') && robots.includes('Disallow: /pokupki'));
+
+  const more = await p.$$eval('.service__more', as => as.map(a => a.getAttribute('href')));
+  ok('карточки услуг ведут на страницы из sitemap', more.length === 6 && more.every(h => locs.includes(CANON + h.slice(1))), more.join(' '));
+  const mainLd = await p.$$eval('script[type="application/ld+json"]', s => s.map(x => JSON.parse(x.textContent)));
+  const mainFaq = mainLd.flatMap(x => x['@graph'] || [x]).find(x => x['@type'] === 'FAQPage');
+  ok('вопросы главной совпадают с микроразметкой', mainFaq && mainFaq.mainEntity.length === await p.$$eval('#faq .faq__item', d => d.length));
+
+  const titles = new Set(), links = new Set(), bad = [];
+  for (const [i, page] of pages.entries()) {
+    const res = await p.goto(page, { waitUntil: 'networkidle' });
+    const info = await p.evaluate(() => ({
+      title: document.title,
+      desc: document.querySelector('meta[name="description"]')?.content || '',
+      canonical: document.querySelector('link[rel="canonical"]')?.href,
+      h1: document.querySelectorAll('h1').length,
+      ld: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => { try { JSON.parse(s.textContent); return true; } catch { return false; } }),
+      ym: typeof window.ym === 'function',
+      links: [...document.querySelectorAll('a[href]')].map(a => a.href).filter(h => h.startsWith(location.origin)),
+    }));
+    titles.add(info.title);
+    info.links.forEach(l => links.add(l.split('#')[0]));
+    if (res.status() !== 200 || info.canonical !== locs[i] || info.h1 !== 1 || !info.desc || !info.ld.length || !info.ld.every(Boolean) || !info.ym) {
+      bad.push(`${locs[i]}: ${res.status()} canonical=${info.canonical} h1=${info.h1} ld=${info.ld} ym=${info.ym}`);
+    }
+  }
+  ok('страницы из sitemap: 200, canonical, один h1, JSON-LD, Метрика', bad.length === 0, bad.join('; '));
+  ok('у каждой страницы свой title', titles.size === pages.length);
+  const broken = [];
+  for (const l of links) { const r = await fetchText(l); if (r.status !== 200) broken.push(`${r.status} ${l}`); }
+  ok('внутренние ссылки открываются', broken.length === 0, broken.join(', '));
+  ok('ошибок JS на страницах нет', errs.length === 0, errs.join('; '));
+  await ctx.close();
+
+  // страница услуги на телефоне: меню, ширина, вопросы
+  const m = await newCtx({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const mp = await m.newPage();
+  await mp.goto(pages[1], { waitUntil: 'networkidle' });
+  await mp.click('.nav-toggle');
+  ok('меню на странице услуги открывается', await mp.isVisible('#nav'));
+  ok('пункты меню ведут на главную', (await mp.getAttribute('#nav a', 'href')) === '/#work');
+  await mp.keyboard.press('Escape');
+  const msw = await mp.evaluate(() => document.documentElement.scrollWidth);
+  ok('страница услуги без горизонтальной прокрутки', msw <= 390, String(msw));
+  await mp.click('#faq summary');
+  ok('вопрос раскрывается', await mp.evaluate(() => document.querySelector('#faq details').open));
+  await m.close();
+}
+
 // Без JS
 {
   const ctx = await newCtx({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });

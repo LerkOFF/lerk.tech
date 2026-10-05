@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 # Покупки: закрытый список на /pokupki/, не для поиска
 Disallow: /pokupki
+# Метки рекламы и переходов из Яндекса не создают новых страниц (директива Яндекса, остальные роботы её пропускают)
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&ysclid
 
 Sitemap: https://lerk.tech/sitemap.xml
