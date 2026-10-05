@@ -69,7 +69,7 @@ ssh metrika-rebenka 'git -C /var/www/lerk.tech/repo pull --ff-only origin main'
 
 ## Правка vhost
 
-Шаблон совпадает с сервером, включая `include` Покупок. Без этой строки `/pokupki/` перестанет открываться. Перед заливкой сравнить с живым файлом и сохранить копию: последняя `site-lerk.tech.pre-webmaster` (05.10.2026).
+Шаблон совпадает с сервером, включая `include` Покупок. Без этой строки `/pokupki/` перестанет открываться. Перед заливкой сравнить с живым файлом и сохранить копию: последняя `site-lerk.tech.pre-manifest` (05.10.2026).
 
 ```bash
 scp deploy/nginx-site-lerk.tech.conf metrika-rebenka:/etc/nginx/sites-available/site-lerk.tech
