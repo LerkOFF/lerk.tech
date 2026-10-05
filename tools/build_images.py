@@ -103,6 +103,7 @@ def round_icon(size):
 
 
 round_icon(32).save(PUB / "favicon-32.png")
+round_icon(120).save(PUB / "favicon-120.png", optimize=True)  # Яндекс берёт в выдачу 120 × 120
 round_icon(192).save(PUB / "icon-192.png")
 round_icon(512).save(PUB / "icon-512.png")
 round_icon(48).save(PUB / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])

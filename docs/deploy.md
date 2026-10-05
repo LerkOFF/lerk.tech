@@ -107,6 +107,6 @@ RESOLVE_IP=157.22.231.158 node tools/smoke.mjs https://lerk.tech/   # то же 
 Ждём: lerk.tech 200 по HTTP/2 и HTTP/1.1, http и www дают 301 на `https://lerk.tech/`, метрика и донну.рф 200.
 Если метрика после правки молчит, выкладку не считать готовой и вернуть копию `config.json`.
 
-После запуска: Яндекс.Вебмастер и Google Search Console, `https://lerk.tech/sitemap.xml`.
+Яндекс.Вебмастер: права подтверждены файлом `public/yandex_f7b33e80f19bcf79.html`, его не удалять и не переименовывать, иначе права слетят. Google Search Console ещё не подключён.
 Яндекс.Метрика подключена 05.10.2026, счётчик `113438654`, код в `index.html` и `404.html`: [описание](site.md#яндексметрика).
 Превью ссылки в Telegram при смене `og.jpg` сбрасывает @WebpageBot.
