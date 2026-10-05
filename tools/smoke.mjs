@@ -13,16 +13,27 @@ const args = resolveIp ? [`--host-resolver-rules=MAP ${host} ${resolveIp},MAP ww
 const b = await chromium.launch({ channel: 'chrome', args });
 const results = [];
 const ok = (name, cond, extra = '') => results.push(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
+// Яндекс.Метрику глушим, чтобы прогоны не попадали в статистику и Вебвизор
+const METRIKA = /^https:\/\/mc\.(yandex|webvisor)\./;
+const newCtx = async (opts) => {
+  const ctx = await b.newContext(opts);
+  await ctx.route(METRIKA, r => r.abort());
+  if (local) await serveLocal(ctx);
+  return ctx;
+};
 
 // Десктоп
 {
-  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] });
-  if (local) await serveLocal(ctx);
+  const ctx = await newCtx({ viewport: { width: 1440, height: 900 }, permissions: ['clipboard-read', 'clipboard-write'] });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', e => errs.push(e.message));
   await p.addInitScript(() => { window.__opened = []; window.open = (u) => { window.__opened.push(u); return {}; }; });
   await p.goto(url, { waitUntil: 'networkidle' });
+
+  // счётчик Метрики
+  ok('счётчик Метрики подключён', await p.evaluate(() => typeof window.ym === 'function' && !!document.querySelector('script[src="https://mc.yandex.ru/metrika/tag.js?id=113438654"]')));
+  ok('Вебвизор не пишет текст задачи', await p.evaluate(() => document.querySelector('#brief-text').classList.contains('ym-disable-keys')));
 
   // тема
   await p.click('[data-theme-toggle]');
@@ -79,8 +90,7 @@ const ok = (name, cond, extra = '') => results.push(`${cond ? 'PASS' : 'FAIL'}  
 
 // Реквизиты и печать: QR на печати читается и ведёт на почту в обеих темах
 for (const scheme of ['light', 'dark']) {
-  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme, reducedMotion: 'reduce' });
-  if (local) await serveLocal(ctx);
+  const ctx = await newCtx({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, colorScheme: scheme, reducedMotion: 'reduce' });
   const p = await ctx.newPage();
   await p.goto(url, { waitUntil: 'networkidle' });
   if (scheme === 'light') {
@@ -105,8 +115,7 @@ for (const scheme of ['light', 'dark']) {
 
 // Телефон
 {
-  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-  if (local) await serveLocal(ctx);
+  const ctx = await newCtx({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   const p = await ctx.newPage();
   await p.goto(url, { waitUntil: 'networkidle' });
   ok('меню скрыто на телефоне', !(await p.isVisible('#nav')));
@@ -126,8 +135,7 @@ for (const scheme of ['light', 'dark']) {
 
 // Без JS
 {
-  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
-  if (local) await serveLocal(ctx);
+  const ctx = await newCtx({ viewport: { width: 1440, height: 900 }, javaScriptEnabled: false });
   const p = await ctx.newPage();
   await p.goto(url, { waitUntil: 'networkidle' });
   ok('без JS видны все блоки', await p.evaluate(() => getComputedStyle(document.querySelector('.case')).opacity === '1'));

@@ -5,7 +5,7 @@
 
 | | |
 | --- | --- |
-| локально | `/Users/lerk/work/lerk.tech` |
+| локально | `/Users/lerk/work/web/lerk.tech` |
 | GitHub | `git@github.com:LerkOFF/lerk.tech.git`, ветка `main` |
 | серверная копия | `/var/www/lerk.tech/repo` |
 | SSH | `metrika-rebenka` (`157.22.231.158`, AdminVPS), root |
@@ -108,4 +108,5 @@ RESOLVE_IP=157.22.231.158 node tools/smoke.mjs https://lerk.tech/   # то же 
 Если метрика после правки молчит, выкладку не считать готовой и вернуть копию `config.json`.
 
 После запуска: Яндекс.Вебмастер и Google Search Console, `https://lerk.tech/sitemap.xml`.
+Яндекс.Метрика подключена 05.10.2026, счётчик `113438654`, код в `index.html` и `404.html`: [описание](site.md#яндексметрика).
 Превью ссылки в Telegram при смене `og.jpg` сбрасывает @WebpageBot.
