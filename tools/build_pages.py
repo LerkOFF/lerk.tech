@@ -702,7 +702,8 @@ def main_ld():
         "email": "mailto:lerk@joulerk.ru",
         "sameAs": ["https://t.me/joulerkOFF", "https://vk.com/ca7ana", "https://github.com/LerkOFF"],
         "knowsAbout": ["PHP", "Laravel", "Python", "JavaScript", "Telegram-боты", "ИИ-генерация изображений",
-                       "ЮKassa", "Яндекс.Метрика", "nginx", "Docker"],
+                       "ЮKassa", "Яндекс.Метрика", "nginx", "Docker", "C++", "C#", "SQL", "FastAPI", "Redis",
+                       "PostgreSQL"],
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
             "name": "Услуги",

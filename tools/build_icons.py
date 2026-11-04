@@ -35,6 +35,7 @@ ICONS = {
     "swap": "arrows-left-right",
     "store": "storefront",
     "notebook": "notebook",
+    "code": "code",
 }
 EXTRA = {"vk": ROOT / "tools" / "icons" / "vk.svg"}  # Simple Icons, viewBox 0 0 24 24
 
