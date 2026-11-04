@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -90,6 +90,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Зависит от объёма: лендинг проще каталога с личным кабинетом. Пришлите пару фраз о задаче и ссылку на сайт, если он уже есть, и я назову цену и срок. Большой проект делим на этапы с оплатой по этапам или почасово."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Делаете сайты на двух языках?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Для портфолио ekatrvl.ru сделан переключатель русской и английской версий без тяжёлых библиотек. Для большого сайта подбираю схему под задачу: отдельные адреса языков, подписи для поисковиков, общая админка."
           }
         },
         {
@@ -162,6 +170,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -281,6 +290,30 @@
           </div>
         </li>
         <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-karat-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://karat-lombard.ru/" rel="noopener">Ломбард КАРАТ, karat-lombard.ru</a></h3>
+            <p>Сайт ломбарда на открытой CMS AgeCMS: личный кабинет клиента и связка с API СмартЛомбард.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-svet-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://свет-донецк.рф/" rel="noopener">Карта света, свет-донецк.рф</a></h3>
+            <p>Карта улиц Донецка, где свет есть и где нет. Данные из графика отключений, районных каналов и отметок жителей. Код открыт на <a href="https://github.com/LerkOFF/karta-sveta" rel="noopener">GitHub</a>.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-ekatrvl-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://ekatrvl.ru/" rel="noopener">ekatrvl.ru</a></h3>
+            <p>Портфолио UGC-креатора на русском и английском: лёгкий сайт без сборки со своим переключателем языка.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
           <img class="project__thumb" src="/assets/img/phone-donnu.webp" alt="" width="520" height="1125" loading="lazy">
           <div class="project__body">
             <h3 class="project__title"><a href="https://донну.рф/" rel="noopener">Расписание ДОННУ</a></h3>
@@ -301,6 +334,10 @@
         <details class="faq__item reveal">
           <summary>Сколько стоит сайт?</summary>
           <div class="faq__answer"><p>Зависит от объёма: лендинг проще каталога с личным кабинетом. Пришлите пару фраз о задаче и ссылку на сайт, если он уже есть, и я назову цену и срок. Большой проект делим на этапы с оплатой по этапам или почасово.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Делаете сайты на двух языках?</summary>
+          <div class="faq__answer"><p>Да. Для портфолио ekatrvl.ru сделан переключатель русской и английской версий без тяжёлых библиотек. Для большого сайта подбираю схему под задачу: отдельные адреса языков, подписи для поисковиков, общая админка.</p></div>
         </details>
         <details class="faq__item reveal">
           <summary>Сколько времени занимает разработка?</summary>
@@ -353,6 +390,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

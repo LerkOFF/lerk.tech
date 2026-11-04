@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -110,6 +110,14 @@
         },
         {
           "@type": "Question",
+          "name": "Безопасно ли давать ИИ-агенту править сайт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Это зависит от системы. В AgeCMS каждая правка агента попадает в журнал и откатывается, поэтому ошибку можно вернуть назад. Что именно агенту разрешено менять, задаётся заранее."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "ИИ-помощник может отвечать вместо менеджера?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -154,6 +162,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -214,14 +223,16 @@
           <li>Очередь заказов: сбой API не теряет заявку, генерация повторяется</li>
           <li>Платная генерация: превью с водяным знаком, полный файл после оплаты</li>
           <li>Учёт времени и расходов на каждую генерацию</li>
+          <li>Подключение ИИ-агента к сайту через MCP: он правит страницы, а каждая правка пишется в журнал</li>
         </ul>
       </div>
       <aside class="panel reveal" aria-labelledby="how-title">
         <h2 class="panel__title" id="how-title">Как делаю</h2>
         <p>Нейросеть подключаю через ваш сервер: ключ API не лежит на странице или в приложении, а каждый запрос попадает в лог. Если фильтр безопасности отказал, человек видит понятное объяснение на русском, а не код ошибки.</p>
         <p>Модель выбираю под задачу и бюджет. В работе GPT, Gemini и GigaChat, а сам код пишу вместе с Claude Code, Cursor и Codex.</p>
+        <p>Агента можно пустить и в сам сайт: в открытой CMS AgeCMS он подключается через MCP, а каждая его правка попадает в журнал с откатом.</p>
         <h3 class="about__sub">Стек</h3>
-        <ul class="chips"><li>GPT</li><li>Gemini</li><li>GigaChat</li><li>PHP</li><li>Python</li><li>Laravel</li><li>ЮKassa</li></ul>
+        <ul class="chips"><li>GPT</li><li>Gemini</li><li>GigaChat</li><li>MCP</li><li>PHP</li><li>Python</li><li>Laravel</li><li>ЮKassa</li></ul>
       </aside>
     </div>
   </section>
@@ -280,6 +291,14 @@
             <p class="role role--sm">Для заказчика</p>
           </div>
         </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-agecms-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://github.com/likvp/AgeCMS" rel="noopener">AgeCMS</a></h3>
+            <p>Открытая CMS на PHP и SQLite. ИИ-агент подключается к ней через MCP и правит сайт, а каждая правка пишется в журнал и откатывается одним действием.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
       </ul>
     </div>
   </section>
@@ -301,6 +320,10 @@
         <details class="faq__item reveal">
           <summary>Можно ли зарабатывать на ИИ-генерации?</summary>
           <div class="faq__answer"><p>Да, так устроены гербы семьи и метрика ребёнка: превью бесплатно, полный файл после оплаты через ЮKassa. Время и стоимость генераций пишутся в базу, поэтому видно, во что обходится каждый заказ.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Безопасно ли давать ИИ-агенту править сайт?</summary>
+          <div class="faq__answer"><p>Это зависит от системы. В AgeCMS каждая правка агента попадает в журнал и откатывается, поэтому ошибку можно вернуть назад. Что именно агенту разрешено менять, задаётся заранее.</p></div>
         </details>
         <details class="faq__item reveal">
           <summary>ИИ-помощник может отвечать вместо менеджера?</summary>
@@ -341,6 +364,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

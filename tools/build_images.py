@@ -8,7 +8,7 @@
 Новую картинку для страницы добавлять в списки ниже, а не класть руками.
 """
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "tools" / "raw"
@@ -25,7 +25,37 @@ SITES = {
     "slapi": ("slapi-desk.png", False, True),
     "sanlux": ("aqcentr-desk.png", False, True),
     "ss14": ("ss14-desk.png", False, True),
+    "svet": ("svet-desk.png", True, True),
+    "ekatrvl": ("ekatrvl-desk.png", True, True),
+    "karat": ("karat-desk.png", True, True),
+    "invoice": ("invoice-payments.png", True, True),  # демо-данные из репозитория invoice-keeper
+    "agecms": ("agecms-desk.png", True, True),  # админка AgeCMS с локального запуска, демо-сайт
+    # малые карточки
+    "kosmos": ("kosmos-desk.png", False, True),
+    "anonimku": ("anonimku-desk.png", False, True),
+    "energoproms": ("energoproms-desk.png", False, True),
+    "zaryanka": ("zaryanka-desk.png", False, True),
+    "rocketeda": ("rocketeda-desk.png", False, True),
+    "gold777": ("gold777-desk.png", False, True),
+    "crestmaker": ("crestmaker-desk.png", False, True),
 }
+# Рамка обрезки исходника (x0, y0, x1, y1, пиксели исходника) до приведения к 16:10.
+# Так отсекается лишнее: телефоны, лица, пустые места.
+BOX = {
+    "svet": (0, 0, 2200, 1375),  # только карта, без боковой панели с телефонами диспетчеров
+    "ekatrvl": (1238, 167, 2642, 1045),  # карточка с заголовком, без фото автора
+    "kosmos": (0, 785, 1624, 1800),  # афиша без шапки с телефоном и пустого экрана
+    "gold777": (190, 40, 1850, 1077),  # категории без баннера с моделью
+}
+# Качество крупного кадра, если дефолтные 78 дают слишком тяжёлый файл (мелкая карта)
+QUAL = {"svet": 56, "energoproms": 66}
+# Закраска и размытие мест, которым не место на картинке: (вид, (x0, y0, x1, y1))
+REDACT = {
+    "karat": [("fill", (2445, 30, 2800, 120))],  # телефон в шапке
+    "kosmos": [("blur", (50, 1175, 490, 1735))],  # постер с лицами
+}
+# Обложки заметок блога: иллюстрации Codex из tools/raw/gen (без текста и лиц)
+NOTES = ["svet", "invoice", "mirror", "agecms"]
 # Экраны телефонов
 PHONES = {
     "assistant": "lodki-assistant-mob.png",
@@ -68,11 +98,19 @@ def crop_ratio(im, ratio, top=0.0):
 
 
 for name, (src, big, small) in SITES.items():
-    im = crop_ratio(Image.open(RAW / src), 16 / 10)
+    im = Image.open(RAW / src).convert("RGB")
+    for kind, box in REDACT.get(name, []):
+        if kind == "fill":
+            im.paste(im.getpixel((box[2] + 40, box[1] + 10)), box)
+        else:
+            im.paste(im.crop(box).filter(ImageFilter.GaussianBlur(40)), box)
+    if name in BOX:
+        im = im.crop(BOX[name])
+    im = crop_ratio(im, 16 / 10)
     if big:
-        save(im, f"site-{name}.webp", 1200, 750, q=78)
+        save(im, f"site-{name}.webp", 1200, 750, q=QUAL.get(name, 78))
     if small:
-        save(im, f"site-{name}-sm.webp", 640, 400, q=76)
+        save(im, f"site-{name}-sm.webp", 640, 400, q=QUAL.get(name, 76))
 
 for name, src in PHONES.items():
     save(crop_ratio(Image.open(RAW / src), 390 / 844), f"phone-{name}.webp", 520, 1125)
@@ -85,6 +123,11 @@ for i, t in enumerate(TEMPLATES, 1):
 
 for i, c in enumerate(COVERS, 1):
     save(Image.open(RAW / "lodki-ai" / f"{c}.jpg"), f"cover-{i}.webp", 560, 560)
+
+for n in NOTES:
+    im = crop_ratio(Image.open(RAW / "gen" / f"note-{n}.png"), 1200 / 630)
+    save(im, f"note-{n}.webp", 1200, 630, q=62)
+    save(im, f"note-{n}-sm.webp", 640, 336, q=62)
 
 # Аватар и иконки сайта
 av = Image.open(AVATAR).convert("RGB")

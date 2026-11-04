@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -110,6 +110,14 @@
         },
         {
           "@type": "Question",
+          "name": "Можно получать уведомления в MAX, а не только в Telegram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Уведомления можно отправлять в Telegram, MAX или в оба мессенджера сразу. Так работает Invoice Keeper, а мост между Telegram и MAX синхронизирует рабочие чаты."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Сайт не на Laravel, это проблема?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -154,6 +162,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -214,6 +223,8 @@
           <li>Выгрузки и обмен данными между сервисами по API</li>
           <li>Яндекс.Метрика с целями, Вебмастер и Директ</li>
           <li>Сводные отчёты по сайтам, которые сами приходят в Telegram</li>
+          <li>Связка сайта с внешними системами по API: например, учёт СмартЛомбард и личный кабинет клиента</li>
+          <li>Уведомления о платежах и сроках в Telegram или MAX</li>
         </ul>
       </div>
       <aside class="panel reveal" aria-labelledby="how-title">
@@ -280,6 +291,30 @@
             <p class="role role--sm">Для заказчика</p>
           </div>
         </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-karat-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://karat-lombard.ru/" rel="noopener">Ломбард КАРАТ, karat-lombard.ru</a></h3>
+            <p>Сайт ломбарда с личным кабинетом, который работает через API СмартЛомбард.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-invoice-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://github.com/LerkOFF/invoice-keeper" rel="noopener">Invoice Keeper</a></h3>
+            <p>Напоминания о регулярных платежах: за 3 дня до срока бот пишет в Telegram или MAX, кнопка «Оплачено» отмечает платёж в веб-панели.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-svet-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://свет-донецк.рф/" rel="noopener">Карта света, свет-донецк.рф</a></h3>
+            <p>Данные собираются из разных источников: график отключений, посты районных каналов, отметки жителей и датчики, которые пингуют роутер. Код на <a href="https://github.com/LerkOFF/karta-sveta" rel="noopener">GitHub</a>.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
       </ul>
     </div>
   </section>
@@ -301,6 +336,10 @@
         <details class="faq__item reveal">
           <summary>Настроите цели в Яндекс.Метрике?</summary>
           <div class="faq__answer"><p>Да: цели на формы, звонки, кнопки и открытие чата, связка с Вебмастером и Директом. Отчёты по нескольким сайтам можно собрать в одну сетку и получать в Telegram.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Можно получать уведомления в MAX, а не только в Telegram?</summary>
+          <div class="faq__answer"><p>Да. Уведомления можно отправлять в Telegram, MAX или в оба мессенджера сразу. Так работает Invoice Keeper, а мост между Telegram и MAX синхронизирует рабочие чаты.</p></div>
         </details>
         <details class="faq__item reveal">
           <summary>Сайт не на Laravel, это проблема?</summary>
@@ -341,6 +380,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

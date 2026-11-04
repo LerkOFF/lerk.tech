@@ -2,6 +2,7 @@
 // local: public/ без сервера (tools/local-route.mjs), иначе адрес сайта.
 import { chromium } from 'playwright-core';
 import { createRequire } from 'node:module';
+import { spawnSync } from 'node:child_process';
 import { serveLocal, LOCAL_URL } from './local-route.mjs';
 const local = process.argv[2] === 'local';
 const url = local ? LOCAL_URL : (process.argv[2] || 'http://127.0.0.1:8765/');
@@ -145,7 +146,7 @@ for (const scheme of ['light', 'dark']) {
   const sitemap = (await fetchText(new URL('sitemap.xml', url).href)).text;
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const pages = locs.map(l => new URL(l.replace(CANON, ''), url).href);
-  ok('в sitemap главная и 6 услуг', locs.length === 7 && locs[0] === CANON, String(locs.length));
+  ok('в sitemap главная, 6 услуг, блог и 4 поста', locs.length === 12 && locs[0] === CANON && locs.filter(l => l.includes('/blog/')).length === 5, String(locs.length));
   const robots = (await fetchText(new URL('robots.txt', url).href)).text;
   ok('robots.txt указывает на sitemap', robots.includes('Sitemap: https://lerk.tech/sitemap.xml') && robots.includes('Disallow: /pokupki'));
 
@@ -193,6 +194,82 @@ for (const scheme of ['light', 'dark']) {
   ok('страница услуги без горизонтальной прокрутки', msw <= 390, String(msw));
   await mp.click('#faq summary');
   ok('вопрос раскрывается', await mp.evaluate(() => document.querySelector('#faq details').open));
+  await m.close();
+}
+
+// Блог: главная, индекс, пост, приватность
+{
+  const chk = spawnSync('python3', ['-B', new URL('./check_blog.py', import.meta.url).pathname], { encoding: 'utf8' });
+  ok('check_blog: в постах нет ссылок, доменов, имён и прочего из стоп-списка', chk.status === 0, (chk.stdout + chk.stderr).trim().split('\n').slice(0, 6).join(' | '));
+  const CANON = 'https://lerk.tech/';
+  const ctx = await newCtx({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage();
+  const errs = [];
+  p.on('pageerror', e => errs.push(e.message));
+  await p.goto(url, { waitUntil: 'networkidle' });
+  ok('в меню главной есть «Блог»', await p.evaluate(() => [...document.querySelectorAll('#nav a')].some(a => a.textContent.trim() === 'Блог' && a.getAttribute('href') === '/blog/')));
+  ok('в подвале есть «Блог»', await p.evaluate(() => !!document.querySelector('.foot a[href="/blog/"]')));
+  const home = await p.evaluate(() => ({
+    cards: document.querySelectorAll('#blog .blog-card').length,
+    hrefs: [...document.querySelectorAll('#blog .blog-card__title a')].map(a => a.getAttribute('href')),
+    all: !!document.querySelector('#blog a[href="/blog/"]'),
+    sized: [...document.querySelectorAll('#blog img')].every(i => i.width && i.height && i.loading === 'lazy'),
+  }));
+  ok('на главной блок «Блог»: 4 карточки и ссылка «Весь блог»', home.cards === 4 && home.all && home.sized, JSON.stringify(home));
+  await p.evaluate(() => document.querySelectorAll('#blog img').forEach(i => { i.loading = 'eager'; }));
+  await p.waitForTimeout(600);
+  ok('обложки в блоке «Блог» загрузились', await p.evaluate(() => [...document.querySelectorAll('#blog img')].every(i => i.complete && i.naturalWidth > 0)));
+
+  const idx = new URL('blog/', url).href;
+  await p.goto(idx, { waitUntil: 'networkidle' });
+  const list = await p.evaluate(() => ({
+    cards: document.querySelectorAll('.blog-card').length,
+    current: document.querySelector('#nav a[aria-current="page"]')?.textContent.trim(),
+    ld: [...document.querySelectorAll('script[type="application/ld+json"]')].flatMap(s => JSON.parse(s.textContent)['@graph']).map(x => x['@type']).join(','),
+  }));
+  ok('индекс блога: 4 карточки, «Блог» отмечен в меню, Blog и BreadcrumbList', list.cards === 4 && list.current === 'Блог' && list.ld === 'Blog,BreadcrumbList', JSON.stringify(list));
+  const sitemapText = await p.evaluate(async (u) => (await fetch(u)).text(), new URL('sitemap.xml', url).href);
+  ok('карточки главной ведут на посты из sitemap', home.hrefs.length === 4 && home.hrefs.every(h => sitemapText.includes(CANON + h.slice(1))), home.hrefs.join(' '));
+
+  for (const href of home.hrefs) {
+    await p.goto(new URL(href.slice(1), url).href, { waitUntil: 'networkidle' });
+    const post = await p.evaluate(() => {
+      const cover = document.querySelector('.blog-cover img');
+      const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].flatMap(s => JSON.parse(s.textContent)['@graph']);
+      const bp = ld.find(x => x['@type'] === 'BlogPosting');
+      const heads = [...document.querySelectorAll('.blog-prose h2')];
+      return {
+        og: document.querySelector('meta[property="og:type"]')?.content,
+        ogimg: document.querySelector('meta[property="og:image"]')?.content || '',
+        canon: document.querySelector('link[rel="canonical"]')?.href,
+        cover: cover && { w: cover.getAttribute('width'), h: cover.getAttribute('height'), prio: cover.getAttribute('fetchpriority'), ok: cover.complete && cover.naturalWidth > 0 },
+        bp: bp && { author: bp.author?.name, id: bp.author?.['@id'], date: bp.datePublished, image: bp.image, words: bp.wordCount },
+        crumbs: ld.some(x => x['@type'] === 'BreadcrumbList'),
+        h2: heads.length, anchors: heads.every(h => h.id && h.querySelector('a.blog-anchor')),
+        facts: !!document.querySelector('.blog-facts'),
+        ext: [...document.querySelectorAll('.blog-prose a, .blog-head a')].filter(a => !a.getAttribute('href').startsWith('#') && !a.getAttribute('href').startsWith('/')).length,
+        service: !!document.querySelector('.svc-links a[href^="/"]'),
+        lazy: [...document.querySelectorAll('img')].filter(i => !i.closest('.blog-cover') && !i.closest('.mascot') && !i.closest('.top') && !i.getAttribute('width')).length,
+      };
+    });
+    const good = post.og === 'article' && post.ogimg.startsWith(CANON + 'assets/img/note-') && post.cover && post.cover.w === '1200' && post.cover.h === '630' && post.cover.prio === 'high' && post.cover.ok
+      && post.bp && post.bp.author === 'Дмитрий' && post.bp.id === 'https://lerk.tech/#person' && /^2026-/.test(post.bp.date) && post.crumbs
+      && post.h2 >= 3 && post.h2 <= 5 && post.anchors && post.facts && post.ext === 0 && post.service && post.lazy === 0 && post.bp.words >= 400 && post.bp.words <= 700;
+    ok(`пост ${href}: article, обложка, BlogPosting, 3-5 разделов, якоря, «Коротко», 400-700 слов, без внешних ссылок`, good, JSON.stringify(post));
+  }
+  ok('ошибок JS в блоге нет', errs.length === 0, errs.join('; '));
+  await ctx.close();
+
+  // телефон: индекс и пост без горизонтальной прокрутки, меню помечает «Блог»
+  const m = await newCtx({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const mp = await m.newPage();
+  for (const href of ['blog/', home.hrefs[0].slice(1)]) {
+    await mp.goto(new URL(href, url).href, { waitUntil: 'networkidle' });
+    const w = await mp.evaluate(() => document.documentElement.scrollWidth);
+    ok(`/${href} на телефоне без горизонтальной прокрутки`, w <= 390, String(w));
+  }
+  await mp.click('.nav-toggle');
+  ok('меню поста на телефоне: «Блог» ведёт на /blog/', await mp.evaluate(() => document.querySelector('#nav a[aria-current="page"]')?.getAttribute('href') === '/blog/'));
   await m.close();
 }
 

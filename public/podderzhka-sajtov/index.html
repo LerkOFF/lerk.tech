@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -102,6 +102,14 @@
         },
         {
           "@type": "Question",
+          "name": "Можно перейти со старого сайта на другую систему?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Смотрю, что накоплено на сайте, и предлагаю путь: остаться на вашей CMS или переехать. В открытой CMS AgeCMS, которую я делаю, есть импорт с WordPress, Tilda, Bitrix и других систем, страницы и материалы переносятся, а старый сайт остаётся рабочим до переключения."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Как оплачивается поддержка?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -154,6 +162,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -248,16 +257,32 @@
             <p class="role role--sm">Для заказчика</p>
           </div>
         </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-karat-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://karat-lombard.ru/" rel="noopener">Ломбард КАРАТ, karat-lombard.ru</a></h3>
+            <p>Сайт ломбарда на AgeCMS: слежу за работой, обновляю ядро и дорабатываю личный кабинет и связку с СмартЛомбард.</p>
+            <p class="role role--sm">Для заказчика</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-agecms-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://github.com/likvp/AgeCMS" rel="noopener">AgeCMS, перенос сайтов</a></h3>
+            <p>Открытая CMS на PHP и SQLite. Умеет импортировать сайты с WordPress, Tilda, Bitrix и других систем, поэтому через неё удобно переехать с устаревшей или закрытой платформы.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
       </ul>
       <div class="support reveal">
         <h3 class="support__title">Поддерживаю и дорабатываю</h3>
-        <ul class="support__list">
-          <li><a href="https://energoproms.ru/" rel="noopener">energoproms.ru</a> <span>механический завод, HostCMS</span></li>
-          <li><a href="https://rocketeda.ru/" rel="noopener">rocketeda.ru</a> <span>доставка пиццы и роллов</span></li>
-          <li><a href="https://zaryanka.coffee/" rel="noopener">zaryanka.coffee</a> <span>кофейня с доставкой</span></li>
-          <li><a href="https://gold777.ru/" rel="noopener">gold777.ru</a> <span>скупка и ломбард</span></li>
-          <li><a href="https://kosmos.pw/" rel="noopener">kosmos.pw</a> <span>кинотеатр, поднял после взлома</span></li>
-          <li><a href="https://anonimku.ru/" rel="noopener">anonimku.ru</a> <span>анонимки для пабликов ВК</span></li>
+        <ul class="support__list support__list--thumbs">
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-energoproms-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://energoproms.ru/" rel="noopener">energoproms.ru</a> <span>механический завод, HostCMS</span></span></li>
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-rocketeda-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://rocketeda.ru/" rel="noopener">rocketeda.ru</a> <span>доставка пиццы и роллов</span></span></li>
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-zaryanka-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://zaryanka.coffee/" rel="noopener">zaryanka.coffee</a> <span>кофейня с доставкой</span></span></li>
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-gold777-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://gold777.ru/" rel="noopener">gold777.ru</a> <span>скупка и ломбард</span></span></li>
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-kosmos-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://kosmos.pw/" rel="noopener">kosmos.pw</a> <span>кинотеатр, поднял после взлома</span></span></li>
+          <li class="support__item"><img class="support__thumb" src="/assets/img/site-anonimku-sm.webp" alt="" width="96" height="60" loading="lazy"><span class="support__text"><a href="https://anonimku.ru/" rel="noopener">anonimku.ru</a> <span>анонимки для пабликов ВК</span></span></li>
         </ul>
       </div>
     </div>
@@ -276,6 +301,10 @@
         <details class="faq__item reveal">
           <summary>Сайт взломали, что делать?</summary>
           <div class="faq__answer"><p>Напишите в Telegram и пришлите адрес сайта. Найду заражённые файлы и источник заражения, вычищу, закрою дыру и восстановлю то, что сломано. Так снова заработал кинотеатр kosmos.pw.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Можно перейти со старого сайта на другую систему?</summary>
+          <div class="faq__answer"><p>Да. Смотрю, что накоплено на сайте, и предлагаю путь: остаться на вашей CMS или переехать. В открытой CMS AgeCMS, которую я делаю, есть импорт с WordPress, Tilda, Bitrix и других систем, страницы и материалы переносятся, а старый сайт остаётся рабочим до переключения.</p></div>
         </details>
         <details class="faq__item reveal">
           <summary>Как оплачивается поддержка?</summary>
@@ -320,6 +349,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

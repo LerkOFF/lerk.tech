@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Сервис напоминаний о регулярных платежах: технический кейс | Блог Дмитрия</title>
+  <meta name="description" content="Технический кейс: свой сервис напоминаний о платежах на FastAPI и SQLite с ботом в Telegram и MAX, кнопкой «Оплачено», ролями, API и импортом CSV.">
+  <link rel="canonical" href="https://lerk.tech/blog/napominaniya-o-platezhah/">
+  <meta name="theme-color" content="#d9c3a0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#18130f" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://lerk.tech/blog/napominaniya-o-platezhah/">
+  <meta property="og:site_name" content="lerk.tech">
+  <meta property="og:title" content="Сервис напоминаний о регулярных платежах: технический кейс">
+  <meta property="og:description" content="Технический кейс: свой сервис напоминаний о платежах на FastAPI и SQLite с ботом в Telegram и MAX, кнопкой «Оплачено», ролями, API и импортом CSV.">
+  <meta property="og:image" content="https://lerk.tech/assets/img/note-invoice.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-10-27">
+  <meta property="article:author" content="Дмитрий">
+  <meta property="article:section" content="Бот">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
+  <script>
+    // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://lerk.tech/blog/napominaniya-o-platezhah/#post",
+      "headline": "Сервис напоминаний о регулярных платежах: технический кейс",
+      "description": "Технический кейс: свой сервис напоминаний о платежах на FastAPI и SQLite с ботом в Telegram и MAX, кнопкой «Оплачено», ролями, API и импортом CSV.",
+      "url": "https://lerk.tech/blog/napominaniya-o-platezhah/",
+      "mainEntityOfPage": "https://lerk.tech/blog/napominaniya-o-platezhah/",
+      "inLanguage": "ru",
+      "datePublished": "2026-10-27",
+      "dateModified": "2026-10-27",
+      "articleSection": "Бот",
+      "wordCount": 416,
+      "image": "https://lerk.tech/assets/img/note-invoice.webp",
+      "author": {
+        "@type": "Person",
+        "@id": "https://lerk.tech/#person",
+        "name": "Дмитрий",
+        "alternateName": "lerk",
+        "url": "https://lerk.tech/"
+      },
+      "publisher": {
+        "@id": "https://lerk.tech/#person"
+      },
+      "isPartOf": {
+        "@id": "https://lerk.tech/blog/#blog"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lerk.tech/blog/napominaniya-o-platezhah/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://lerk.tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://lerk.tech/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Напоминания о платежах",
+          "item": "https://lerk.tech/blog/napominaniya-o-platezhah/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113438654', 'ym');
+
+      ym(113438654, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/113438654" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- Собрано tools/build_pages.py из tools/blog.py, руками не править -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 256 256" fill="currentColor"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol><symbol id="i-card" viewBox="0 0 256 256" fill="currentColor"><path d="M224,44H32A20,20,0,0,0,12,64V192a20,20,0,0,0,20,20H224a20,20,0,0,0,20-20V64A20,20,0,0,0,224,44Zm-4,24V88H36V68ZM36,188V112H220v76Zm172-24a12,12,0,0,1-12,12H164a12,12,0,0,1,0-24h32A12,12,0,0,1,208,164Zm-68,0a12,12,0,0,1-12,12H116a12,12,0,0,1,0-24h12A12,12,0,0,1,140,164Z"/></symbol><symbol id="i-robot" viewBox="0 0 256 256" fill="currentColor"><path d="M72,104a16,16,0,1,1,16,16A16,16,0,0,1,72,104Zm96,16a16,16,0,1,0-16-16A16,16,0,0,0,168,120Zm68-40V192a36,36,0,0,1-36,36H56a36,36,0,0,1-36-36V80A36,36,0,0,1,56,44h60V16a12,12,0,0,1,24,0V44h60A36,36,0,0,1,236,80Zm-24,0a12,12,0,0,0-12-12H56A12,12,0,0,0,44,80V192a12,12,0,0,0,12,12H200a12,12,0,0,0,12-12Zm-12,82a30,30,0,0,1-30,30H86a30,30,0,0,1,0-60h84A30,30,0,0,1,200,162Zm-80-6v12h16V156ZM86,168H96V156H86a6,6,0,0,0,0,12Zm90-6a6,6,0,0,0-6-6H160v12h10A6,6,0,0,0,176,162Z"/></symbol><symbol id="i-telegram" viewBox="0 0 256 256" fill="currentColor"><path d="M231.49,23.16a13,13,0,0,0-13.23-2.26L15.6,100.21a18.22,18.22,0,0,0,3.12,34.86L68,144.74V200a20,20,0,0,0,34.4,13.88l22.67-23.51L162.35,223a20,20,0,0,0,32.7-10.54L235.67,35.91A13,13,0,0,0,231.49,23.16ZM139.41,77.52,77.22,122.09l-34.43-6.75ZM92,190.06V161.35l15,13.15Zm81.16,10.52L99.28,135.81,205.59,59.63Z"/></symbol></svg>
+
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<header class="top" data-top>
+  <div class="wrap top__row">
+    <a class="brand" href="/" aria-label="lerk, на главную">
+      <img class="brand__face" src="/assets/img/avatar-sm.webp" alt="" width="40" height="40">
+      <span class="brand__name">lerk</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="/#work">Работы</a>
+      <a href="/#ai">ИИ</a>
+      <a href="/#services">Услуги</a>
+      <a href="/#process">Как работаю</a>
+      <a href="/#about">Обо мне</a>
+      <a href="/blog/" aria-current="page">Блог</a>
+    </nav>
+
+    <div class="top__actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Тёмная тема" title="Сменить тему">
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+      <a class="btn btn--primary btn--sm top__tg" href="https://t.me/joulerkOFF" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+        <span>Написать в Telegram</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <nav class="crumbs wrap" aria-label="Навигационная цепочка">
+    <ol>
+      <li><a href="/">Главная</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><span aria-current="page">Напоминания о платежах</span></li>
+    </ol>
+  </nav>
+
+  <header class="blog-head blog-narrow">
+    <p class="blog-meta"><span class="role role--sm role--own">Бот</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+    <h1 class="blog-head__title" id="page-title">Сервис напоминаний о регулярных платежах: технический кейс</h1>
+    <p class="blog-head__lead">Аренда, подписки, серверы: платежи повторяются, и их легко пропустить. Сделал сервис, который напоминает за три дня до срока и позволяет отметить оплату одной кнопкой прямо в сообщении.</p>
+    <p class="blog-by"><img class="blog-by__face" src="/assets/img/avatar-sm.webp" alt="" width="36" height="36"><span>Дмитрий</span></p>
+  </header>
+
+  <figure class="blog-cover blog-narrow">
+    <img src="/assets/img/note-invoice-sm.webp" srcset="/assets/img/note-invoice-sm.webp 640w, /assets/img/note-invoice.webp 1200w" sizes="(max-width: 1020px) 100vw, 980px" alt="Обложка поста про сервис напоминаний о регулярных платежах" width="1200" height="630" fetchpriority="high">
+  </figure>
+
+  <div class="blog-layout blog-narrow">
+    <nav class="blog-toc" aria-label="Содержание">
+      <p class="blog-toc__title">Содержание</p>
+      <ol>
+          <li><a href="#zadacha">Задача</a></li>
+          <li><a href="#chto-delaet-bot">Что делает бот</a></li>
+          <li><a href="#kak-ustroeno">Как устроено</a></li>
+          <li><a href="#chto-esche-vnutri">Что ещё внутри</a></li>
+          <li><a href="#zaschita-i-udobstva">Защита и удобства</a></li>
+      </ol>
+    </nav>
+    <article class="blog-prose" aria-labelledby="page-title">
+      <aside class="blog-facts" aria-label="Коротко">
+        <p class="blog-facts__title">Коротко</p>
+        <ul class="checks">
+          <li>Задача: напоминания о регулярных платежах для команды, на хакатоне</li>
+          <li>Стек: FastAPI, SQLAlchemy, SQLite, Docker Compose</li>
+          <li>Роли: администратор и обычный пользователь, права проверяет сервер</li>
+          <li>Валюты: RUB, USD, EUR, итоги по каждой отдельно, без конвертации</li>
+          <li>API под <code>/api/v1</code> со Swagger</li>
+          <li>Каналы напоминаний: Telegram и MAX</li>
+        </ul>
+      </aside>
+
+<h2 id="zadacha">Задача<a class="blog-anchor" href="#zadacha" aria-label="Ссылка на раздел «Задача»">#</a></h2>
+<p>Администратор вносит платежи, бот за три дня до срока пишет в чат, а команда отмечает оплату. В любой момент видно три вещи: что и когда оплатить, что уже оплачено и что просрочено.</p>
+<p>Основу собрал примерно за 10 часов из 30, которые были на хакатоне. Остальное время ушло на тесты, защиту входа, импорт из CSV и webhook.</p>
+
+<h2 id="chto-delaet-bot">Что делает бот<a class="blog-anchor" href="#chto-delaet-bot" aria-label="Ссылка на раздел «Что делает бот»">#</a></h2>
+<ul>
+  <li>за три дня до срока присылает название, сумму, валюту и дату оплаты, по одному разу на период;</li>
+  <li>в каждом напоминании есть кнопка «Оплачено»: нажатие отмечает период оплаченным, сообщение обновляется, повторное нажатие безвредно;</li>
+  <li>нажимать могут только участники чата, это проверяется на стороне сервера;</li>
+  <li>если срок прошёл, а оплату не отметили, на следующий день приходит одно повторное напоминание «Платёж просрочен».</li>
+</ul>
+<p>Работает в Telegram и в MAX, каналы независимы: можно включить один или оба.</p>
+
+<h2 id="kak-ustroeno">Как устроено<a class="blog-anchor" href="#kak-ustroeno" aria-label="Ссылка на раздел «Как устроено»">#</a></h2>
+<p>FastAPI и SQLAlchemy, база SQLite в Docker volume, планировщик внутри того же процесса. Всё поднимается одной командой через Docker Compose, данные переживают перезапуск.</p>
+<p>Пара решений, которыми доволен:</p>
+<ul>
+  <li>просрочка не хранится, а вычисляется: платёж не оплачен, и срок уже прошёл;</li>
+  <li>даты периодов считаются от первой даты, а не цепочкой: платёж с 31 числа не «уезжает» на 28 после февраля;</li>
+  <li>администратор задаётся только в настройках окружения, через API его нельзя создать, изменить или удалить;</li>
+  <li>все ручки под <code>/api/v1</code>, документация Swagger лежит на <code>/api/v1/docs</code>.</li>
+</ul>
+
+<h2 id="chto-esche-vnutri">Что ещё внутри<a class="blog-anchor" href="#chto-esche-vnutri" aria-label="Ссылка на раздел «Что ещё внутри»">#</a></h2>
+<p>Кроме обязательной части сделал бонусы, потому что на них ушёл остаток времени:</p>
+<ul>
+  <li>напоминания по email и webhook с подписью HMAC-SHA256, чтобы получатель мог проверить отправителя;</li>
+  <li>двухфакторный вход администратора (TOTP) и API-токены «только чтение» или «чтение и запись»;</li>
+  <li>журнал входов, оплат и изменений, пароли туда не попадают;</li>
+  <li>интерфейс на русском и английском, светлая и тёмная темы.</li>
+</ul>
+
+<h2 id="zaschita-i-udobstva">Защита и удобства<a class="blog-anchor" href="#zaschita-i-udobstva" aria-label="Ссылка на раздел «Защита и удобства»">#</a></h2>
+<p>После 5 неверных паролей подряд логин закрывается на 15 минут. Пароли хранятся хэшем argon2, в базе лежит только хэш токена сессии, а смена пароля закрывает остальные сессии.</p>
+<p>Из удобств: импорт платежей из CSV с проверкой без записи (панель показывает каждую строку с ошибками), пауза платежа, категории, ответственный за платёж, календарь оплат и бюджет по валютам.</p>
+<blockquote><p>Пока честно: приложение рассчитано на один процесс, замок напоминаний живёт внутри него. Несколько воркеров запускать нельзя.</p></blockquote>
+    </article>
+  </div>
+
+  <section class="section section--sub section--last" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div>
+          <h2 class="cta__title" id="cta-title">Расскажите о задаче</h2>
+          <p>Пара фраз и ссылка на сайт, если он уже есть. Отвечаю сам: задам вопросы, назову срок и цену.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="https://t.me/joulerkOFF" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+            <span>Написать в Telegram</span>
+          </a>
+          <a class="btn btn--ghost" href="/#contact">Собрать задачу</a>
+        </div>
+      </div>
+
+      <h2 class="subhead">Заказать похожее</h2>
+      <ul class="svc-links">
+        <li><a class="svc-link" href="/telegram-boty/"><svg class="icon" aria-hidden="true"><use href="#i-robot"></use></svg><span>Telegram-боты</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+        <li><a class="svc-link" href="/integracii/"><svg class="icon" aria-hidden="true"><use href="#i-card"></use></svg><span>Оплаты и интеграции</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+      </ul>
+
+      <h2 class="subhead">Ещё посты</h2>
+      <ul class="blog-grid blog-grid--more">
+        <li class="blog-card reveal" style="--i:0">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-agecms-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">CMS</span><time datetime="2026-11-02">2 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/cms-dlya-lyudej-i-agentov/">Открытая CMS, которую правят люди и ИИ-агенты</a></h3>
+            <p class="blog-card__text">Как я сделал свою CMS на PHP и SQLite: журнал правок с откатом, предохранитель для ИИ-агента и перенос сайтов с WordPress, Tilda, Bitrix и других систем.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:1">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-svet-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Карта</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/karta-sveta-po-gorodu/">Карта света по городу: график, каналы и отметки жителей</a></h3>
+            <p class="blog-card__text">Сделал открытую карту света по городу: данные из графика отключений, районных каналов и отметок жителей, защита от мусора и датчики по пингу роутера.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:2">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-mirror-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Интеграции</span><time datetime="2026-10-02">2 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/zerkalo-dvuh-messendzherov/">Зеркало двух мессенджеров для рабочих чатов</a></h3>
+            <p class="blog-card__text">Как я сделал сервис-зеркало между MAX и Telegram: aiogram, pymax, очередь на ARQ и Redis, PostgreSQL и Docker Compose. Что уже работает, а что пока нет.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
+    <p>© 2026 lerk.tech</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js?v=20260927" defer></script>
+</body>
+</html>

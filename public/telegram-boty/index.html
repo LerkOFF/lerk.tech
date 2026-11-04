@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -110,6 +110,14 @@
         },
         {
           "@type": "Question",
+          "name": "Код бота мне передадут?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Код лежит в git, к нему пишу документацию, а токены и ключи хранятся в настройках сервера, а не в репозитории. Свои боты, например Invoice Keeper и Карту света, я выложил в открытый доступ на GitHub."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Где будет работать бот?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -154,6 +162,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -241,6 +250,22 @@
           </div>
         </li>
         <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-svet-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://свет-донецк.рф/" rel="noopener">Карта света, свет-донецк.рф</a></h3>
+            <p>Бот читает посты районных каналов и отдаёт данные карте света в Донецке. Жители отмечают свет и его отсутствие, отметку подтверждает второй человек. Код на <a href="https://github.com/LerkOFF/karta-sveta" rel="noopener">GitHub</a>.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-invoice-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://github.com/LerkOFF/invoice-keeper" rel="noopener">Invoice Keeper</a></h3>
+            <p>Напоминания о регулярных платежах: за 3 дня до срока бот пишет в Telegram или MAX, кнопка «Оплачено» закрывает платёж. Есть веб-панель, FastAPI и Docker Compose, код открыт.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
           <img class="project__thumb" src="/assets/img/site-ss14-sm.webp" alt="" width="640" height="400" loading="lazy">
           <div class="project__body">
             <h3 class="project__title"><a href="https://сс14.рф/" rel="noopener">сс14.рф</a> и <a href="https://github.com/LerkOFF/LerkBot_Horizon" rel="noopener">LERK Bot</a></h3>
@@ -303,6 +328,10 @@
           <div class="faq__answer"><p>Да. Один и тот же сервис может отдавать результат в Telegram, ВК и MAX, а мост синхронизирует рабочие чаты между Telegram и MAX в обе стороны.</p></div>
         </details>
         <details class="faq__item reveal">
+          <summary>Код бота мне передадут?</summary>
+          <div class="faq__answer"><p>Да. Код лежит в git, к нему пишу документацию, а токены и ключи хранятся в настройках сервера, а не в репозитории. Свои боты, например Invoice Keeper и Карту света, я выложил в открытый доступ на GitHub.</p></div>
+        </details>
+        <details class="faq__item reveal">
           <summary>Где будет работать бот?</summary>
           <div class="faq__answer"><p>На VPS, вашем или новом. Настраиваю сервер, запускаю бота как службу или в Docker и пишу документацию: как его обновить и перезапустить.</p></div>
         </details>
@@ -341,6 +370,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

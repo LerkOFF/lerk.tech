@@ -27,7 +27,7 @@
 
   <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/style.css?v=20261005">
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261104b">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -110,6 +110,14 @@
         },
         {
           "@type": "Question",
+          "name": "Поднимете открытый проект из GitHub на моём сервере?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да, если у проекта есть описание запуска. Для примера, Invoice Keeper поднимается через Docker Compose: настраиваю сервер, домен, HTTPS и перезапуск после сбоя, а в документации пишу, как его обновлять."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Нужен ли Docker?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -154,6 +162,7 @@
       <a href="/#services">Услуги</a>
       <a href="/#process">Как работаю</a>
       <a href="/#about">Обо мне</a>
+      <a href="/blog/">Блог</a>
     </nav>
 
     <div class="top__actions">
@@ -257,7 +266,15 @@
           </div>
         </li>
         <li class="project reveal">
-          <span class="project__thumb project__thumb--icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+          <img class="project__thumb" src="/assets/img/site-invoice-sm.webp" alt="" width="640" height="400" loading="lazy">
+          <div class="project__body">
+            <h3 class="project__title"><a href="https://github.com/LerkOFF/invoice-keeper" rel="noopener">Invoice Keeper</a></h3>
+            <p>Сервис напоминаний на FastAPI: запускается в Docker Compose одной командой, токены лежат в настройках сервера.</p>
+            <p class="role role--sm role--own">Свой проект</p>
+          </div>
+        </li>
+        <li class="project reveal">
+          <img class="project__thumb" src="/assets/img/site-kosmos-sm.webp" alt="" width="640" height="400" loading="lazy">
           <div class="project__body">
             <h3 class="project__title"><a href="https://kosmos.pw/" rel="noopener">Кинотеатр kosmos.pw</a></h3>
             <p>Сайт снова работает после взлома: вычистил заражённые файлы на хостинге и восстановил обнулённую главную.</p>
@@ -285,6 +302,10 @@
         <details class="faq__item reveal">
           <summary>Перенесёте сайт на другой хостинг?</summary>
           <div class="faq__answer"><p>Да: переношу файлы и базу, настраиваю домен, SSL и почту на новом месте и проверяю сайт до переключения DNS.</p></div>
+        </details>
+        <details class="faq__item reveal">
+          <summary>Поднимете открытый проект из GitHub на моём сервере?</summary>
+          <div class="faq__answer"><p>Да, если у проекта есть описание запуска. Для примера, Invoice Keeper поднимается через Docker Compose: настраиваю сервер, домен, HTTPS и перезапуск после сбоя, а в документации пишу, как его обновлять.</p></div>
         </details>
         <details class="faq__item reveal">
           <summary>Нужен ли Docker?</summary>
@@ -325,6 +346,7 @@
 <footer class="foot">
   <div class="wrap foot__row">
     <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
     <p>© 2026 lerk.tech</p>
   </div>
 </footer>

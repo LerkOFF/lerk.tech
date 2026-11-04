@@ -32,6 +32,8 @@ npm ci --prefix tools
 | `node tools/smoke.mjs local` | Проверить локальную страницу без отдельного HTTP-сервера |
 | `node tools/smoke.mjs https://lerk.tech/` | Проверить опубликованный сайт |
 | `node tools/shoot.mjs` и `node tools/shoot-extra.mjs` | Снять скриншоты проектов в `tools/raw/` |
+| `python3 tools/build_pages.py` | Собрать страницы услуг, блог (`tools/blog.py`), главную и sitemap, затем проверить посты |
+| `python3 tools/check_blog.py` | Проверить правило приватности постов блога |
 | `python3 tools/build_images.py` | Подготовить изображения из исходных скриншотов |
 | `python3 tools/build_icons.py` | Обновить SVG-спрайт иконок |
 | `node tools/build_stamp.mjs` | Обновить печать с QR-кодом в HTML |

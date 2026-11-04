@@ -27,8 +27,11 @@ const sites = [
   { name: 'energoproms', url: 'https://energoproms.ru/' },
   { name: 'zaryanka', url: 'https://zaryanka.coffee/' },
   { name: 'rocketeda', url: 'https://rocketeda.ru/' },
-  { name: 'gold777', url: 'https://gold777.ru/' },
+  { name: 'gold777', url: 'https://gold777.ru/', lazy: true, scrollY: 820 }, // без верхнего баннера с лицом модели
   { name: 'crestmaker', url: 'https://crestmaker.site/' },
+  { name: 'svet', url: 'https://xn----ctbhcc4athwm3c.xn--p1ai/' },
+  { name: 'ekatrvl', url: 'https://ekatrvl.ru/' },
+  { name: 'karat', url: 'https://karat-lombard.ru/' },
 ];
 
 const hideOverlays = () => {
@@ -67,6 +70,18 @@ for (const mode of ['desk', 'mob']) {
       await page.goto(s.url, { waitUntil: 'load', timeout: 45000 });
       await page.waitForTimeout(2500);
       await page.evaluate(hideOverlays);
+      if (s.lazy) { // прогоняем страницу вниз, чтобы подгрузились ленивые картинки
+        await page.evaluate(async () => {
+          for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 250)); }
+          window.scrollTo(0, 0);
+        });
+        await page.waitForTimeout(1500);
+      }
+      if (s.scrollY) {
+        await page.evaluate((y) => window.scrollTo(0, y), s.scrollY);
+        await page.waitForTimeout(1200);
+        await page.evaluate(hideOverlays);
+      }
       if (s.section) {
         const h = page.getByText(s.section, { exact: false }).first();
         await h.scrollIntoViewIfNeeded();
