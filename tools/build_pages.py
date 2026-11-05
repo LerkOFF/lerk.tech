@@ -698,10 +698,10 @@ def main_ld():
         "alternateName": "lerk",
         "url": f"{SITE}/",
         "image": f"{SITE}/assets/img/avatar.webp",
-        "jobTitle": "Разработчик сайтов, ботов и ИИ-сервисов",
+        "jobTitle": "Разработчик ИИ-автоматизации, ботов и сайтов",
         "email": "mailto:lerk@joulerk.ru",
         "sameAs": ["https://t.me/joulerkOFF", "https://vk.com/ca7ana", "https://github.com/LerkOFF"],
-        "knowsAbout": ["PHP", "Laravel", "Python", "JavaScript", "Telegram-боты", "ИИ-генерация изображений",
+        "knowsAbout": ["ИИ-автоматизация бизнеса", "ИИ-агенты", "PHP", "Laravel", "Python", "JavaScript", "Telegram-боты", "ИИ-генерация изображений",
                        "ЮKassa", "Яндекс.Метрика", "nginx", "Docker", "C++", "C#", "SQL", "FastAPI", "Redis",
                        "PostgreSQL"],
         "hasOfferCatalog": {
