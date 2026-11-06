@@ -290,8 +290,8 @@ def service_page(s):
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="{url}">
-  <meta name="theme-color" content="#d9c3a0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#18130f" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121215" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="website">
@@ -309,7 +309,7 @@ def service_page(s):
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/style.css?v={css_v}">
   <script>
@@ -417,7 +417,7 @@ def blog_header():
 
 def blog_page(*, title, desc, url, og_title, og_type, og_image, extra_meta, ld, body):
     """Оболочка страницы блога: head как у страниц услуг, спрайт только с нужными иконками."""
-    used = sorted(set(re.findall(r'href="#i-([\w-]+)"', body)))
+    used = sorted(set(re.findall(r'href="#i-([\w-]+)"', header + body + footer)))
     missing = [u for u in used if u not in symbol_src]
     assert not missing, f"{url}: нет иконок в спрайте {missing}"
     page_sprite = ('<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">'
@@ -430,8 +430,8 @@ def blog_page(*, title, desc, url, og_title, og_type, og_image, extra_meta, ld, 
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(desc)}">
   <link rel="canonical" href="{url}">
-  <meta name="theme-color" content="#d9c3a0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#18130f" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121215" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="{og_type}">
@@ -449,7 +449,7 @@ def blog_page(*, title, desc, url, og_title, og_type, og_image, extra_meta, ld, 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <link rel="preload" href="/assets/fonts/dela-gothic-one-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/style.css?v={css_v}">
   <script>
