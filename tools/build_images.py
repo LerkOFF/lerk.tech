@@ -55,7 +55,7 @@ REDACT = {
     "kosmos": [("blur", (50, 1175, 490, 1735))],  # постер с лицами
 }
 # Обложки заметок блога: иллюстрации Codex из tools/raw/gen (без текста и лиц)
-NOTES = ["svet", "invoice", "mirror", "agecms", "avtomatizaciya", "agent"]
+NOTES = ["svet", "invoice", "mirror", "agecms", "avtomatizaciya", "agent", "seeyer"]
 # Экраны телефонов
 PHONES = {
     "assistant": "lodki-assistant-mob.png",

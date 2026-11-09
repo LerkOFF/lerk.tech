@@ -146,7 +146,7 @@ for (const scheme of ['light', 'dark']) {
   const sitemap = (await fetchText(new URL('sitemap.xml', url).href)).text;
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const pages = locs.map(l => new URL(l.replace(CANON, ''), url).href);
-  ok('в sitemap главная, 7 услуг, блог и 6 постов', locs.length === 15 && locs[0] === CANON && locs.filter(l => l.includes('/blog/')).length === 7, String(locs.length));
+  ok('в sitemap главная, 7 услуг, блог и 7 постов', locs.length === 16 && locs[0] === CANON && locs.filter(l => l.includes('/blog/')).length === 8, String(locs.length));
   const robots = (await fetchText(new URL('robots.txt', url).href)).text;
   ok('robots.txt указывает на sitemap', robots.includes('Sitemap: https://lerk.tech/sitemap.xml') && robots.includes('Disallow: /pokupki'));
 
@@ -227,7 +227,7 @@ for (const scheme of ['light', 'dark']) {
     current: document.querySelector('#nav a[aria-current="page"]')?.textContent.trim(),
     ld: [...document.querySelectorAll('script[type="application/ld+json"]')].flatMap(s => JSON.parse(s.textContent)['@graph']).map(x => x['@type']).join(','),
   }));
-  ok('индекс блога: 6 карточек, «Блог» отмечен в меню, Blog и BreadcrumbList', list.cards === 6 && list.current === 'Блог' && list.ld === 'Blog,BreadcrumbList', JSON.stringify(list));
+  ok('индекс блога: 7 карточек, «Блог» отмечен в меню, Blog и BreadcrumbList', list.cards === 7 && list.current === 'Блог' && list.ld === 'Blog,BreadcrumbList', JSON.stringify(list));
   const sitemapText = await p.evaluate(async (u) => (await fetch(u)).text(), new URL('sitemap.xml', url).href);
   ok('карточки главной ведут на посты из sitemap', home.hrefs.length === 4 && home.hrefs.every(h => sitemapText.includes(CANON + h.slice(1))), home.hrefs.join(' '));
 
