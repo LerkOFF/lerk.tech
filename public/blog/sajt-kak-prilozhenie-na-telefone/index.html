@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Как сделать из сайта приложение на телефоне без нативной разработки | Блог Дмитрия</title>
+  <meta name="description" content="Нижние вкладки, безопасные зоны, карты на весь экран, манифест и тёмная тема: как я сделал так, что два моих сайта на телефоне ведут себя как приложения.">
+  <link rel="canonical" href="https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/">
+  <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121215" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/">
+  <meta property="og:site_name" content="lerk.tech">
+  <meta property="og:title" content="Как сделать из сайта приложение на телефоне без нативной разработки">
+  <meta property="og:description" content="Нижние вкладки, безопасные зоны, карты на весь экран, манифест и тёмная тема: как я сделал так, что два моих сайта на телефоне ведут себя как приложения.">
+  <meta property="og:image" content="https://lerk.tech/assets/img/note-app.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-11-13">
+  <meta property="article:author" content="Дмитрий">
+  <meta property="article:section" content="Сайты">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="/assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261106a">
+  <script>
+    // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/#post",
+      "headline": "Как сделать из сайта приложение на телефоне без нативной разработки",
+      "description": "Нижние вкладки, безопасные зоны, карты на весь экран, манифест и тёмная тема: как я сделал так, что два моих сайта на телефоне ведут себя как приложения.",
+      "url": "https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/",
+      "mainEntityOfPage": "https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/",
+      "inLanguage": "ru",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "articleSection": "Сайты",
+      "wordCount": 425,
+      "image": "https://lerk.tech/assets/img/note-app.webp",
+      "author": {
+        "@type": "Person",
+        "@id": "https://lerk.tech/#person",
+        "name": "Дмитрий",
+        "alternateName": "lerk",
+        "url": "https://lerk.tech/"
+      },
+      "publisher": {
+        "@id": "https://lerk.tech/#person"
+      },
+      "isPartOf": {
+        "@id": "https://lerk.tech/blog/#blog"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://lerk.tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://lerk.tech/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Сайт как приложение",
+          "item": "https://lerk.tech/blog/sajt-kak-prilozhenie-na-telefone/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113438654', 'ym');
+
+      ym(113438654, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/113438654" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- Собрано tools/build_pages.py из tools/blog.py, руками не править -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 256 256" fill="currentColor"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol><symbol id="i-browser" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,24V84H44V60ZM44,196V108H212v88Z"/></symbol><symbol id="i-close" viewBox="0 0 256 256" fill="currentColor"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></symbol><symbol id="i-menu" viewBox="0 0 256 256" fill="currentColor"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-moon" viewBox="0 0 256 256" fill="currentColor"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol><symbol id="i-robot" viewBox="0 0 256 256" fill="currentColor"><path d="M72,104a16,16,0,1,1,16,16A16,16,0,0,1,72,104Zm96,16a16,16,0,1,0-16-16A16,16,0,0,0,168,120Zm68-40V192a36,36,0,0,1-36,36H56a36,36,0,0,1-36-36V80A36,36,0,0,1,56,44h60V16a12,12,0,0,1,24,0V44h60A36,36,0,0,1,236,80Zm-24,0a12,12,0,0,0-12-12H56A12,12,0,0,0,44,80V192a12,12,0,0,0,12,12H200a12,12,0,0,0,12-12Zm-12,82a30,30,0,0,1-30,30H86a30,30,0,0,1,0-60h84A30,30,0,0,1,200,162Zm-80-6v12h16V156ZM86,168H96V156H86a6,6,0,0,0,0,12Zm90-6a6,6,0,0,0-6-6H160v12h10A6,6,0,0,0,176,162Z"/></symbol><symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,36V20a12,12,0,0,1,24,0V36a12,12,0,0,1-24,0Zm80,92a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM48,128a12,12,0,0,0-12-12H20a12,12,0,0,0,0,24H36A12,12,0,0,0,48,128Zm80,80a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V220A12,12,0,0,0,128,208Zm108-92H220a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-telegram" viewBox="0 0 256 256" fill="currentColor"><path d="M231.49,23.16a13,13,0,0,0-13.23-2.26L15.6,100.21a18.22,18.22,0,0,0,3.12,34.86L68,144.74V200a20,20,0,0,0,34.4,13.88l22.67-23.51L162.35,223a20,20,0,0,0,32.7-10.54L235.67,35.91A13,13,0,0,0,231.49,23.16ZM139.41,77.52,77.22,122.09l-34.43-6.75ZM92,190.06V161.35l15,13.15Zm81.16,10.52L99.28,135.81,205.59,59.63Z"/></symbol></svg>
+
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<header class="top" data-top>
+  <div class="wrap top__row">
+    <a class="brand" href="/" aria-label="lerk, на главную">
+      <img class="brand__face" src="/assets/img/avatar-sm.webp" alt="" width="40" height="40">
+      <span class="brand__name">lerk</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="/#work">Работы</a>
+      <a href="/#ai">ИИ</a>
+      <a href="/#services">Услуги</a>
+      <a href="/#process">Как работаю</a>
+      <a href="/#about">Обо мне</a>
+      <a href="/blog/" aria-current="page">Блог</a>
+    </nav>
+
+    <div class="top__actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Тёмная тема" title="Сменить тему">
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+      <a class="btn btn--primary btn--sm top__tg" href="https://t.me/joulerkOFF" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+        <span>Написать в Telegram</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <nav class="crumbs wrap" aria-label="Навигационная цепочка">
+    <ol>
+      <li><a href="/">Главная</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><span aria-current="page">Сайт как приложение</span></li>
+    </ol>
+  </nav>
+
+  <header class="blog-head blog-narrow">
+    <p class="blog-meta"><span class="role role--sm role--own">Сайты</span><time datetime="2026-11-13">13 ноября 2026</time><span>3 мин чтения</span></p>
+    <h1 class="blog-head__title" id="page-title">Как сделать из сайта приложение на телефоне без нативной разработки</h1>
+    <p class="blog-head__lead">Последние дни я занимался мобильным видом двух своих сайтов: городского портала с картами и общего списка покупок. На телефоне оба теперь ведут себя как приложение, хотя это обычные веб-страницы.</p>
+    <p class="blog-by"><img class="blog-by__face" src="/assets/img/avatar-sm.webp" alt="" width="36" height="36"><span>Дмитрий</span></p>
+  </header>
+
+  <figure class="blog-cover blog-narrow">
+    <img src="/assets/img/note-app-sm.webp" srcset="/assets/img/note-app-sm.webp 640w, /assets/img/note-app.webp 1200w" sizes="(max-width: 1020px) 100vw, 980px" alt="Обложка поста про мобильный сайт: смартфон с нижней панелью вкладок, картой улиц и выезжающей карточкой" width="1200" height="630" fetchpriority="high">
+  </figure>
+
+  <div class="blog-layout blog-narrow">
+    <nav class="blog-toc" aria-label="Содержание">
+      <p class="blog-toc__title">Содержание</p>
+      <ol>
+          <li><a href="#chto-prishlos-sdelat">Что пришлось сделать</a></li>
+          <li><a href="#zachem-voobsche-eto-nuzhno">Зачем вообще это нужно</a></li>
+          <li><a href="#spisok-pokupok">Список покупок</a></li>
+          <li><a href="#chego-tak-ne-sdelat">Чего так не сделать</a></li>
+          <li><a href="#itog">Итог</a></li>
+      </ol>
+    </nav>
+    <article class="blog-prose" aria-labelledby="page-title">
+      <aside class="blog-facts" aria-label="Коротко">
+        <p class="blog-facts__title">Коротко</p>
+        <ul class="checks">
+          <li>Нижняя панель вкладок вместо меню сверху, остальные разделы в листе «Ещё»</li>
+          <li>Безопасные зоны экрана, чтобы панель не садилась на жест «домой»</li>
+          <li>Карты на весь экран между панелями, боковая карточка превращается в лист снизу</li>
+          <li>Манифест, значки и ярлыки: с экрана «Домой» сайт открывается без адресной строки</li>
+          <li>Пуши и работа без сети так не делаются, это отдельная история</li>
+        </ul>
+      </aside>
+
+<h2 id="chto-prishlos-sdelat">Что пришлось сделать<a class="blog-anchor" href="#chto-prishlos-sdelat" aria-label="Ссылка на раздел «Что пришлось сделать»">#</a></h2>
+<ul>
+  <li><strong>Нижняя панель вкладок.</strong> Главная, три самых нужных раздела и «Ещё». Остальные разделы уходят в лист снизу, который выезжает по «Ещё».</li>
+  <li><strong>Безопасные зоны.</strong> <code>viewport-fit=cover</code> и отступы <code>env(safe-area-inset-*)</code>, иначе панель на iPhone садится на жест «домой».</li>
+  <li><strong>Карты на весь экран.</strong> Высота <code>100dvh</code> минус обе панели. Боковая карточка района на телефоне превращается в лист снизу.</li>
+  <li><strong>Фильтры.</strong> На телефоне одной лентой, а не столбиком.</li>
+  <li><strong>Манифест и значки.</strong> Значки 192 и 512, ярлыки на разделы. Если добавить сайт на экран «Домой», он открывается без адресной строки.</li>
+  <li><strong>Светлая и тёмная тема.</strong> По умолчанию как в системе, выбор запоминается.</li>
+</ul>
+<p>Активная вкладка подсвечена, а если открыт раздел из листа «Ещё», подсвечивается сама кнопка «Ещё». Манифест сервер отдаёт со своим типом содержимого, иначе часть браузеров его просто игнорирует. Все размеры панелей лежат в переменных стилей, поэтому поменять высоту панели можно в одном месте.</p>
+
+<h2 id="zachem-voobsche-eto-nuzhno">Зачем вообще это нужно<a class="blog-anchor" href="#zachem-voobsche-eto-nuzhno" aria-label="Ссылка на раздел «Зачем вообще это нужно»">#</a></h2>
+<p>Городским порталом пользуются на ходу: открыли карту, посмотрели, есть ли вода на улице, закрыли. Меню сверху в такой ситуации неудобно, до него не дотянуться одной рукой. Нижняя панель решает это почти даром, а лист «Ещё» убирает с неё всё, что нужно реже.</p>
+<p>Самое нудное в этой работе оказались мелочи вокруг экрана: нижний отступ у контента, чтобы панель его не закрывала, высота карты без прыжков при появлении адресной строки браузера и отступы под вырез и жест «домой». По отдельности каждая строка CSS простая, а вместе они и дают ощущение приложения.</p>
+
+<h2 id="spisok-pokupok">Список покупок<a class="blog-anchor" href="#spisok-pokupok" aria-label="Ссылка на раздел «Список покупок»">#</a></h2>
+<p>У второго сайта то же самое, плюс одна вещь по делу: у продукта появилось место, где его купить: магазин, аптека, хозтовары, рынок или своё. Список делится по местам, а кнопки над ним оставляют только одно. В аптеке видно только аптечное, остальное не мешает.</p>
+
+<h2 id="chego-tak-ne-sdelat">Чего так не сделать<a class="blog-anchor" href="#chego-tak-ne-sdelat" aria-label="Ссылка на раздел «Чего так не сделать»">#</a></h2>
+<blockquote><p>Пока честно: нативное приложение это не заменяет.</p></blockquote>
+<p>Пуши и работа без сети так не делаются, это отдельная история. Но для сайта, которым пользуются одной рукой на ходу, этого хватило.</p>
+
+<h2 id="itog">Итог<a class="blog-anchor" href="#itog" aria-label="Ссылка на раздел «Итог»">#</a></h2>
+<p>Если у вас сайт или кабинет, которым пользуются с телефона, такой вид делается без отдельного приложения и без магазинов приложений. Напишите, что за сайт, подскажу, что стоит сделать в первую очередь.</p>
+    </article>
+  </div>
+
+  <section class="section section--sub section--last" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div>
+          <h2 class="cta__title" id="cta-title">Расскажите о задаче</h2>
+          <p>Пара фраз и ссылка на сайт, если он уже есть. Отвечаю сам: задам вопросы, назову срок и цену.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="https://t.me/joulerkOFF" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+            <span>Написать в Telegram</span>
+          </a>
+          <a class="btn btn--ghost" href="/#contact">Собрать задачу</a>
+        </div>
+      </div>
+
+      <h2 class="subhead">Заказать похожее</h2>
+      <ul class="svc-links">
+        <li><a class="svc-link" href="/razrabotka-sajtov/"><svg class="icon" aria-hidden="true"><use href="#i-browser"></use></svg><span>Разработка сайтов</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+        <li><a class="svc-link" href="/telegram-boty/"><svg class="icon" aria-hidden="true"><use href="#i-robot"></use></svg><span>Telegram-боты</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+      </ul>
+
+      <h2 class="subhead">Ещё посты</h2>
+      <ul class="blog-grid blog-grid--more">
+        <li class="blog-card reveal" style="--i:0">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-seeyer-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Telegram</span><time datetime="2026-11-09">9 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/telegram-bot-udalennyh-soobshchenij/">Telegram-бот, который возвращает удалённые и изменённые сообщения</a></h3>
+            <p class="blog-card__text">Как я за два дня собрал Telegram-бота на Python и aiogram: он присылает удалённые и изменённые сообщения, возвращает вложения и берёт деньги за подписку.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:1">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-avtomatizaciya-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">ИИ</span><time datetime="2026-11-05">5 ноября 2026</time><span>4 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/avtomatizaciya-biznesa-s-pomoshchyu-ii/">Автоматизация бизнеса с помощью ИИ: что работает, а что нет</a></h3>
+            <p class="blog-card__text">Что я автоматизировал с помощью ИИ на живых проектах: заявки, ответы клиентам, статьи, сводки и отчёты. Что окупилось, а что оказалось лишним.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:2">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-agent-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">ИИ</span><time datetime="2026-11-05">5 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/ii-agent-ili-chat-bot/">ИИ-агент или чат-бот: в чём разница и что выбрать бизнесу</a></h3>
+            <p class="blog-card__text">Чем ИИ-агент отличается от чат-бота, когда бизнесу хватит бота, а когда нужен агент, и как ограничить агента, чтобы он не навредил. По опыту живых проектов.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:3">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-agecms-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">CMS</span><time datetime="2026-11-02">2 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/cms-dlya-lyudej-i-agentov/">Открытая CMS, которую правят люди и ИИ-агенты</a></h3>
+            <p class="blog-card__text">Как я сделал свою CMS на PHP и SQLite: журнал правок с откатом, предохранитель для ИИ-агента и перенос сайтов с WordPress, Tilda, Bitrix и других систем.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:4">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-svet-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Карта</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/karta-sveta-po-gorodu/">Карта света по городу: график, каналы и отметки жителей</a></h3>
+            <p class="blog-card__text">Сделал открытую карту света по городу: данные из графика отключений, районных каналов и отметок жителей, защита от мусора и датчики по пингу роутера.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:5">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-invoice-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Бот</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/napominaniya-o-platezhah/">Сервис напоминаний о регулярных платежах: технический кейс</a></h3>
+            <p class="blog-card__text">Технический кейс: свой сервис напоминаний о платежах на FastAPI и SQLite с ботом в Telegram и MAX, кнопкой «Оплачено», ролями, API и импортом CSV.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:6">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-mirror-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Интеграции</span><time datetime="2026-10-02">2 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/zerkalo-dvuh-messendzherov/">Зеркало двух мессенджеров для рабочих чатов</a></h3>
+            <p class="blog-card__text">Как я сделал сервис-зеркало между MAX и Telegram: aiogram, pymax, очередь на ARQ и Redis, PostgreSQL и Docker Compose. Что уже работает, а что пока нет.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
+    <p>© 2026 lerk.tech</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js?v=20260927" defer></script>
+</body>
+</html>
