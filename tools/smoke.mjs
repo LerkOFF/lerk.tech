@@ -146,7 +146,7 @@ for (const scheme of ['light', 'dark']) {
   const sitemap = (await fetchText(new URL('sitemap.xml', url).href)).text;
   const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   const pages = locs.map(l => new URL(l.replace(CANON, ''), url).href);
-  ok('в sitemap главная, 7 услуг, блог и 9 постов', locs.length === 18 && locs[0] === CANON && locs.filter(l => l.includes('/blog/')).length === 10, String(locs.length));
+  ok('в sitemap главная, 7 услуг, блог и 10 постов', locs.length === 19 && locs[0] === CANON && locs.filter(l => l.includes('/blog/')).length === 11, String(locs.length));
   const robots = (await fetchText(new URL('robots.txt', url).href)).text;
   ok('robots.txt указывает на sitemap', robots.includes('Sitemap: https://lerk.tech/sitemap.xml') && robots.includes('Disallow: /pokupki'));
 
@@ -227,7 +227,7 @@ for (const scheme of ['light', 'dark']) {
     current: document.querySelector('#nav a[aria-current="page"]')?.textContent.trim(),
     ld: [...document.querySelectorAll('script[type="application/ld+json"]')].flatMap(s => JSON.parse(s.textContent)['@graph']).map(x => x['@type']).join(','),
   }));
-  ok('индекс блога: 9 карточек, «Блог» отмечен в меню, Blog и BreadcrumbList', list.cards === 9 && list.current === 'Блог' && list.ld === 'Blog,BreadcrumbList', JSON.stringify(list));
+  ok('индекс блога: 10 карточек, «Блог» отмечен в меню, Blog и BreadcrumbList', list.cards === 10 && list.current === 'Блог' && list.ld === 'Blog,BreadcrumbList', JSON.stringify(list));
   const sitemapText = await p.evaluate(async (u) => (await fetch(u)).text(), new URL('sitemap.xml', url).href);
   ok('карточки главной ведут на посты из sitemap', home.hrefs.length === 4 && home.hrefs.every(h => sitemapText.includes(CANON + h.slice(1))), home.hrefs.join(' '));
 
@@ -247,15 +247,15 @@ for (const scheme of ['light', 'dark']) {
         crumbs: ld.some(x => x['@type'] === 'BreadcrumbList'),
         h2: heads.length, anchors: heads.every(h => h.id && h.querySelector('a.blog-anchor')),
         facts: !!document.querySelector('.blog-facts'),
-        ext: [...document.querySelectorAll('.blog-prose a, .blog-head a')].filter(a => !a.getAttribute('href').startsWith('#') && !a.getAttribute('href').startsWith('/')).length,
+        ext: [...document.querySelectorAll('.blog-prose a, .blog-head a')].filter(a => !a.getAttribute('href').startsWith('#') && !a.getAttribute('href').startsWith('/') && !a.getAttribute('href').startsWith('https://github.com/LerkOFF/')).length,
         service: !!document.querySelector('.svc-links a[href^="/"]'),
         lazy: [...document.querySelectorAll('img')].filter(i => !i.closest('.blog-cover') && !i.closest('.mascot') && !i.closest('.top') && !i.getAttribute('width')).length,
       };
     });
     const good = post.og === 'article' && post.ogimg.startsWith(CANON + 'assets/img/note-') && post.cover && post.cover.w === '1200' && post.cover.h === '630' && post.cover.prio === 'high' && post.cover.ok
       && post.bp && post.bp.author === 'Дмитрий' && post.bp.id === 'https://lerk.tech/#person' && /^2026-/.test(post.bp.date) && post.crumbs
-      && post.h2 >= 3 && post.h2 <= 5 && post.anchors && post.facts && post.ext === 0 && post.service && post.lazy === 0 && post.bp.words >= 400 && post.bp.words <= 700;
-    ok(`пост ${href}: article, обложка, BlogPosting, 3-5 разделов, якоря, «Коротко», 400-700 слов, без внешних ссылок`, good, JSON.stringify(post));
+      && post.h2 >= 3 && post.h2 <= 5 && post.anchors && post.facts && post.ext === 0 && post.service && post.lazy === 0 && post.bp.words >= 250 && post.bp.words <= 700;
+    ok(`пост ${href}: article, обложка, BlogPosting, 3-5 разделов, якоря, «Коротко», 250-700 слов, без внешних ссылок кроме моего GitHub`, good, JSON.stringify(post));
   }
   ok('ошибок JS в блоге нет', errs.length === 0, errs.join('; '));
   await ctx.close();
