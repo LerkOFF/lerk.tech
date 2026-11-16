@@ -1,7 +1,7 @@
 """Проверка правила приватности постов блога. Запуск: python3 tools/check_blog.py
 
 В постах (tools/blog.py и собранные public/blog/**/index.html, плюс блок «Блог» на главной) не должно быть:
-ссылок и доменов, IP-адресов, @-ников, t.me, почты, длинного тире, стоп-слов (имена, заказчики, компании, города).
+ссылок и доменов (кроме ссылок на мои проекты на github.com/LerkOFF), IP-адресов, @-ников, t.me, почты, длинного тире, стоп-слов (имена, заказчики, компании, города).
 Шапка, подвал и кнопка «Написать в Telegram» - общий каркас сайта, их проверка не касается:
 смотрим только контент поста и карточек (заголовок, герой, статья, сетка карточек), мета-теги и JSON-LD.
 Код возврата 1, если что-то найдено. Стоп-слова легко дополнять: списки ниже.
@@ -35,6 +35,9 @@ STOP_STEMS = [
 # Слова, которые нельзя ловить подстрокой, только целиком и с учётом регистра (иначе заденем обычные слова)
 STOP_WORDS_CS = ["Тут", "Катя", "Кате", "Валя"]
 
+# Исключение (решение владельца 2026-11-16): ссылки на мои проекты на GitHub в постах можно, это не скрываем.
+OWN_GIT_RE = re.compile(r"https://github\.com/LerkOFF(?:/[\w.-]+)?", re.I)
+
 URL_RE = re.compile(r"https?://|www\.", re.I)
 DOMAIN_RE = re.compile(r"\b[\w-]+\.(ru|рф|com|tech|site|pw|su|net|org|io|dev|ai|shop|app|me|info|xyz)\b", re.I)
 IPV4_RE = re.compile(r"\b\d{1,3}(?:\.\d{1,3}){3}\b")
@@ -60,6 +63,7 @@ ASSET_RE = re.compile(r"/assets/img/[\w.-]+")  # имена файлов кар�
 
 def scan(where, text):
     text = ASSET_RE.sub("/assets/img/-", text)
+    text = OWN_GIT_RE.sub("", text)
     for name, rx in RULES:
         for m in rx.finditer(text):
             problems.append(f"{where}: {name}: «{m.group(0)}»")
@@ -147,7 +151,7 @@ def check_html(path):
     for part in parts:
         scan(where, part)
         for href in re.findall(r'href="([^"]*)"', part):
-            if not (href.startswith("/") or href.startswith("#")):
+            if not (href.startswith("/") or href.startswith("#") or OWN_GIT_RE.fullmatch(href)):
                 problems.append(f"{where}: внешняя ссылка в контенте: «{href}»")
     for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
         walk_ld(where, json.loads(raw.replace("<\\/", "</")))
@@ -162,7 +166,7 @@ def check_home():
         return 0
     scan("index.html [блок Блог]", m.group(1))
     for href in re.findall(r'href="([^"]*)"', m.group(1)):
-        if not href.startswith(("/", "#")):
+        if not (href.startswith(("/", "#")) or OWN_GIT_RE.fullmatch(href)):
             problems.append(f"index.html [блок Блог]: внешняя ссылка: «{href}»")
     return 1
 
