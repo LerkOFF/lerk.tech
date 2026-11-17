@@ -32,6 +32,7 @@ const sites = [
   { name: 'svet', url: 'https://xn----ctbhcc4athwm3c.xn--p1ai/' },
   { name: 'ekatrvl', url: 'https://ekatrvl.ru/' },
   { name: 'karat', url: 'https://karat-lombard.ru/' },
+  { name: 'rabota', url: 'https://xn----7sbadrg9awfdp1a2d.xn--p1ai/' },
 ];
 
 const hideOverlays = () => {

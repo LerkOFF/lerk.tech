@@ -28,7 +28,7 @@
 
   <link rel="preload" href="assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261106a">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261117a">
   <script>
     // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
     (function () {
@@ -468,7 +468,7 @@
           <img class="project__thumb" src="assets/img/site-sanlux-sm.webp" alt="" width="640" height="400" loading="lazy">
           <div class="project__body">
             <h4 class="project__title"><a href="https://aqcentr.ru/" rel="noopener">САНЛЮКС, aqcentr.ru</a></h4>
-            <p>Магазин производителя сантехники: посадочные «Производство» и «Опт», звонки с сайта через Plusofon, статьи по расписанию.</p>
+            <p>Магазин производителя сантехники: посадочные «Производство» и «Опт», звонки с сайта через Plusofon, статьи и описания товаров по расписанию, ИИ-консультант в чате по каталогу.</p>
             <p class="role role--sm">Для заказчика</p>
           </div>
         </li>
@@ -558,6 +558,9 @@
           <button class="ai__tab" type="button" role="tab" id="tab-agents" aria-controls="panel-agents" aria-selected="false" tabindex="-1">
             <svg class="icon" aria-hidden="true"><use href="#i-robot"></use></svg><span>Агенты для рутины</span>
           </button>
+          <button class="ai__tab" type="button" role="tab" id="tab-data" aria-controls="panel-data" aria-selected="false" tabindex="-1">
+            <svg class="icon" aria-hidden="true"><use href="#i-swap"></use></svg><span>Сбор данных из источников</span>
+          </button>
         </div>
 
         <div class="ai__panels">
@@ -607,6 +610,7 @@
                 <li>Все диалоги видны в админке.</li>
                 <li>Открытие чата и сообщения уходят в цели Яндекс.Метрики.</li>
                 <li>ИИ-коуч в мобильном приложении ходит в модель через свой бэкенд, ключ API в приложении не лежит.</li>
+                <li>На <a href="https://aqcentr.ru/" rel="noopener">aqcentr.ru</a> консультант отвечает только по каталогу и базе знаний, показывает карточку товара, а вопрос без ответа в данных передаёт менеджеру.</li>
               </ul>
               <p class="ai__where">Работает на <a href="https://lodki.site/" rel="noopener">lodki.site</a>, кнопка «AI-помощник» справа внизу.</p>
             </div>
@@ -640,6 +644,24 @@
                 <div><h4>Сайт</h4><p>ИИ-агент подключается к <a href="https://github.com/likvp/AgeCMS" rel="noopener">AgeCMS</a> через MCP. Каждая его правка записана в журнал и откатывается.</p></div>
               </li>
             </ul>
+          </div>
+
+          <div class="ai__panel" role="tabpanel" id="panel-data" aria-labelledby="tab-data" tabindex="0">
+            <div class="ai__text">
+              <h3>Сборщик из десятка источников</h3>
+              <p>Вакансии лежат в десятках каналов Telegram, пабликов VK, каналах MAX и на сайтах. Посты длинные, с рекламой и повторами, часть выложена картинкой. Сервис собирает всё в одну базу и показывает короткой карточкой.</p>
+              <ul class="checks">
+                <li>Сборщики для Telegram, VK, MAX, «Работы России», «Моего ЦЗН» и hh.ru.</li>
+                <li>Текст и картинки разбираются в поля: профессия, оплата, график, район, контакт.</li>
+                <li>Дубли склеиваются, реклама и посты не про работу отсеиваются.</li>
+                <li>Карточка ведёт на оригинал. Сотни тестов, в том числе браузерные.</li>
+              </ul>
+              <p class="ai__where">Работает на <a href="https://работа-донецк.рф/" rel="noopener">работа-донецк.рф</a>. Защиту сайтов от роботов не обхожу: берутся только открытые данные и официальные API. Та же схема подходит для сканирования каналов, пабликов и каталогов конкурентов.</p>
+            </div>
+            <div class="ai__visual ai__visual--shots">
+              <img src="assets/img/site-rabota.webp" alt="Главная работа-донецк.рф: поиск, счётчик вакансий и быстрые фильтры" width="1200" height="750" loading="lazy">
+              <img class="phone" src="assets/img/phone-rabota.webp" alt="Работа Донецк на телефоне: поиск вакансий и счётчик" width="520" height="1125" loading="lazy">
+            </div>
           </div>
         </div>
       </div>

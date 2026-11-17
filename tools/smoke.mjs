@@ -46,13 +46,13 @@ const newCtx = async (opts) => {
 
   // вкладки
   const vis = () => p.evaluate(() => [...document.querySelectorAll('.ai__panel')].map(x => !x.hidden));
-  ok('видна только первая вкладка', JSON.stringify(await vis()) === '[true,false,false,false]');
+  ok('видна только первая вкладка', JSON.stringify(await vis()) === '[true,false,false,false,false]');
   await p.click('#tab-chat');
-  ok('клик по вкладке «Помощник»', JSON.stringify(await vis()) === '[false,false,true,false]');
+  ok('клик по вкладке «Помощник»', JSON.stringify(await vis()) === '[false,false,true,false,false]');
   await p.focus('#tab-chat'); await p.keyboard.press('ArrowRight');
-  ok('стрелка вправо', JSON.stringify(await vis()) === '[false,false,false,true]' && await p.evaluate(() => document.activeElement.id === 'tab-agents'));
+  ok('стрелка вправо', JSON.stringify(await vis()) === '[false,false,false,true,false]' && await p.evaluate(() => document.activeElement.id === 'tab-agents'));
   await p.keyboard.press('Home');
-  ok('Home к первой', JSON.stringify(await vis()) === '[true,false,false,false]');
+  ok('Home к первой', JSON.stringify(await vis()) === '[true,false,false,false,false]');
 
   // копирование почты
   await p.click('[data-copy]');

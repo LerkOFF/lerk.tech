@@ -28,6 +28,7 @@ SITES = {
     "svet": ("svet-desk.png", True, True),
     "ekatrvl": ("ekatrvl-desk.png", True, True),
     "karat": ("karat-desk.png", True, True),
+    "rabota": ("rabota-desk.png", True, True),
     "invoice": ("invoice-payments.png", True, True),  # демо-данные из репозитория invoice-keeper
     "agecms": ("agecms-desk.png", True, True),  # админка AgeCMS с локального запуска, демо-сайт
     # малые карточки
@@ -61,6 +62,7 @@ PHONES = {
     "assistant": "lodki-assistant-mob.png",
     "donnu": "donnu-mob.png",
     "app": "app/app2.jpg",
+    "rabota": "rabota-mob.png",
 }
 # Гербы без лиц людей: Салдушкины, Рудак, Салдушкин
 GERBS = ["42034", "42046", "42033"]

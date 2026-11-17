@@ -556,6 +556,8 @@ button { font: inherit; }
 .ai__visual--covers img:nth-child(1) { left: 0; top: 0; rotate: -5deg; }
 .ai__visual--covers img:nth-child(2) { right: 0; top: 14%; rotate: 4deg; z-index: 1; }
 .ai__visual--covers img:nth-child(3) { left: 16%; bottom: 0; rotate: -1.5deg; z-index: 2; }
+.ai__visual--shots img:first-child { width: 94%; left: 0; top: 4%; rotate: -2deg; }
+.ai__visual--shots .phone { width: 34%; right: 0; bottom: 0; rotate: 4deg; z-index: 1; border-radius: 22px; }
 .ai__visual--phone { display: grid; place-items: center; min-height: 0; }
 .ai__visual--phone .phone { position: static; width: min(260px, 70%); rotate: 2deg; border-radius: 34px; }
 
