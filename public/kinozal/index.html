@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0e">
+<meta name="robots" content="noindex">
+<title>Выбор места с видом на экран: прототип</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="app" id="app">
+    <canvas id="scene"></canvas>
+
+    <!-- Seat map screen -->
+    <section class="map" id="map" data-t-aria="map" aria-label="Схема зала">
+      <header class="topbar">
+        <button class="round-btn" id="btnBack" type="button" data-t-aria="back" aria-label="Назад">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="title">
+          <h1 id="hallName"></h1>
+          <p id="hallSub"></p>
+        </div>
+        <button class="round-btn" id="btnInfo" type="button" data-t-aria="switchHall" aria-label="Сменить зал">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h14M14 4l4 4-4 4M20 16H6M10 12l-4 4 4 4"/></svg>
+        </button>
+      </header>
+
+      <div class="shows" id="shows" role="tablist" data-t-aria="shows" aria-label="Сеансы"></div>
+
+      <div class="screen-arc" aria-hidden="true">
+        <svg viewBox="0 0 320 40" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="arcGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#7ee2a8" stop-opacity="0"/>
+              <stop offset=".5" stop-color="#7ee2a8" stop-opacity="1"/>
+              <stop offset="1" stop-color="#7ee2a8" stop-opacity="0"/>
+            </linearGradient>
+            <filter id="arcBlur" x="-10%" y="-100%" width="120%" height="300%"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <path d="M8 32 Q160 4 312 32" fill="none" stroke="url(#arcGrad)" stroke-width="5" filter="url(#arcBlur)" opacity=".55"/>
+          <path d="M8 32 Q160 4 312 32" fill="none" stroke="url(#arcGrad)" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span data-t="screenLabel">ЭКРАН</span>
+      </div>
+
+      <div class="grid-wrap">
+        <div class="grid" id="grid" role="group" data-t-aria="seats" aria-label="Места"></div>
+      </div>
+
+      <ul class="legend" data-t-aria="legend" aria-label="Обозначения">
+        <li><i class="dot dot-avail"></i><span data-t="legAvail">Свободно</span></li>
+        <li id="legRecliner"><i class="dot dot-recliner"></i><span data-t="legRecliner">Комфорт</span></li>
+        <li><i class="dot dot-taken"></i><span data-t="legTaken">Занято</span></li>
+        <li><i class="dot dot-selected"></i><span data-t="legSelected">Выбрано</span></li>
+      </ul>
+
+      <footer class="bar" id="bar">
+        <div class="bar-text">
+          <strong id="barTitle" data-t="barTitle">Выберите место</strong>
+          <span id="barPrice" hidden></span>
+        </div>
+        <button class="cta" id="btnContinue" type="button" data-t="btnContinue" disabled>Продолжить</button>
+      </footer>
+    </section>
+
+    <!-- Flight pill -->
+    <div class="flybar" id="flybar" aria-hidden="true">
+      <button class="round-btn small" id="btnFlyBack" type="button" data-t-aria="flyBack" aria-label="Назад к схеме зала" tabindex="-1">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <div class="fly-pill"><i class="live-dot"></i><span id="flyLabel">Вид с места</span></div>
+    </div>
+
+    <!-- Bottom sheet -->
+    <aside class="sheet" id="sheet" aria-hidden="true" data-t-aria="sheet" aria-label="Данные о месте">
+      <div class="sheet-head" id="sheetHead" role="button" tabindex="0" data-t-aria="sheetToggle" aria-label="Свернуть или развернуть карточку" aria-expanded="true">
+        <span class="grab"></span>
+      </div>
+
+      <div class="sheet-body" id="sheetDetail">
+        <div class="sheet-top">
+          <div class="sheet-info">
+            <span class="tag" id="sheetTag"></span>
+            <h2 id="sheetTitle"></h2>
+            <p id="sheetSub"></p>
+          </div>
+          <svg class="minimap" id="minimap" viewBox="0 0 84 72" aria-hidden="true"></svg>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b id="mDistance"></b><span data-t="mDistanceLabel">до экрана</span></div>
+          <div class="metric"><b id="mFov"></b><span data-t="mFovLabel">угол обзора</span></div>
+          <div class="metric"><b id="mOffset"></b><span id="mOffsetLabel"></span></div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="btnChange" type="button" data-t="btnChange">Другое место</button>
+          <button class="btn white" id="btnBook" type="button">Забронировать</button>
+          <button class="btn white wide" id="btnClose" type="button" data-t="btnClose" hidden>Закрыть</button>
+        </div>
+      </div>
+
+      <div class="sheet-body booked" id="sheetBooked" hidden>
+        <div class="check"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2 id="bookedTitle"></h2>
+        <p id="bookedSub"></p>
+        <div class="actions"><button class="btn white wide" id="btnDone" type="button" data-t="btnDone">Готово</button></div>
+      </div>
+    </aside>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

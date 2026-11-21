@@ -30,6 +30,8 @@ SITES = {
     "karat": ("karat-desk.png", True, True),
     "rabota": ("rabota-desk.png", True, True),
     "arxprod": ("pf/arx-home.png", False, True),  # новый сайт лейбла, главная
+    "mtdelivery": ("pf/mt-home.png", False, True),  # прототип витрины магазина (не продан)
+    "kinozal": ("pf/kinozal-view.jpg", False, True),  # прототип выбора места, вид с места (не продан)
     "lerkvpn": ("gen/note-vpn.png", False, True),  # иллюстрация сервиса каскадных VPN
     "invoice": ("invoice-payments.png", True, True),  # демо-данные из репозитория invoice-keeper
     "agecms": ("agecms-desk.png", True, True),  # админка AgeCMS с локального запуска, демо-сайт
@@ -49,6 +51,7 @@ BOX = {
     "ekatrvl": (1238, 167, 2642, 1045),  # карточка с заголовком, без фото автора
     "kosmos": (0, 785, 1624, 1800),  # афиша без шапки с телефоном и пустого экрана
     "gold777": (190, 40, 1850, 1077),  # категории без баннера с моделью
+    "mtdelivery": (0, 90, 2880, 1800),  # без верхней полосы с телефонами
 }
 # Качество крупного кадра, если дефолтные 78 дают слишком тяжёлый файл (мелкая карта)
 QUAL = {"svet": 56, "energoproms": 66}
