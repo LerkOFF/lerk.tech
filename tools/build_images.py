@@ -29,6 +29,8 @@ SITES = {
     "ekatrvl": ("ekatrvl-desk.png", True, True),
     "karat": ("karat-desk.png", True, True),
     "rabota": ("rabota-desk.png", True, True),
+    "arxprod": ("pf/arx-home.png", False, True),  # новый сайт лейбла, главная
+    "lerkvpn": ("gen/note-vpn.png", False, True),  # иллюстрация сервиса каскадных VPN
     "invoice": ("invoice-payments.png", True, True),  # демо-данные из репозитория invoice-keeper
     "agecms": ("agecms-desk.png", True, True),  # админка AgeCMS с локального запуска, демо-сайт
     # малые карточки

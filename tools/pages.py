@@ -102,6 +102,9 @@ SERVICES = [
                  text="Карта улиц Донецка, где свет есть и где нет. Данные из графика отключений, районных каналов "
                       "и отметок жителей. Код открыт на <a href=\"https://github.com/LerkOFF/karta-sveta\" "
                       "rel=\"noopener\">GitHub</a>."),
+            dict(img="site-arxprod-sm.webp", title="ARX Productions, arxprod.ru", url="https://arxprod.ru/",
+                 text="Сайт музыкального лейбла: каталог релизов и дистро, корзина с заказом на почту, админка "
+                      "с загрузкой Excel, русский и английский, две темы."),
             dict(img="site-ekatrvl-sm.webp", title="ekatrvl.ru", url="https://ekatrvl.ru/",
                  text="Портфолио UGC-креатора на русском и английском: лёгкий сайт без сборки со своим "
                       "переключателем языка."),
