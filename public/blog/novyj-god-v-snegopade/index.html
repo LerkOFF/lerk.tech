@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Новый год в Snowdrift: гирлянда, снеговик и иней на экране | Блог Дмитрия</title>
+  <meta name="description" content="В снегопад поверх окон добавил Новый год: гирлянду сверху экрана, снеговика из снежного кома и иней, который протирается курсором. Версия 0.6.1.">
+  <link rel="canonical" href="https://lerk.tech/blog/novyj-god-v-snegopade/">
+  <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121215" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://lerk.tech/blog/novyj-god-v-snegopade/">
+  <meta property="og:site_name" content="lerk.tech">
+  <meta property="og:title" content="Новый год в Snowdrift: гирлянда, снеговик и иней на экране">
+  <meta property="og:description" content="В снегопад поверх окон добавил Новый год: гирлянду сверху экрана, снеговика из снежного кома и иней, который протирается курсором. Версия 0.6.1.">
+  <meta property="og:image" content="https://lerk.tech/assets/img/note-snowdrift-ny.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="article:published_time" content="2026-11-24">
+  <meta property="article:author" content="Дмитрий">
+  <meta property="article:section" content="Приложения">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon-120.png" type="image/png" sizes="120x120">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="/assets/fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261117a">
+  <script>
+    // Тема до отрисовки, чтобы не мигало: сохранённая вручную или системная.
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://lerk.tech/blog/novyj-god-v-snegopade/#post",
+      "headline": "Новый год в Snowdrift: гирлянда, снеговик и иней на экране",
+      "description": "В снегопад поверх окон добавил Новый год: гирлянду сверху экрана, снеговика из снежного кома и иней, который протирается курсором. Версия 0.6.1.",
+      "url": "https://lerk.tech/blog/novyj-god-v-snegopade/",
+      "mainEntityOfPage": "https://lerk.tech/blog/novyj-god-v-snegopade/",
+      "inLanguage": "ru",
+      "datePublished": "2026-11-24",
+      "dateModified": "2026-11-24",
+      "articleSection": "Приложения",
+      "wordCount": 389,
+      "image": "https://lerk.tech/assets/img/note-snowdrift-ny.webp",
+      "author": {
+        "@type": "Person",
+        "@id": "https://lerk.tech/#person",
+        "name": "Дмитрий",
+        "alternateName": "lerk",
+        "url": "https://lerk.tech/"
+      },
+      "publisher": {
+        "@id": "https://lerk.tech/#person"
+      },
+      "isPartOf": {
+        "@id": "https://lerk.tech/blog/#blog"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://lerk.tech/blog/novyj-god-v-snegopade/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Главная",
+          "item": "https://lerk.tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://lerk.tech/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Новый год в снегопаде",
+          "item": "https://lerk.tech/blog/novyj-god-v-snegopade/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113438654', 'ym');
+
+      ym(113438654, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<noscript><div><img src="https://mc.yandex.ru/watch/113438654" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- Собрано tools/build_pages.py из tools/blog.py, руками не править -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 256 256" fill="currentColor"><path d="M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z"/></symbol><symbol id="i-browser" viewBox="0 0 256 256" fill="currentColor"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36Zm-4,24V84H44V60ZM44,196V108H212v88Z"/></symbol><symbol id="i-close" viewBox="0 0 256 256" fill="currentColor"><path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"/></symbol><symbol id="i-menu" viewBox="0 0 256 256" fill="currentColor"><path d="M228,128a12,12,0,0,1-12,12H40a12,12,0,0,1,0-24H216A12,12,0,0,1,228,128ZM40,76H216a12,12,0,0,0,0-24H40a12,12,0,0,0,0,24ZM216,180H40a12,12,0,0,0,0,24H216a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-moon" viewBox="0 0 256 256" fill="currentColor"><path d="M236.37,139.4a12,12,0,0,0-12-3A84.07,84.07,0,0,1,119.6,31.59a12,12,0,0,0-15-15A108.86,108.86,0,0,0,49.69,55.07,108,108,0,0,0,136,228a107.09,107.09,0,0,0,64.93-21.69,108.86,108.86,0,0,0,38.44-54.94A12,12,0,0,0,236.37,139.4Zm-49.88,47.74A84,84,0,0,1,68.86,69.51,84.93,84.93,0,0,1,92.27,48.29Q92,52.13,92,56A108.12,108.12,0,0,0,200,164q3.87,0,7.71-.27A84.79,84.79,0,0,1,186.49,187.14Z"/></symbol><symbol id="i-sun" viewBox="0 0 256 256" fill="currentColor"><path d="M116,36V20a12,12,0,0,1,24,0V36a12,12,0,0,1-24,0Zm80,92a68,68,0,1,1-68-68A68.07,68.07,0,0,1,196,128Zm-24,0a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,128ZM51.51,68.49a12,12,0,1,0,17-17l-12-12a12,12,0,0,0-17,17Zm0,119-12,12a12,12,0,0,0,17,17l12-12a12,12,0,1,0-17-17ZM196,72a12,12,0,0,0,8.49-3.51l12-12a12,12,0,0,0-17-17l-12,12A12,12,0,0,0,196,72Zm8.49,115.51a12,12,0,0,0-17,17l12,12a12,12,0,0,0,17-17ZM48,128a12,12,0,0,0-12-12H20a12,12,0,0,0,0,24H36A12,12,0,0,0,48,128Zm80,80a12,12,0,0,0-12,12v16a12,12,0,0,0,24,0V220A12,12,0,0,0,128,208Zm108-92H220a12,12,0,0,0,0,24h16a12,12,0,0,0,0-24Z"/></symbol><symbol id="i-telegram" viewBox="0 0 256 256" fill="currentColor"><path d="M231.49,23.16a13,13,0,0,0-13.23-2.26L15.6,100.21a18.22,18.22,0,0,0,3.12,34.86L68,144.74V200a20,20,0,0,0,34.4,13.88l22.67-23.51L162.35,223a20,20,0,0,0,32.7-10.54L235.67,35.91A13,13,0,0,0,231.49,23.16ZM139.41,77.52,77.22,122.09l-34.43-6.75ZM92,190.06V161.35l15,13.15Zm81.16,10.52L99.28,135.81,205.59,59.63Z"/></symbol></svg>
+
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<header class="top" data-top>
+  <div class="wrap top__row">
+    <a class="brand" href="/" aria-label="lerk, на главную">
+      <img class="brand__face" src="/assets/img/avatar-sm.webp" alt="" width="40" height="40">
+      <span class="brand__name">lerk</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="/#work">Работы</a>
+      <a href="/#ai">ИИ</a>
+      <a href="/#services">Услуги</a>
+      <a href="/#process">Как работаю</a>
+      <a href="/#about">Обо мне</a>
+      <a href="/blog/" aria-current="page">Блог</a>
+    </nav>
+
+    <div class="top__actions">
+      <button class="icon-btn" type="button" data-theme-toggle aria-label="Тёмная тема" title="Сменить тему">
+        <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+        <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+      <a class="btn btn--primary btn--sm top__tg" href="https://t.me/joulerkOFF" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+        <span>Написать в Telegram</span>
+      </a>
+      <button class="icon-btn nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg class="icon icon--menu" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <nav class="crumbs wrap" aria-label="Навигационная цепочка">
+    <ol>
+      <li><a href="/">Главная</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><span aria-current="page">Новый год в снегопаде</span></li>
+    </ol>
+  </nav>
+
+  <header class="blog-head blog-narrow">
+    <p class="blog-meta"><span class="role role--sm role--own">Приложения</span><time datetime="2026-11-24">24 ноября 2026</time><span>3 мин чтения</span></p>
+    <h1 class="blog-head__title" id="page-title">Новый год в Snowdrift: гирлянда, снеговик и иней на экране</h1>
+    <p class="blog-head__lead">С прошлого поста про снегопад поверх окон вышло четыре версии. Последняя, 0.6.1, про Новый год: гирлянда, снеговик из снежного кома и иней на экране. Код открытый, лицензия MIT.</p>
+    <p class="blog-by"><img class="blog-by__face" src="/assets/img/avatar-sm.webp" alt="" width="36" height="36"><span>Дмитрий</span></p>
+  </header>
+
+  <figure class="blog-cover blog-narrow">
+    <img src="/assets/img/note-snowdrift-ny-sm.webp" srcset="/assets/img/note-snowdrift-ny-sm.webp 640w, /assets/img/note-snowdrift-ny.webp 1200w" sizes="(max-width: 1020px) 100vw, 980px" alt="Обложка поста про Новый год в снегопаде: гирлянда с цветными лампочками, снеговик в шарфе и шапке, снежинки и иней по углам" width="1200" height="630" fetchpriority="high">
+  </figure>
+
+  <div class="blog-layout blog-narrow">
+    <nav class="blog-toc" aria-label="Содержание">
+      <p class="blog-toc__title">Содержание</p>
+      <ol>
+          <li><a href="#chto-poyavilos">Что появилось</a></li>
+          <li><a href="#chto-vyshlo-za-eti-dni">Что вышло за эти дни</a></li>
+          <li><a href="#otkuda-ideya">Откуда идея</a></li>
+          <li><a href="#chto-poka-ne-dodelano">Что пока не доделано</a></li>
+      </ol>
+    </nav>
+    <article class="blog-prose" aria-labelledby="page-title">
+      <aside class="blog-facts" aria-label="Коротко">
+        <p class="blog-facts__title">Коротко</p>
+        <ul class="checks">
+          <li>Гирлянда висит вдоль верха экрана, лампочки качаются от курсора</li>
+          <li>Снеговика лепите сами: ком катится по сугробу, растёт и ставится на другой</li>
+          <li>Иней растёт от краёв экрана, курсор его протирает</li>
+          <li>Заодно вышли Linux, снег на диалогах и автообновление</li>
+          <li>На Windows проверено вживую, на старых ПК иней и гирлянда подвисают</li>
+        </ul>
+      </aside>
+
+<h2 id="chto-poyavilos">Что появилось<a class="blog-anchor" href="#chto-poyavilos" aria-label="Ссылка на раздел «Что появилось»">#</a></h2>
+<p>Три украшения, каждое включается отдельно или все сразу пунктом «Всё сразу» в меню «Новый год».</p>
+<ul>
+  <li><strong>Гирлянда.</strong> Шнур с лампочками закреплён вдоль верха экрана, на маке под строкой меню. Он провисает и мерцает, а если провести по нему курсором, качается и сам успокаивается. В версии 0.6.0 она висела вдоль верха окон, в 0.6.1 перенёс на верх экрана.</li>
+  <li><strong>Снеговик.</strong> Нажимаете на сугроб внизу экрана и тянете вдоль земли: снег под курсором сворачивается в ком, и чем дальше катите, тем он больше. Ком можно поднять, перенести и поставить на другой. Три кома друг на друге получают лицо, нос-морковку, пуговицы, шарф и руки-ветки. Брошенный ком лопается, снегоуборщик сметает снеговиков.</li>
+  <li><strong>Иней.</strong> От углов и середин краёв экрана за несколько минут растут папоротниковые узоры. Курсором их протираете, через минуту они замерзают снова.</li>
+</ul>
+<p>Клики поверх экрана ловятся только пока курсор над комом снега или несёт его. В остальное время мышь работает как обычно.</p>
+
+<h2 id="chto-vyshlo-za-eti-dni">Что вышло за эти дни<a class="blog-anchor" href="#chto-vyshlo-za-eti-dni" aria-label="Ссылка на раздел «Что вышло за эти дни»">#</a></h2>
+<ul>
+  <li>0.3.0: Linux, X11 и XWayland, есть пакеты deb, rpm и архив для x86_64 и aarch64.</li>
+  <li>0.4.0: снег ложится на диалоги и всплывающие окна внутри окон. Опция по умолчанию выключена, на маке для неё нужно разрешение «Универсальный доступ».</li>
+  <li>0.5.0: «Проверить обновления» сам скачивает новую версию, заменяет приложение и перезапускает его. Версии до 0.5.0 так не умеют, их один раз ставят руками.</li>
+</ul>
+
+<h2 id="otkuda-ideya">Откуда идея<a class="blog-anchor" href="#otkuda-ideya" aria-label="Ссылка на раздел «Откуда идея»">#</a></h2>
+<p>Увидел ролик, где такое показывали в платном приложении, и решил сделать у себя. Расчёт снега, физика кома, иней и лампочки лежат в общем ядре на Rust, поэтому на маке, Windows и Linux ведут себя одинаково. На маке то же нарисовано через Metal.</p>
+
+<h2 id="chto-poka-ne-dodelano">Что пока не доделано<a class="blog-anchor" href="#chto-poka-ne-dodelano" aria-label="Ссылка на раздел «Что пока не доделано»">#</a></h2>
+<blockquote><p>Пока честно: на живой Windows всё работает отлично, но на старых ПК иней и гирлянда подвисают.</p></blockquote>
+<p>Это буду разбирать. Linux я гонял только на виртуальном экране, на настоящем рабочем столе его не видел. Если что-то у вас заведётся или не заведётся, напишите.</p>
+<p>Код, релизы и установка одной командой: <a href="https://github.com/LerkOFF/snowdrift" rel="noopener">репозиторий Snowdrift на GitHub</a>.</p>
+    </article>
+  </div>
+
+  <section class="section section--sub section--last" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div>
+          <h2 class="cta__title" id="cta-title">Расскажите о задаче</h2>
+          <p>Пара фраз и ссылка на сайт, если он уже есть. Отвечаю сам: задам вопросы, назову срок и цену.</p>
+        </div>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="https://t.me/joulerkOFF" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-telegram"></use></svg>
+            <span>Написать в Telegram</span>
+          </a>
+          <a class="btn btn--ghost" href="/#contact">Собрать задачу</a>
+        </div>
+      </div>
+
+      <h2 class="subhead">Заказать похожее</h2>
+      <ul class="svc-links">
+        <li><a class="svc-link" href="/razrabotka-sajtov/"><svg class="icon" aria-hidden="true"><use href="#i-browser"></use></svg><span>Разработка сайтов</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+        <li><a class="svc-link" href="/razrabotka-sajtov/"><svg class="icon" aria-hidden="true"><use href="#i-browser"></use></svg><span>Разработка сайтов</span><svg class="icon svc-link__arrow" aria-hidden="true"><use href="#i-arrow"></use></svg></a></li>
+      </ul>
+
+      <h2 class="subhead">Ещё посты</h2>
+      <ul class="blog-grid blog-grid--more">
+        <li class="blog-card reveal" style="--i:0">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-vpn-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Серверы</span><time datetime="2026-11-19">19 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/kaskadnye-vpn-s-veb-panelyu/">Каскадные VPN на Xray с веб-панелью: открытый сервис</a></h3>
+            <p class="blog-card__text">Собрал сервис каскадных VPN на Xray (VLESS и Reality) с веб-панелью: ставится одной командой, серверы и клиенты добавляются в браузере, российский трафик идёт напрямую.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:1">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-snowdrift-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Приложения</span><time datetime="2026-11-16">16 ноября 2026</time><span>2 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/snegopad-dlya-windows/">Снегопад поверх окон теперь и на Windows: версия 0.2.0</a></h3>
+            <p class="blog-card__text">Вышла версия 0.2.0 моего снегопада: добавил Windows, поменял движок снега на Mac, сделал режимы листьев, дождя и сакуры. На Windows пока не проверял.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:2">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-snowdrift-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Приложения</span><time datetime="2026-11-16">16 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/snegopad-poverh-okon-macos/">Снегопад поверх окон на macOS: сугробы на кромках окон и снегоуборщик</a></h3>
+            <p class="blog-card__text">Как я написал на Swift снегопад для macOS: снег ложится на кромки окон, сползает при движении окна, а внизу экрана выезжает снегоуборщик и сгребает сугробы.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:3">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-app-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Сайты</span><time datetime="2026-11-13">13 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/sajt-kak-prilozhenie-na-telefone/">Как сделать из сайта приложение на телефоне без нативной разработки</a></h3>
+            <p class="blog-card__text">Нижние вкладки, безопасные зоны, карты на весь экран, манифест и тёмная тема: как я сделал так, что два моих сайта на телефоне ведут себя как приложения.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:4">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-seeyer-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Telegram</span><time datetime="2026-11-09">9 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/telegram-bot-udalennyh-soobshchenij/">Telegram-бот, который возвращает удалённые и изменённые сообщения</a></h3>
+            <p class="blog-card__text">Как я за два дня собрал Telegram-бота на Python и aiogram: он присылает удалённые и изменённые сообщения, возвращает вложения и берёт деньги за подписку.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:5">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-avtomatizaciya-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">ИИ</span><time datetime="2026-11-05">5 ноября 2026</time><span>4 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/avtomatizaciya-biznesa-s-pomoshchyu-ii/">Автоматизация бизнеса с помощью ИИ: что работает, а что нет</a></h3>
+            <p class="blog-card__text">Что я автоматизировал с помощью ИИ на живых проектах: заявки, ответы клиентам, статьи, сводки и отчёты. Что окупилось, а что оказалось лишним.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:6">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-agent-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">ИИ</span><time datetime="2026-11-05">5 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/ii-agent-ili-chat-bot/">ИИ-агент или чат-бот: в чём разница и что выбрать бизнесу</a></h3>
+            <p class="blog-card__text">Чем ИИ-агент отличается от чат-бота, когда бизнесу хватит бота, а когда нужен агент, и как ограничить агента, чтобы он не навредил. По опыту живых проектов.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:7">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-agecms-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">CMS</span><time datetime="2026-11-02">2 ноября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/cms-dlya-lyudej-i-agentov/">Открытая CMS, которую правят люди и ИИ-агенты</a></h3>
+            <p class="blog-card__text">Как я сделал свою CMS на PHP и SQLite: журнал правок с откатом, предохранитель для ИИ-агента и перенос сайтов с WordPress, Tilda, Bitrix и других систем.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:8">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-svet-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Карта</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/karta-sveta-po-gorodu/">Карта света по городу: график, каналы и отметки жителей</a></h3>
+            <p class="blog-card__text">Сделал открытую карту света по городу: данные из графика отключений, районных каналов и отметок жителей, защита от мусора и датчики по пингу роутера.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:9">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-invoice-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Бот</span><time datetime="2026-10-27">27 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/napominaniya-o-platezhah/">Сервис напоминаний о регулярных платежах: технический кейс</a></h3>
+            <p class="blog-card__text">Технический кейс: свой сервис напоминаний о платежах на FastAPI и SQLite с ботом в Telegram и MAX, кнопкой «Оплачено», ролями, API и импортом CSV.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+        <li class="blog-card reveal" style="--i:10">
+          <div class="blog-card__media"><img class="blog-card__cover" src="/assets/img/note-mirror-sm.webp" alt="" width="640" height="336" loading="lazy"></div>
+          <div class="blog-card__body">
+            <p class="blog-meta"><span class="role role--sm role--own">Интеграции</span><time datetime="2026-10-02">2 октября 2026</time><span>3 мин чтения</span></p>
+            <h3 class="blog-card__title"><a href="/blog/zerkalo-dvuh-messendzherov/">Зеркало двух мессенджеров для рабочих чатов</a></h3>
+            <p class="blog-card__text">Как я сделал сервис-зеркало между MAX и Telegram: aiogram, pymax, очередь на ARQ и Redis, PostgreSQL и Docker Compose. Что уже работает, а что пока нет.</p>
+            <p class="blog-card__more">Читать пост<svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <p>Дмитрий, самозанятый, ИНН 614328597388. <a href="/#rekvizity">Реквизиты</a></p>
+    <p><a href="/blog/">Блог</a></p>
+    <p>© 2026 lerk.tech</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js?v=20260927" defer></script>
+</body>
+</html>
